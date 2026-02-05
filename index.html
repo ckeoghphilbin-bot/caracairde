@@ -1,254 +1,130 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-  <title>CaraCairde | Find friends, right where you live</title>  
-  <meta name="description" content="CaraCairde helps people across Ireland make friends locally through shared interests and real-life meetups." />  
-  
-  <style>  
-    :root {  
-      --bg: #f8faf8;  
-      --primary: #2f6f5f;  
-      --accent: #f3a683;  
-      --text: #243333;  
-      --muted: #6b7c7a;  
-      --card: #ffffff;  
-      --radius: 14px;  
-    }  
-  
-    * {  
-      box-sizing: border-box;  
-    }  
-  
-    body {  
-      margin: 0;  
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;  
-      background: var(--bg);  
-      color: var(--text);  
-      line-height: 1.6;  
-    }  
-  
-    header {  
-      padding: 1.5rem 2rem;  
-      display: flex;  
-      justify-content: space-between;  
-      align-items: center;  
-    }  
-  
-    header h1 {  
-      font-size: 1.4rem;  
-      margin: 0;  
-      color: var(--primary);  
-    }  
-  
-  <div style="margin-top:20px;">
-  <a href= https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform?usp=publish-editor
-     style="
-     display:inline-block;
-     padding:16px 24px;
-     background-color:#2f7cff;
-     color:#ffffff;
-     text-decoration:none;
-     font-size:18px;
-     font-weight:600;
-     border-radius:10px;
-     text-align:center;
-     ">
-     Join CaraCairde in your town
-  </a>
-</div>
-    header span {  
-      font-weight: 600;  
-    }  
-  
-    .btn {  
-      background: var(--primary);  
-      color: #fff;  
-      padding: 0.75rem 1.2rem;  
-      border-radius: 999px;  
-      text-decoration: none;  
-      font-weight: 600;  
-      transition: transform 0.1s ease, background 0.2s ease;  
-      display: inline-block;  
-    }  
-  
-    .btn:hover {  
-      background: #255a4d;  
-      transform: translateY(-1px);  
-    }  
-  
-    .hero {  
-      max-width: 1000px;  
-      margin: 3rem auto;  
-      padding: 0 2rem;  
-      text-align: center;  
-    }  
-  
-    .hero h2 {  
-      font-size: 2.6rem;  
-      margin-bottom: 1rem;  
-    }  
-  
-    .hero p {  
-      font-size: 1.1rem;  
-      color: var(--muted);  
-      max-width: 640px;  
-      margin: 0 auto 2rem;  
-    }  
-  
-    .hero small {  
-      display: block;  
-      margin-top: 1rem;  
-      color: var(--muted);  
-    }  
-  
-    section {  
-      max-width: 1100px;  
-      margin: 4rem auto;  
-      padding: 0 2rem;  
-    }  
-  
-    .cards {  
-      display: grid;  
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));  
-      gap: 1.5rem;  
-    }  
-  
-    .card {  
-      background: var(--card);  
-      padding: 1.8rem;  
-      border-radius: var(--radius);  
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);  
-    }  
-  
-    .card h3 {  
-      margin-top: 0;  
-      color: var(--primary);  
-    }  
-  
-    .card p {  
-      color: var(--muted);  
-      font-size: 0.95rem;  
-    }  
-  
-    .values {  
-      background: #eef5f3;  
-      padding: 3rem 2rem;  
-      border-radius: var(--radius);  
-      text-align: center;  
-    }  
-  
-    footer {  
-      padding: 2rem;  
-      text-align: center;  
-      font-size: 0.9rem;  
-      color: var(--muted);  
-    }  
-  
-    footer a {  
-      color: var(--muted);  
-      text-decoration: none;  
-      margin: 0 0.5rem;  
-    }  
-  
-    footer a:hover {  
-      text-decoration: underline;  
-    }  
-  
-    input[type="email"] {  
-      padding: 0.7rem 1rem;  
-      width: 70%;  
-      max-width: 260px;  
-      border-radius: 999px;  
-      border: 1px solid #ccc;  
-      font-size: 0.95rem;  
-    }  
-  
-    @media (max-width: 600px) {  
-      .hero h2 {  
-        font-size: 2rem;  
-      }  
-    }  
-  </style>  
-</head>  
-  
-<body>  
-  
-<header>  
-  <h1>Cara<span>Cairde</span></h1>  
-  <a href="#join" class="btn">Join the beta</a>  
-</header>  
-  
-<div class="hero">  
-  <h2>Find friends, right where you live.</h2>  
-  <p>  
-    CaraCairde (CC) is a friendly, inclusive social platform for people across Ireland  
-    who want to connect locally through shared interests and real-life meetups.  
-  </p>  
-  <a href="#join" class="btn">Get early access</a>  
-  <small>Ireland-only • Real names • Friendship-first • No pressure</small>  
-</div>  
-  
-<section>  
-  <div class="cards">  
-    <div class="card">  
-      <h3>Create your profile</h3>  
-      <p>  
-        Use your real name, choose your town, and select your interests.  
-        CC is about trust, not performance.  
-      </p>  
-    </div>  
-    <div class="card">  
-      <h3>Connect locally</h3>  
-      <p>  
-        Add friends, follow others, or browse nearby people based on shared interests  
-        and comfort.  
-      </p>  
-    </div>  
-    <div class="card">  
-      <h3>Meet up in real life</h3>  
-      <p>  
-        Join or create local meetups — walks, coffees, chats, hobbies, support groups.  
-      </p>  
-    </div>  
-  </div>  
-</section>  
-  
-<section class="values">  
-  <h3>What makes CaraCairde different</h3>  
-  <p>  
-    Built for Ireland. Inclusive by default. Friendship over followers.  
-  </p>  
-  <p>  
-    No algorithms. No dating pressure. Just decent humans, locally.  
-  </p>  
-</section>  
-  
-<section id="join">  
-  <div class="card" style="text-align:center; max-width:600px; margin:0 auto;">  
-    <h3>Join the beta</h3>  
-    <p>  
-      CaraCairde is launching quietly across Ireland.  
-      Leave your email to get early access.  
-    </p>  
-    <form>  
-      <input type="email" placeholder="you@email.ie" required />  
-      <br><br>  
-      <button class="btn" type="submit">Request invite</button>  
-    </form>  
-  </div>  
-</section>  
-  
-<footer>  
-  © CaraCairde Ireland    
-  <br><br>  
-  <a href="#">About</a>  
-  <a href="#">Safety</a>  
-  <a href="#">Terms</a>  
-  <a href="#">Privacy</a>  
-  <a href="#">Contact</a>  
-</footer>  
-  
-</body>  
-</html>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CaraCairde – Make Friends Locally</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --primary: #2f7cff;
+      --bg: #f7f9fc;
+      --text: #1f2937;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      text-align: center;
+    }
+
+    header {
+      padding: 40px 20px 20px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    p {
+      max-width: 500px;
+      margin: 0 auto 20px;
+      line-height: 1.5;
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 26px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 16px;
+      padding: 30px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      color: #666;
+      padding: 30px 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Cara<span>Cairde</span></h1>
+
+    <p>
+      A friendly, Ireland-only community to help people make genuine friends —
+      not dates. Real names. Real people. Real connection.
+    </p>
+
+    <a
+      class="btn"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform"
+      target="_blank"
+    >
+      Join CaraCairde in your town
+    </a>
+  </header>
+
+  <section class="cards">
+    <div class="card">
+      <h3>Create a profile</h3>
+      <p>
+        Use your real name and tell us your interests.
+        CaraCairde is about trust and belonging.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Connect locally</h3>
+      <p>
+        Find people near you who want friendship,
+        not dating or pressure.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Safe & respectful</h3>
+      <p>
+        Messages only open when both people agree.
+        Dating behaviour is gently redirected, then removed if needed.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    Ireland-only • 16+ • Real people only<br />
+    © CaraCairde
+  </footer>
+
+</body>
+</html>
