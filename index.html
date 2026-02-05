@@ -9,13 +9,13 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f6d6dc; /* blush pink */
+      background: #f6d6dc;
       color: #2b2b2b;
       text-align: center;
     }
 
     header {
-      padding: 50px 20px 20px;
+      padding: 48px 20px 20px;
     }
 
     /* LOGO */
@@ -23,22 +23,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 10px;
     }
 
     .logo-text {
-      font-size: 3rem;
+      font-size: 3.2rem;
       font-weight: 700;
-      letter-spacing: 1px;
     }
 
-    .logo-text span.cara {
-      color: #e9a6a6; /* blush */
+    .logo-text .cara {
+      color: #e9a6a6;
     }
 
-    .logo-text span.square {
-      color: #9ec7d8; /* soft blue */
-      font-size: 1.5rem;
+    .logo-text .square {
+      color: #9ec7d8;
+      font-size: 1.6rem;
       vertical-align: super;
       margin-left: 4px;
     }
@@ -46,22 +44,17 @@
     .logo-blocks {
       display: flex;
       gap: 14px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .block {
-      width: 52px;
-      height: 78px;
+      width: 54px;
+      height: 80px;
       border-radius: 20px;
     }
 
-    .block.blush {
-      background: #e9a6a6;
-    }
-
-    .block.blue {
-      background: #9ec7d8;
-    }
+    .block.blush { background: #e9a6a6; }
+    .block.blue { background: #9ec7d8; }
 
     .tagline {
       margin-top: 18px;
@@ -72,28 +65,28 @@
     .hero {
       background: #fff4ef;
       margin: 30px 16px 0;
-      padding: 34px 22px;
-      border-radius: 26px;
+      padding: 36px 22px;
+      border-radius: 28px;
       box-shadow: 0 12px 30px rgba(0,0,0,0.08);
     }
 
     .hero p {
       font-size: 1.05rem;
       line-height: 1.6;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .btn {
       display: inline-block;
-      background: #f9f4ee; /* cream */
+      background: #f9f4ee;
       color: #000;
-      padding: 16px 28px;
-      border-radius: 16px;
+      padding: 16px 30px;
+      border-radius: 18px;
       text-decoration: none;
       font-weight: 600;
       font-size: 1rem;
       box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .btn:hover {
@@ -102,19 +95,19 @@
     }
 
     .flowers {
-      font-size: 1.7rem;
-      margin: 28px 0 6px;
+      font-size: 1.8rem;
+      margin: 26px 0 6px;
     }
 
-    .rules {
-      margin: 40px 22px;
+    .how {
+      margin: 42px 22px;
       font-size: 0.95rem;
       color: #5f4f4f;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     footer {
-      margin: 28px 0 20px;
+      margin: 30px 0 22px;
       font-size: 0.8rem;
       color: #7a6a6a;
     }
@@ -140,35 +133,38 @@
 
   <div class="hero">
     <p>
-      Cara² is a friendship-first community for people in Ireland who want
-      <strong>real, easy, human connection</strong> — without dating pressure,
-      awkward vibes, or performance.
+      Cara² is a small, soft place for people in Ireland who’d like
+      <strong>more connection and less pressure</strong>.
     </p>
 
     <p>
-      Two people. Two yeses.<br />
-      Walks, chats, shared interests, gentle belonging.
+      No dating. No “what are we?”.<br>
+      Just chats, walks, shared interests — and sound humans.
     </p>
 
-    <a
-      class="btn"
+    <p>
+      Two people. Two yeses.<br>
+      That’s it. That’s the magic.
+    </p>
+
+    <a class="btn"
       href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform"
-      target="_blank"
-    >
+      target="_blank">
       🌸 Join Cara²
     </a>
 
     <div class="flowers">🌼 🌷 🌸 🌻 🌿</div>
   </div>
 
-  <div class="rules">
-    ✨ Messaging opens only when both people accept<br />
-    ✨ Dating behaviour is gently redirected, then removed<br />
-    ✨ Kindness, boundaries & community come first
+  <div class="how">
+    🍀 Friendship first, always<br>
+    🍀 Messaging opens only after both say yes<br>
+    🍀 Dating behaviour gets redirected, warned, then removed<br>
+    🍀 €0.50/week once we’re up and running (no rush, no pressure)
   </div>
 
   <footer>
-    Made softly, in Ireland 🤍
+    Made gently, in Ireland 🤍
   </footer>
 
 </body>
