@@ -15,7 +15,7 @@
     }
 
     header {
-      padding: 48px 20px 20px;
+      padding: 50px 20px 20px;
     }
 
     /* LOGO */
@@ -76,6 +76,16 @@
       margin-bottom: 18px;
     }
 
+    /* BUTTONS */
+    .button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
     .btn {
       display: inline-block;
       background: #f9f4ee;
@@ -94,9 +104,29 @@
       box-shadow: 0 12px 26px rgba(0,0,0,0.25);
     }
 
+    /* Daisy login button */
+    .daisy-login {
+      width: 52px;
+      height: 52px;
+      background: #e9a6a6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .daisy-login:hover {
+      transform: rotate(-6deg) scale(1.08);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+
     .flowers {
       font-size: 1.8rem;
-      margin: 26px 0 6px;
+      margin: 28px 0 6px;
     }
 
     .how {
@@ -133,34 +163,40 @@
 
   <div class="hero">
     <p>
-      Cara² is a small, soft place for people in Ireland who’d like
-      <strong>more connection and less pressure</strong>.
+      Cara² is a soft little corner of the internet for people in Ireland
+      who’d like <strong>more connection and less pressure</strong>.
     </p>
 
     <p>
-      No dating. No “what are we?”.<br>
-      Just chats, walks, shared interests — and sound humans.
+      No dating. No swiping. No “what are we?”.<br>
+      Just sound people, finding their people.
     </p>
 
     <p>
       Two people. Two yeses.<br>
-      That’s it. That’s the magic.
+      Simple as that.
     </p>
 
-    <a class="btn"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform"
-      target="_blank">
-      🌸 Join Cara²
-    </a>
+    <div class="button-row">
+      <a class="btn"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform"
+        target="_blank">
+        🌸 Join Cara²
+      </a>
+
+      <a class="daisy-login" href="login.html" title="Member login">
+        🌼
+      </a>
+    </div>
 
     <div class="flowers">🌼 🌷 🌸 🌻 🌿</div>
   </div>
 
   <div class="how">
     🍀 Friendship first, always<br>
-    🍀 Messaging opens only after both say yes<br>
-    🍀 Dating behaviour gets redirected, warned, then removed<br>
-    🍀 €0.50/week once we’re up and running (no rush, no pressure)
+    🍀 Messaging opens only when both people say yes<br>
+    🍀 Dating behaviour is gently redirected, then removed<br>
+    🍀 €0.50/week coming later — only to keep the space kind & real
   </div>
 
   <footer>
