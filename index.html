@@ -3,56 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CaraCairde</title>
+<title>CC² — Cara Squared</title>
 
 <style>
 body {
   margin:0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ff4fd8, #ff9de2);
+  background: linear-gradient(120deg, #ff2fd3, #7b2cff, #00ffd5);
+  background-size: 300% 300%;
+  animation: bg 10s infinite alternate;
   color:#111;
   text-align:center;
 }
 
+@keyframes bg {
+  0% {background-position:0% 50%;}
+  100% {background-position:100% 50%;}
+}
+
 header {
-  padding:70px 20px;
+  padding:80px 20px;
 }
 
 h1 {
-  font-size:48px;
+  font-size:54px;
   margin-bottom:10px;
 }
 
 h1 span {
   background:#fff;
-  padding:6px 12px;
-  border-radius:12px;
+  padding:6px 14px;
+  border-radius:16px;
 }
 
 .tagline {
   font-size:20px;
-  margin-bottom:30px;
+  max-width:600px;
+  margin:0 auto 30px;
 }
 
 .btn {
   display:inline-block;
-  padding:16px 26px;
+  padding:16px 28px;
   background:#111;
   color:#fff;
-  border-radius:14px;
+  border-radius:18px;
   text-decoration:none;
   font-size:18px;
   font-weight:bold;
   margin:8px;
+  cursor:pointer;
 }
 
 .page {
   display:none;
   background:#fff;
-  border-radius:24px;
+  border-radius:28px;
   padding:40px 20px;
   max-width:520px;
   margin:20px auto;
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
 }
 
 .page.active {
@@ -64,7 +74,7 @@ input {
   padding:16px;
   margin:10px 0;
   font-size:16px;
-  border-radius:12px;
+  border-radius:14px;
   border:1px solid #ccc;
 }
 
@@ -74,17 +84,17 @@ small {
 
 ul {
   text-align:left;
-  max-width:400px;
+  max-width:420px;
   margin:20px auto;
 }
 
 footer {
-  padding:30px;
+  padding:40px;
   font-size:14px;
-  color:#222;
+  color:#111;
 }
 
-.shake {
+.glitch {
   animation: shake 0.3s infinite alternate;
 }
 
@@ -98,7 +108,7 @@ footer {
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 </script>
 
@@ -107,56 +117,57 @@ function showPage(id) {
 <body>
 
 <header>
-  <h1 class="shake">Cara<span>Cairde</span></h1>
+  <h1 class="glitch">CC<span>²</span></h1>
   <p class="tagline">
-    Make friends locally.<br>
-    No dating. No pressure. Just people.
+    Friendship, curiosity, chaos.<br>
+    No dating. No algorithms. Just humans × humans.
   </p>
 
-  <a class="btn" onclick="showPage('signup')">Join</a>
+  <a class="btn" onclick="showPage('signup')">Enter</a>
   <a class="btn" onclick="showPage('login')">Log in</a>
 </header>
 
 <!-- SIGN UP -->
 <div id="signup" class="page">
-  <h2>Join CaraCairde 💖</h2>
-  <p>We’re building this slowly and safely.</p>
+  <h2>Join CC² 🌍</h2>
+  <p>Worldwide. Experimental. Soft launch.</p>
 
-  <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform?usp=publish-editor">
-    Join via form
-  </a>
+  <input type="text" placeholder="Name (or nickname)">
+  <input type="email" placeholder="Email">
 
-  <p><small>Already joined?</small></p>
-  <a class="btn" onclick="showPage('login')">Log in</a>
+  <a class="btn" onclick="showPage('members')">Continue</a>
+
+  <p><small>By joining, you agree this is not a dating platform.</small></p>
 </div>
 
 <!-- LOGIN -->
 <div id="login" class="page">
   <h2>Log in ✨</h2>
-  <p><small>Invite-only during early launch</small></p>
 
-  <input type="email" placeholder="Email address">
+  <input type="email" placeholder="Email">
 
-  <a class="btn" onclick="showPage('members')">Continue</a>
+  <a class="btn" onclick="showPage('members')">Enter CC²</a>
+
+  <p><small>Invite-only during early chaos.</small></p>
 </div>
 
 <!-- MEMBERS -->
 <div id="members" class="page">
-  <h2>Members 💚</h2>
-  <p>You’re in. Be sound.</p>
+  <h2>CC² Space 💥</h2>
+  <p>You’re inside.</p>
 
   <ul>
-    <li>Friendship first, always</li>
-    <li>No dating behaviour</li>
-    <li>Local meetups coming</li>
-    <li>Kindness required</li>
+    <li>Global conversations</li>
+    <li>No flirting, no dating</li>
+    <li>Curiosity > performance</li>
+    <li>Be weird, be kind</li>
   </ul>
 
-  <p><small>Profiles & messaging coming soon.</small></p>
+  <p><small>Chat rooms & profiles coming next.</small></p>
 </div>
 
 <footer>
-  © CaraCairde · Ireland only · Friendship first
+  CC² · Worldwide · Friendship squared · Experimental
 </footer>
 
 </body>
