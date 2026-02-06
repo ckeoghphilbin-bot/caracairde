@@ -1,281 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>CC² — Friends, not matches</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaraCairde</title>
 
   <style>
-    :root {
-      --ink: #1b1b1b;
-      --soft: #ffffff;
-      --pink: #f2c6d3;
-      --blue: #cfe3f0;
-      --accent: #7faec8;
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      background: linear-gradient(160deg, var(--pink), var(--blue));
-      color: var(--ink);
-    }
-
-    /* TOP BAR */
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 26px;
-    }
-
-    .logo {
-      font-weight: 900;
-      font-size: 1.9rem;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      font-size: 1.1rem;
-      vertical-align: super;
-      color: var(--accent);
-    }
-
-    .login {
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--ink);
-      background: rgba(255,255,255,0.6);
-      padding: 10px 18px;
-      border-radius: 22px;
-    }
-
-    /* HERO */
-    .hero {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 90px 24px 70px;
+      padding: 0;
+      background: #f7f9fc;
+      color: #222;
       text-align: center;
     }
 
-    .hero h1 {
-      font-size: 3.4rem;
-      line-height: 1.05;
-      margin-bottom: 26px;
+    header {
+      padding: 60px 20px;
+      background: #ffffff;
     }
 
-    .hero p {
-      font-size: 1.25rem;
-      line-height: 1.65;
-      max-width: 720px;
-      margin: 0 auto 28px;
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
     }
 
-    .hero strong {
-      font-weight: 800;
+    header h1 span {
+      color: #2f7cff;
     }
 
-    .cta {
+    header p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: #555;
+    }
+
+    .btn {
       display: inline-block;
-      margin-top: 20px;
-      background: var(--ink);
-      color: var(--soft);
-      padding: 20px 40px;
-      border-radius: 34px;
-      font-size: 1.1rem;
-      font-weight: 800;
+      padding: 16px 26px;
+      background-color: #2f7cff;
+      color: #ffffff;
       text-decoration: none;
-      animation: pulseOnce 1.4s ease-out 1;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
     }
 
-    @keyframes pulseOnce {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
-    }
-
-    /* SCROLL SECTIONS */
     section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 90px 24px;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 40px;
-      align-items: center;
-    }
-
-    .big {
-      font-size: 2.2rem;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.75);
-      border-radius: 30px;
-      padding: 34px;
-      transform: rotate(-0.5deg);
-    }
-
-    .card:nth-child(even) {
-      transform: rotate(0.6deg);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      font-size: 1.35rem;
-    }
-
-    .card p {
-      line-height: 1.65;
-      font-size: 1.05rem;
-    }
-
-    /* STATEMENT */
-    .statement {
-      text-align: center;
-      font-size: 2.4rem;
-      font-weight: 900;
-      padding: 120px 24px;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
       padding: 50px 20px;
-      font-size: 0.9rem;
-      opacity: 0.8;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      text-align: left;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    footer {
+      padding: 30px;
+      font-size: 14px;
+      color: #777;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- TOP -->
-  <div class="top">
-    <div class="logo">CC<span>²</span></div>
-    <a href="login.html" class="login">Log in</a>
-  </div>
-
-  <!-- HERO -->
-  <div class="hero">
-    <h1>
-      You don’t need more matches.<br>
-      You need more mates.
-    </h1>
-
+  <!-- HERO / HOME -->
+  <header>
+    <h1>Cara<span>Cairde</span></h1>
     <p>
-      CC² is for people who are quietly done with swipe culture,
-      awkward small talk, and apps pretending friendship
-      magically happens by accident.
+      Make friends locally — without dating pressure.  
+      A friendship-first community for people in Ireland.
     </p>
 
-    <p>
-      This is <strong>friends only</strong>.
-      No flirting.
-      No dating energy.
-      No pressure to perform.
-    </p>
-
-    <a class="cta"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform"
-      target="_blank">
-      I want in
+    <a 
+      href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform?usp=publish-editor"
+      class="btn"
+    >
+      Join CaraCairde in your town
     </a>
-  </div>
+  </header>
 
-  <!-- SECTION -->
+  <!-- ABOUT -->
   <section>
-    <div class="split">
-      <div class="big">
-        Here’s the thing no app admits:
-      </div>
-
-      <div class="card">
-        <p>
-          Most people aren’t lonely because they’re bad at socialising.
-          They’re lonely because modern platforms
-          turn everything into performance.
-        </p>
-
-        <p>
-          CC² removes the performance.
-          You connect through interests,
-          mutual consent,
-          and actual human pacing.
-        </p>
-      </div>
-    </div>
+    <h2>What is CaraCairde?</h2>
+    <p>
+      CaraCairde is a friendship-first community designed to help people
+      feel happy, welcome, and part of something local.
+    </p>
+    <p>
+      It is not a dating app. It is not about swiping or pressure.
+      It is about real people, shared interests, and belonging.
+    </p>
   </section>
 
-  <!-- HOW -->
-  <section>
-    <div class="split">
-      <div class="card">
-        <h3>Not dating. Seriously.</h3>
-        <p>
-          Romantic or sexual behaviour is redirected.
-          Repeated behaviour is removed.
-          This keeps the space comfortable for everyone.
-        </p>
-      </div>
+  <!-- MEMBERS -->
+  <section id="members">
+    <h2>Members Area</h2>
+    <p>
+      Welcome to CaraCairde 💚  
+      This space is for approved members only.
+    </p>
 
-      <div class="card">
-        <h3>All genders. All orientations.</h3>
-        <p>
-          CC² works globally and welcomes everyone.
-          Friendship doesn’t need boxes.
-        </p>
-      </div>
+    <p>Here you’ll find:</p>
 
-      <div class="card">
-        <h3>Mutual from the start.</h3>
-        <p>
-          Messaging only opens when both people say yes.
-          No cold approaches. No awkward inbox surprises.
-        </p>
-      </div>
-    </div>
+    <ul>
+      <li>Upcoming local meetups</li>
+      <li>Community guidelines</li>
+      <li>How to connect safely</li>
+    </ul>
+
+    <p>
+      Profiles, messaging, and more features are coming soon.
+    </p>
   </section>
-
-  <!-- STATEMENT -->
-  <div class="statement">
-    Friendship works better when it’s intentional.
-  </div>
 
   <!-- FOOTER -->
   <footer>
-    CC² — Friends, squared.<br>
-    Built for humans. Not algorithms.
+    © CaraCairde · Friendship first · Ireland only
   </footer>
-<section id="members" style="padding:40px; max-width:700px; margin:auto;">
-  <h2>Members Area</h2>
-  <p>
-    Welcome to CaraCairde 💚  
-    This space is for approved members only.
-  </p>
 
-  <p>
-    Here you’ll find:
-  </p>
-
-  <ul>
-    <li>Upcoming local meetups</li>
-    <li>Community guidelines</li>
-    <li>How to connect safely</li>
-  </ul>
-
-  <p>
-    Messaging and profiles are coming soon.
-  </p>
-</section>
 </body>
 </html>
