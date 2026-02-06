@@ -7,42 +7,52 @@
 
 <style>
 body {
-  font-family: Arial, sans-serif;
-  background:#f7f9fc;
   margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff4fd8, #ff9de2);
+  color:#111;
   text-align:center;
-  color:#222;
 }
 
 header {
-  padding:60px 20px;
-  background:#fff;
+  padding:70px 20px;
 }
 
 h1 {
-  font-size:42px;
+  font-size:48px;
+  margin-bottom:10px;
 }
 
 h1 span {
-  color:#2f7cff;
+  background:#fff;
+  padding:6px 12px;
+  border-radius:12px;
+}
+
+.tagline {
+  font-size:20px;
+  margin-bottom:30px;
 }
 
 .btn {
   display:inline-block;
-  padding:14px 22px;
-  background:#2f7cff;
-  color:white;
-  border-radius:10px;
+  padding:16px 26px;
+  background:#111;
+  color:#fff;
+  border-radius:14px;
   text-decoration:none;
   font-size:18px;
-  margin:10px;
+  font-weight:bold;
+  margin:8px;
 }
 
 .page {
   display:none;
+  background:#fff;
+  border-radius:24px;
   padding:40px 20px;
-  max-width:500px;
-  margin:auto;
+  max-width:520px;
+  margin:20px auto;
 }
 
 .page.active {
@@ -51,10 +61,10 @@ h1 span {
 
 input {
   width:90%;
-  padding:14px;
+  padding:16px;
   margin:10px 0;
   font-size:16px;
-  border-radius:8px;
+  border-radius:12px;
   border:1px solid #ccc;
 }
 
@@ -62,10 +72,25 @@ small {
   color:#666;
 }
 
+ul {
+  text-align:left;
+  max-width:400px;
+  margin:20px auto;
+}
+
 footer {
   padding:30px;
   font-size:14px;
-  color:#777;
+  color:#222;
+}
+
+.shake {
+  animation: shake 0.3s infinite alternate;
+}
+
+@keyframes shake {
+  from { transform: rotate(-1deg); }
+  to { transform: rotate(1deg); }
 }
 </style>
 
@@ -73,6 +98,7 @@ footer {
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 </script>
 
@@ -81,8 +107,11 @@ function showPage(id) {
 <body>
 
 <header>
-  <h1>Cara<span>Cairde</span></h1>
-  <p>Make friends locally — without dating pressure.</p>
+  <h1 class="shake">Cara<span>Cairde</span></h1>
+  <p class="tagline">
+    Make friends locally.<br>
+    No dating. No pressure. Just people.
+  </p>
 
   <a class="btn" onclick="showPage('signup')">Join</a>
   <a class="btn" onclick="showPage('login')">Log in</a>
@@ -90,8 +119,8 @@ function showPage(id) {
 
 <!-- SIGN UP -->
 <div id="signup" class="page">
-  <h2>Join CaraCairde</h2>
-  <p>We’re starting slowly to keep things safe.</p>
+  <h2>Join CaraCairde 💖</h2>
+  <p>We’re building this slowly and safely.</p>
 
   <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform?usp=publish-editor">
     Join via form
@@ -103,31 +132,31 @@ function showPage(id) {
 
 <!-- LOGIN -->
 <div id="login" class="page">
-  <h2>Log in</h2>
+  <h2>Log in ✨</h2>
+  <p><small>Invite-only during early launch</small></p>
 
   <input type="email" placeholder="Email address">
 
   <a class="btn" onclick="showPage('members')">Continue</a>
-
-  <p><small>Login is invite-only during early launch.</small></p>
 </div>
 
 <!-- MEMBERS -->
 <div id="members" class="page">
-  <h2>Members Area 💚</h2>
-  <p>Welcome to CaraCairde.</p>
+  <h2>Members 💚</h2>
+  <p>You’re in. Be sound.</p>
 
-  <ul style="text-align:left;">
-    <li>Friendship-first community</li>
+  <ul>
+    <li>Friendship first, always</li>
     <li>No dating behaviour</li>
-    <li>Local meetups coming soon</li>
+    <li>Local meetups coming</li>
+    <li>Kindness required</li>
   </ul>
 
-  <p><small>Messaging & profiles coming next.</small></p>
+  <p><small>Profiles & messaging coming soon.</small></p>
 </div>
 
 <footer>
-  © CaraCairde · Ireland only
+  © CaraCairde · Ireland only · Friendship first
 </footer>
 
 </body>
