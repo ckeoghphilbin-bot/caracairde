@@ -2,132 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Cara² — Friendship, squared.</title>
+  <title>CC² — Friendship, squared</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
+    :root {
+      --bg1: #f4d9e3;
+      --bg2: #dceaf2;
+      --ink: #1f1f1f;
+      --soft: #ffffff;
+      --accent: #7faec8;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f6d6dc;
-      color: #2b2b2b;
-      text-align: center;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--ink);
     }
 
-    /* TOP LOGIN */
-    .top-bar {
+    /* TOP BAR */
+    .top {
       display: flex;
-      justify-content: flex-end;
-      padding: 16px 20px;
-    }
-
-    .daisy-login {
-      width: 64px;
-      height: 64px;
-      background: #e9a6a6;
-      border-radius: 50%;
-      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: #2b2b2b;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-      animation: floaty 5s ease-in-out infinite;
+      padding: 18px 24px;
     }
 
-    @keyframes floaty {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-      100% { transform: translateY(0); }
-    }
-
-    header {
-      padding: 20px 20px 10px;
-    }
-
-    /* LOGO */
     .logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -1px;
     }
 
-    .logo-text {
-      font-size: 3.2rem;
-      font-weight: 700;
-    }
-
-    .logo-text .cara { color: #e9a6a6; }
-    .logo-text .square {
-      color: #9ec7d8;
-      font-size: 1.6rem;
-      vertical-align: super;
-      margin-left: 4px;
-    }
-
-    .logo-blocks {
-      display: flex;
-      gap: 14px;
-      margin-top: 12px;
-    }
-
-    .block {
-      width: 54px;
-      height: 80px;
-      border-radius: 20px;
-      animation: sway 6s ease-in-out infinite;
-    }
-
-    .block.blush {
-      background: #e9a6a6;
-      animation-delay: 0s;
-    }
-
-    .block.blue {
-      background: #9ec7d8;
-      animation-delay: 1.5s;
-    }
-
-    @keyframes sway {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-      100% { transform: translateY(0); }
-    }
-
-    .tagline {
-      margin-top: 18px;
+    .logo span {
+      color: var(--accent);
       font-size: 1.1rem;
-      color: #6b5a5a;
+      vertical-align: super;
     }
 
+    .login {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.6);
+    }
+
+    /* HERO */
     .hero {
-      background: #fff4ef;
-      margin: 30px 16px 0;
-      padding: 36px 22px;
-      border-radius: 28px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      padding: 80px 24px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
     }
 
     .hero p {
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       line-height: 1.6;
-      margin-bottom: 18px;
+      max-width: 720px;
+      margin: 0 auto 36px;
     }
 
-    /* JOIN BUTTON */
-    .btn {
+    .cta {
       display: inline-block;
-      background: #f9f4ee;
-      color: #000;
-      padding: 16px 30px;
-      border-radius: 18px;
+      background: var(--ink);
+      color: var(--soft);
+      padding: 18px 34px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 700;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-      animation: pulseOnce 1.2s ease-out 1;
+      animation: pulseOnce 1.3s ease-out 1;
     }
 
     @keyframes pulseOnce {
@@ -136,72 +93,128 @@
       100% { transform: scale(1); }
     }
 
-    .how {
-      margin: 42px 22px;
-      font-size: 0.95rem;
-      color: #5f4f4f;
-      line-height: 1.7;
+    /* SECTIONS */
+    section {
+      padding: 70px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 26px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.7);
+      padding: 30px;
+      border-radius: 26px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      line-height: 1.6;
+    }
+
+    /* BIG STATEMENT */
+    .statement {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      padding: 80px 24px;
+    }
+
+    /* FOOTER */
     footer {
-      margin: 30px 0 22px;
-      font-size: 0.8rem;
-      color: #7a6a6a;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      opacity: 0.75;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="top-bar">
-    <a class="daisy-login" href="login.html">Log in</a>
+  <!-- TOP BAR -->
+  <div class="top">
+    <div class="logo">CC<span>²</span></div>
+    <a href="login.html" class="login">Log in</a>
   </div>
 
-  <header>
-    <div class="logo">
-      <div class="logo-text">
-        <span class="cara">Cara</span><span class="square">²</span>
-      </div>
-      <div class="logo-blocks">
-        <div class="block blush"></div>
-        <div class="block blue"></div>
-      </div>
-      <div class="tagline">Friendship, squared.</div>
-    </div>
-  </header>
-
+  <!-- HERO -->
   <div class="hero">
+    <h1>Make friends.<br>Not profiles.</h1>
+
     <p>
-      Cara² is a calm, friendship-first space for people in Ireland
-      who want connection without pressure.
+      CC² is a global friendship platform for people who want connection
+      through shared interests — not dating, not flirting, not swipe culture.
     </p>
 
     <p>
-      No dating. No swiping. No ambiguity.
-      Just sound people, finding their people.
+      No labels. No algorithms trying to guess your love life.
+      Just people choosing people.
     </p>
 
-    <p>
-      Two people. Two yeses.
-      Simple as that.
-    </p>
-
-    <a class="btn"
+    <a class="cta"
       href="https://docs.google.com/forms/d/e/1FAIpQLSdKFPVzgn2y_5_bue15ohGHb9jLY3x_M-L6sS1bTPQeDZHTzg/viewform"
       target="_blank">
-      Join Cara²
+      Join CC²
     </a>
   </div>
 
-  <div class="how">
-    Friendship comes first, always.<br>
-    Messaging opens only when both people agree.<br>
-    Dating behaviour is redirected, then removed.<br>
-    A small weekly fee will come later to keep the space safe and genuine.
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="grid">
+      <div class="card">
+        <h3>Interests first</h3>
+        <p>
+          You connect through what you enjoy — walking, music, fitness,
+          creativity, conversation, curiosity.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Mutual by design</h3>
+        <p>
+          Nothing opens unless both people agree.
+          No awkward messages. No pressure.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>All people welcome</h3>
+        <p>
+          CC² is for every gender, every sexuality, every background.
+          Friendship doesn’t need categories.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Not a dating app</h3>
+        <p>
+          Romantic or sexual behaviour is redirected.
+          Repeated behaviour is removed.
+          This keeps the space genuine.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <div class="statement">
+    Friendship works better when it’s intentional.
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    Made gently, in Ireland.
+    CC² — Friendship, squared.  
+    Built for people, not algorithms.
   </footer>
 
 </body>
