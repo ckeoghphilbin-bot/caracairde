@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhance Profile – CC²</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:#f4efff;
+  padding:20px;
+}
+.box{
+  background:white;
+  border-radius:24px;
+  padding:20px;
+  max-width:600px;
+  margin:auto;
+}
+input,textarea,select{
+  width:100%;
+  padding:10px;
+  margin-bottom:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+}
+button{
+  background:#cbb9ff;
+  border:none;
+  padding:14px;
+  border-radius:20px;
+  width:100%;
+  font-size:16px;
+}
+small{color:#777;}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Enhance my profile ✨</h2>
+
+<input id="name" placeholder="Your name">
+<input id="location" placeholder="Country · County / Area">
+
+<textarea id="bio" placeholder="Tell people about you..."></textarea>
+
+<label>Profile photo</label>
+<input type="file" id="photo">
+
+<label>How do you like to connect?</label>
+<select id="availability">
+  <option>In-person meet-ups</option>
+  <option>Online friendship</option>
+  <option>Both</option>
+</select>
+
+<label>Interests (search + add)</label>
+<input id="interestInput" placeholder="Type an interest and press Add">
+<button type="button" onclick="addInterest()">Add interest</button>
+<div id="interestList"></div>
+
+<label>Leave a kind message (positive only)</label>
+<textarea id="commentInput" placeholder="Say hello 👋 or something kind"></textarea>
+<button type="button" onclick="addComment()">Add message</button>
+
+<button onclick="save()">Save profile 💜</button>
+</div>
+
+<script>
+let interests=[];
+let comments=[];
+const banned=["hate","kill","slur","abuse","idiot","ugly"];
+
+function addInterest(){
+  const v=interestInput.value.trim();
+  if(v){
+    interests.push(v);
+    interestList.innerHTML += `<span>${v}</span><br>`;
+    interestInput.value="";
+  }
+}
+
+function addComment(){
+  let txt=commentInput.value.toLowerCase();
+  if(banned.some(w=>txt.includes(w))){
+    alert("Please keep things kind 💜");
+    return;
+  }
+  comments.push(commentInput.value);
+  commentInput.value="";
+}
+
+function save(){
+  const reader=new FileReader();
+  const file=photo.files[0];
+
+  let data={
+    name:name.value,
+    location:location.value,
+    bio:bio.value,
+    availability:availability.value,
+    interests,
+    comments
+  };
+
+  if(file){
+    reader.onload=()=>{
+      data.photo=reader.result;
+      localStorage.setItem("cc2profile",JSON.stringify(data));
+      window.location="profilec.html";
+    };
+    reader.readAsDataURL(file);
+  }else{
+    localStorage.setItem("cc2profile",JSON.stringify(data));
+    window.location="profilec.html";
+  }
+}
+</script>
+
+</body>
+</html>
