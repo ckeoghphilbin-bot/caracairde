@@ -1,206 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile · CaraCairde</title>
+<title>My Profile · CC²</title>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "YOUR_KEY",
-    authDomain: "YOUR_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_BUCKET",
-    messagingSenderId: "YOUR_SENDER",
-    appId: "YOUR_APP_ID"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
+  authDomain: "ccsq-c2e3e.firebaseapp.com",
+  projectId: "ccsq-c2e3e"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  const storage = getStorage(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-  let currentUser;
+onAuthStateChanged(auth, user => {
+  if (!user) window.location.href = "login.html";
+});
 
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      window.location.href = "login.html";
-      return;
-    }
-    currentUser = user;
-
-    const snap = await getDoc(doc(db, "profiles", user.uid));
-    if (snap.exists()) {
-      const data = snap.data();
-      if (data.photo) document.getElementById("avatar").src = data.photo;
-      if (data.country) country.value = data.country;
-      if (data.county) county.value = data.county;
-      if (data.about) about.value = data.about;
-    }
-  });
-
-  window.saveProfile = async () => {
-    await setDoc(doc(db, "profiles", currentUser.uid), {
-      country: country.value,
-      county: county.value,
-      about: about.value
-    }, { merge: true });
-
-    alert("Profile saved 💖");
-  };
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const avatar = document.getElementById("avatar");
-    const photo = document.getElementById("photo");
-
-    avatar.onclick = () => photo.click();
-
-    photo.onchange = async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      avatar.src = URL.createObjectURL(file);
-
-      const imgRef = ref(storage, `avatars/${currentUser.uid}`);
-      await uploadBytes(imgRef, file);
-      const url = await getDownloadURL(imgRef);
-
-      await setDoc(doc(db, "profiles", currentUser.uid), { photo: url }, { merge: true });
-    };
-  });
+window.logout = async () => {
+  await signOut(auth);
+  window.location.href = "login.html";
+};
 </script>
 
 <style>
-body {
-  margin: 0;
-  font-family: "Trebuchet MS", Arial, sans-serif;
-  background: linear-gradient(180deg, #ffe4ec, #f3ecff);
+body { background:#f7f2ff; font-family:Arial; }
+.box {
+  max-width:420px;
+  margin:90px auto;
+  background:#fff;
+  padding:32px;
+  border-radius:22px;
+  text-align:center;
 }
-
-.wrapper {
-  max-width: 420px;
-  margin: 40px auto;
-  background: white;
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.avatar-box {
-  text-align: center;
-}
-
-.avatar-box img {
-  width: 140px;
-  height: 140px;
-  border-radius: 20px;
-  object-fit: cover;
-  cursor: pointer;
-  background: #eee;
-}
-
-input[type=file] {
-  display: none;
-}
-
-h1 {
-  font-size: 26px;
-  margin: 20px 0 10px;
-}
-
-label {
-  font-weight: bold;
-  margin-top: 15px;
-  display: block;
-}
-
-select, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-}
-
-textarea {
-  height: 80px;
-  resize: none;
-}
-
 button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px;
-  border-radius: 30px;
-  border: none;
-  background: #f4a6c1;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+  width:100%;
+  padding:14px;
+  margin-top:20px;
+  border:none;
+  border-radius:14px;
+  background:#ccc;
 }
-
-button:hover {
-  background: #ec8fb2;
-}
-
-.bebo-box {
-  margin-top: 25px;
-  background: #f0e9ff;
-  padding: 16px;
-  border-radius: 18px;
-}
-
 </style>
 </head>
 
 <body>
-<div class="wrapper">
-
-  <div class="avatar-box">
-    <img id="avatar" src="https://via.placeholder.com/140?text=Tap+to+add">
-    <input type="file" id="photo" accept="image/*">
-    <div style="font-size:12px;color:#777;">Tap photo to upload</div>
-  </div>
-
-  <h1>My Profile 💗</h1>
-
-  <label>Country</label>
-  <select id="country">
-    <option>Ireland</option>
-    <option>UK</option>
-    <option>USA</option>
-    <option>Other</option>
-  </select>
-
-  <label>County</label>
-  <select id="county">
-    <option>Dublin</option>
-    <option>Galway</option>
-    <option>Cork</option>
-    <option>Donegal</option>
-    <option>Other</option>
-  </select>
-
-  <label>About me</label>
-  <textarea id="about" placeholder="Tell people a bit about you..."></textarea>
-
-  <button onclick="saveProfile()">Save profile ✨</button>
-
-  <div class="bebo-box">
-    <strong>Status:</strong> Feeling cosy & open to new friendships 💫
-  </div>
-
+<div class="box">
+<h2>Welcome to CC² 💜</h2>
+<p>You are logged in.</p>
+<button onclick="logout()">Log out</button>
 </div>
 </body>
 </html>
