@@ -1,218 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CaraCairde</title>
+<meta charset="UTF-8">
+<title>Log in · CaraCairde</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
-  background: linear-gradient(180deg, #ffe4ef, #f6f0ff);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card {
-  background: #fff;
-  width: 100%;
-  max-width: 420px;
-  padding: 28px;
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.12);
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-.tagline {
-  text-align: center;
-  color: #666;
-  margin-bottom: 24px;
-}
-
-input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-}
-
-button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 14px;
-  background: #ff7eb6;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.secondary {
-  background: #8aa7ff;
-}
-
-.link {
-  text-align: center;
-  color: #555;
-  cursor: pointer;
-  margin-top: 8px;
-}
-
-.small {
-  font-size: 14px;
-}
-
-.hidden {
-  display: none;
-}
-
-.error {
-  color: #c0392b;
-  text-align: center;
-  margin-bottom: 10px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-
-  <h1>CaraCairde</h1>
-  <div class="tagline">Local friendship · shared interests · no dating · no pressure</div>
-
-  <div id="error" class="error"></div>
-
-  <!-- SIGN UP -->
-  <div id="signup">
-    <input id="signupEmail" type="email" placeholder="Email" />
-    <input id="signupPassword" type="password" placeholder="Password" />
-    <input id="signupConfirm" type="password" placeholder="Confirm password" />
-
-    <label class="small">
-      <input type="checkbox" onclick="togglePassword()"> Show password
-    </label>
-
-    <button onclick="createAccount()">Create account</button>
-
-    <div class="link" onclick="showLogin()">Already have an account? Log in</div>
-  </div>
-
-  <!-- LOGIN -->
-  <div id="login" class="hidden">
-    <input id="loginEmail" type="email" placeholder="Email" />
-    <input id="loginPassword" type="password" placeholder="Password" />
-
-    <label class="small">
-      <input type="checkbox" onclick="togglePassword()"> Show password
-    </label>
-
-    <button onclick="login()">Log in</button>
-
-    <div class="link small" onclick="resetPassword()">Forgot password?</div>
-    <div class="link" onclick="showSignup()">Back to sign up</div>
-  </div>
-
-</div>
-
-<!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
   authDomain: "ccsq-c2e3e.firebaseapp.com",
   projectId: "ccsq-c2e3e",
-  storageBucket: "ccsq-c2e3e.firebasestorage.app",
-  messagingSenderId: "1092085359746",
-  appId: "1:1092085359746:web:9184879638b1183ce4009b"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-window.showLogin = () => {
-  signup.classList.add("hidden");
-  login.classList.remove("hidden");
-  error.textContent = "";
-};
-
-window.showSignup = () => {
-  login.classList.add("hidden");
-  signup.classList.remove("hidden");
-  error.textContent = "";
-};
-
-window.togglePassword = () => {
-  document.querySelectorAll("input[type=password]").forEach(i => {
-    i.type = i.type === "password" ? "text" : "password";
-  });
-};
-
-window.createAccount = () => {
-  const email = signupEmail.value;
-  const password = signupPassword.value;
-  const confirm = signupConfirm.value;
-
-  if (!email || !password || !confirm) {
-    error.textContent = "Fill in all fields";
-    return;
-  }
-
-  if (password !== confirm) {
-    error.textContent = "Passwords do not match";
-    return;
-  }
-
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Account created 💕"))
-    .catch(e => error.textContent = e.message);
-};
-
-window.login = () => {
-  const email = loginEmail.value;
-  const password = loginPassword.value;
+window.login = async () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
 
   if (!email || !password) {
-    error.textContent = "Enter email and password";
+    alert("Please fill everything in 💕");
     return;
   }
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Welcome back 💗"))
-    .catch(e => error.textContent = e.message);
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Logged in 💗");
+  } catch (err) {
+    alert(err.message);
+  }
 };
 
-window.resetPassword = () => {
-  const email = loginEmail.value;
-
-  if (!email) {
-    error.textContent = "Enter your email first";
-    return;
-  }
-
-  sendPasswordResetEmail(auth, email)
-    .then(() => alert("Password reset email sent 💌"))
-    .catch(e => error.textContent = e.message);
+window.resetPass = async () => {
+  const email = emailInput.value.trim();
+  if (!email) return alert("Enter your email first 💌");
+  await sendPasswordResetEmail(auth, email);
+  alert("Password reset sent ✨");
 };
 </script>
 
+<style>
+body {
+  background:#ffe4ec;
+  font-family:sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.card {
+  background:#fff;
+  padding:30px;
+  border-radius:22px;
+  width:90%;
+  max-width:400px;
+}
+input,button {
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+}
+button {
+  background:#4f46e5;
+  color:#fff;
+  font-weight:600;
+  border:none;
+}
+.link {
+  margin-top:14px;
+  text-align:center;
+  color:#4f46e5;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h2>Welcome back 💕</h2>
+
+  <input id="emailInput" placeholder="Email">
+  <input id="passwordInput" type="password" placeholder="Password">
+
+  <button onclick="login()">Log in</button>
+
+  <div class="link" onclick="resetPass()">Forgot password?</div>
+  <div class="link" onclick="location.href='index.html'">← Back</div>
+</div>
 </body>
 </html>
