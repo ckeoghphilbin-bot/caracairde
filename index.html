@@ -1,272 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>CaraCairde 💗</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(180deg, #ffd6e8, #e8f1ff);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #333;
-    }
-
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 24px;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 6px;
-    }
-
-    .tagline {
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 20px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      font-size: 15px;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      border-radius: 14px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      background: #f49ac2;
-      color: white;
-      font-weight: 600;
-    }
-
-    button.secondary {
-      background: #d6e4ff;
-      color: #333;
-    }
-
-    .link {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 14px;
-      color: #666;
-      cursor: pointer;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 6px;
-      font-size: 14px;
-    }
-
-    .chat-box {
-      background: #f7f7f7;
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>CaraCairde</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg,#ffe4ec,#f3e8ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+}
+h1 {
+  margin: 0;
+  font-size: 34px;
+}
+p {
+  color: #666;
+  margin: 12px 0 30px;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.login {
+  background: #4f46e5;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.signup {
+  background: #f472b6;
+  color: #fff;
+}
+.footer {
+  margin-top: 25px;
+  font-size: 14px;
+  color: #777;
+}
+</style>
 </head>
-
 <body>
 
 <div class="card">
+  <h1>CaraCairde 💗</h1>
+  <p>Local friendship · shared interests · no dating · no pressure</p>
 
-  <!-- HOME / LOGIN -->
-  <div id="loginPage">
-    <h1>CaraCairde</h1>
-    <div class="tagline">Local friendship · shared interests · no dating · no pressure</div>
+  <button class="login" onclick="location.href='login.html'">Log in</button>
+  <button class="signup" onclick="location.href='signup.html'">Create account</button>
 
-    <input id="loginEmail" type="email" placeholder="Email">
-    <input id="loginPassword" type="password" placeholder="Password">
-
-    <div class="checkbox">
-      <input type="checkbox" onclick="togglePassword('loginPassword')">
-      Show password
-    </div>
-
-    <button onclick="login()">Log in</button>
-    <button class="secondary" onclick="showSignup()">Create account</button>
-
-    <div class="link" onclick="resetPassword()">Forgot password?</div>
+  <div class="footer">
+    A calm place to meet people — not perform.
   </div>
-
-  <!-- SIGN UP -->
-  <div id="signupPage" class="hidden">
-    <h1>Create account 💗</h1>
-
-    <input id="signupEmail" type="email" placeholder="Email">
-    <input id="signupPassword" type="password" placeholder="Password (min 6)">
-    <input id="signupConfirm" type="password" placeholder="Confirm password">
-
-    <div class="checkbox">
-      <input type="checkbox" onclick="togglePassword('signupPassword'); togglePassword('signupConfirm')">
-      Show passwords
-    </div>
-
-    <button onclick="signup()">Sign up</button>
-    <div class="link" onclick="showLogin()">← Back to login</div>
-  </div>
-
-  <!-- PROFILE -->
-  <div id="profilePage" class="hidden">
-    <h1>Your profile 🌸</h1>
-
-    <input type="file" accept="image/*" onchange="previewPhoto(event)">
-    <img id="photoPreview" style="width:100%;border-radius:12px;margin-top:10px;display:none;">
-
-    <select>
-      <option>Age range</option>
-      <option>18–25</option>
-      <option>26–35</option>
-      <option>36–45</option>
-      <option>46+</option>
-    </select>
-
-    <select>
-      <option>Gender</option>
-      <option>Female</option>
-      <option>Male</option>
-      <option>Rather not say</option>
-    </select>
-
-    <input placeholder="Location (town/county)">
-    <input placeholder="Hobbies & interests">
-    <input placeholder="Best times to meet">
-
-    <button onclick="showChats()">Save & continue</button>
-  </div>
-
-  <!-- CHATS -->
-  <div id="chatPage" class="hidden">
-    <h1>Community 💬</h1>
-
-    <div class="chat-box">🌍 Local Meets — organise walks, coffee, events</div>
-    <div class="chat-box">💬 General Chat — everyday friendly chat</div>
-    <div class="chat-box">👨‍👩‍👧 Parents Hub — support & connection</div>
-
-    <button onclick="logout()">Log out</button>
-  </div>
-
 </div>
-
-<!-- FIREBASE -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    sendPasswordResetEmail
-  } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
-    authDomain: "ccsq-c2e3e.firebaseapp.com",
-    projectId: "ccsq-c2e3e",
-    storageBucket: "ccsq-c2e3e.firebasestorage.app",
-    messagingSenderId: "1092085359746",
-    appId: "1:1092085359746:web:9184879638b1183ce4009b"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.login = async () => {
-    const email = loginEmail.value;
-    const pass = loginPassword.value;
-    if (!email || !pass) return alert("Fill in both fields");
-    try {
-      await signInWithEmailAndPassword(auth, email, pass);
-      showProfile();
-    } catch (e) {
-      alert(e.message);
-    }
-  };
-
-  window.signup = async () => {
-    if (signupPassword.value !== signupConfirm.value)
-      return alert("Passwords don’t match");
-    try {
-      await createUserWithEmailAndPassword(auth, signupEmail.value, signupPassword.value);
-      showProfile();
-    } catch (e) {
-      alert(e.message);
-    }
-  };
-
-  window.resetPassword = () => {
-    if (!loginEmail.value) return alert("Enter your email first");
-    sendPasswordResetEmail(auth, loginEmail.value)
-      .then(() => alert("Password reset email sent 💌"))
-      .catch(e => alert(e.message));
-  };
-</script>
-
-<script>
-  function showSignup() {
-    loginPage.classList.add("hidden");
-    signupPage.classList.remove("hidden");
-  }
-
-  function showLogin() {
-    signupPage.classList.add("hidden");
-    loginPage.classList.remove("hidden");
-  }
-
-  function showProfile() {
-    loginPage.classList.add("hidden");
-    signupPage.classList.add("hidden");
-    profilePage.classList.remove("hidden");
-  }
-
-  function showChats() {
-    profilePage.classList.add("hidden");
-    chatPage.classList.remove("hidden");
-  }
-
-  function logout() {
-    location.reload();
-  }
-
-  function togglePassword(id) {
-    const el = document.getElementById(id);
-    el.type = el.type === "password" ? "text" : "password";
-  }
-
-  function previewPhoto(e) {
-    const img = photoPreview;
-    img.src = URL.createObjectURL(e.target.files[0]);
-    img.style.display = "block";
-  }
-</script>
 
 </body>
 </html>
