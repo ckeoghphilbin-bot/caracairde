@@ -6,38 +6,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-:root{
-  --pink:#f4b6cf;
-  --lav:#e9ddff;
-  --cream:#fff7fb;
-  --ink:#222;
-}
-
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
   background:linear-gradient(135deg,#f3e9ff,#fde6ef);
-  color:var(--ink);
 }
 
 .container{
   max-width:440px;
   margin:20px auto 120px;
-  background:var(--cream);
+  background:#fff7fb;
   border-radius:30px;
   padding:24px;
   box-shadow:0 25px 60px rgba(0,0,0,.18);
 }
 
-.header{
+.topbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-.header h1{
+.topbar h1{
   margin:0;
   font-size:26px;
+}
+
+.waves-btn{
+  position:relative;
+  background:#e9ddff;
+  border-radius:18px;
+  padding:8px 14px;
+  font-weight:900;
+  text-decoration:none;
+  color:#333;
+}
+
+.badge{
+  position:absolute;
+  top:-6px;
+  right:-6px;
+  background:#f45b8b;
+  color:white;
+  border-radius:50%;
+  font-size:12px;
+  padding:4px 7px;
 }
 
 .avatar{
@@ -48,6 +61,7 @@ body{
   background-size:cover;
   background-position:center;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
+  margin-top:16px;
 }
 
 label{
@@ -63,13 +77,12 @@ input, select, textarea{
   border:1px solid #ddd;
   margin-top:6px;
   font-size:15px;
-  background:white;
 }
 
 textarea{ resize:none }
 
 .section{
-  background:var(--lav);
+  background:#e9ddff;
   padding:18px;
   border-radius:24px;
   margin-top:18px;
@@ -118,10 +131,15 @@ nav a{
 
 <div class="container">
 
-  <div class="header">
+  <div class="topbar">
     <h1>My Profile 💜</h1>
-    <div id="avatar" class="avatar"></div>
+    <a href="waves.html" class="waves-btn">
+      CC² 👋
+      <span id="waveCount" class="badge">1</span>
+    </a>
   </div>
+
+  <div id="avatar" class="avatar"></div>
 
   <label>Profile photo</label>
   <input type="file" accept="image/*" onchange="previewPhoto(event)">
@@ -135,50 +153,18 @@ nav a{
   </div>
 
   <div class="section">
-    <label>Location</label>
-    <select id="location">
-      <option value="">Select area</option>
-
-      <!-- IRELAND (32) -->
-      <optgroup label="Ireland">
-        <option>Antrim</option><option>Armagh</option><option>Carlow</option>
-        <option>Cavan</option><option>Clare</option><option>Cork</option>
-        <option>Derry</option><option>Donegal</option><option>Down</option>
-        <option>Dublin</option><option>Fermanagh</option><option>Galway</option>
-        <option>Kerry</option><option>Kildare</option><option>Kilkenny</option>
-        <option>Laois</option><option>Leitrim</option><option>Limerick</option>
-        <option>Longford</option><option>Louth</option><option>Mayo</option>
-        <option>Meath</option><option>Monaghan</option><option>Offaly</option>
-        <option>Roscommon</option><option>Sligo</option><option>Tipperary</option>
-        <option>Tyrone</option><option>Waterford</option><option>Westmeath</option>
-        <option>Wexford</option><option>Wicklow</option>
-      </optgroup>
-
-      <!-- UK -->
-      <optgroup label="England">
-        <option>Greater London</option><option>Greater Manchester</option>
-        <option>West Midlands</option><option>Merseyside</option>
-        <option>West Yorkshire</option><option>South Yorkshire</option>
-        <option>Kent</option><option>Essex</option><option>Surrey</option>
-        <option>Hampshire</option><option>Devon</option><option>Cornwall</option>
-        <option>Norfolk</option><option>Suffolk</option>
-      </optgroup>
-
-      <optgroup label="Scotland">
-        <option>Glasgow</option><option>Edinburgh</option>
-        <option>Aberdeenshire</option><option>Highlands</option>
-        <option>Dundee</option><option>Fife</option>
-      </optgroup>
-
-      <optgroup label="Wales">
-        <option>Cardiff</option><option>Swansea</option>
-        <option>Newport</option><option>Gwynedd</option>
-        <option>Powys</option>
-      </optgroup>
+    <label>Country</label>
+    <select id="country" onchange="updateCounties()">
+      <option value="">Select country</option>
+      <option>Ireland</option>
+      <option>UK</option>
     </select>
 
+    <label>County / Area</label>
+    <select id="county"></select>
+
     <label>Interests</label>
-    <input id="interests" placeholder="Coffee, chats, walks, music…">
+    <input id="interests">
   </div>
 
   <button onclick="saveProfile()">Save profile</button>
@@ -188,24 +174,50 @@ nav a{
 
 <nav>
   <a href="index.html">Home</a>
+  <a href="browse.html">Browse</a>
   <a href="profilec.html">Profile</a>
-  <a href="login.html">Log out</a>
 </nav>
 
 <script>
+const ireland=[
+"Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down",
+"Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim",
+"Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon",
+"Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"
+];
+
+const uk=[
+"Greater London","Greater Manchester","West Midlands","Merseyside",
+"West Yorkshire","South Yorkshire","Kent","Essex","Surrey","Hampshire",
+"Devon","Cornwall","Norfolk","Suffolk","Glasgow","Edinburgh","Highlands",
+"Cardiff","Swansea","Newport"
+];
+
+function updateCounties(){
+  county.innerHTML="";
+  const list=country.value==="Ireland"?ireland:
+             country.value==="UK"?uk:[];
+  list.forEach(c=>{
+    const o=document.createElement("option");
+    o.textContent=c;
+    county.appendChild(o);
+  });
+}
+
 function previewPhoto(e){
-  const reader=new FileReader();
-  reader.onload=()=>{
-    avatar.style.backgroundImage=`url(${reader.result})`;
-    localStorage.setItem("cc2_avatar",reader.result);
+  const r=new FileReader();
+  r.onload=()=>{
+    avatar.style.backgroundImage=`url(${r.result})`;
+    localStorage.setItem("cc2_avatar",r.result);
   };
-  reader.readAsDataURL(e.target.files[0]);
+  r.readAsDataURL(e.target.files[0]);
 }
 
 function saveProfile(){
   localStorage.setItem("cc2_name",name.value);
   localStorage.setItem("cc2_about",about.value);
-  localStorage.setItem("cc2_location",location.value);
+  localStorage.setItem("cc2_country",country.value);
+  localStorage.setItem("cc2_county",county.value);
   localStorage.setItem("cc2_interests",interests.value);
   saved.style.display="block";
 }
@@ -215,7 +227,9 @@ function loadProfile(){
     avatar.style.backgroundImage=`url(${localStorage.getItem("cc2_avatar")})`;
   name.value=localStorage.getItem("cc2_name")||"";
   about.value=localStorage.getItem("cc2_about")||"";
-  location.value=localStorage.getItem("cc2_location")||"";
+  country.value=localStorage.getItem("cc2_country")||"";
+  updateCounties();
+  county.value=localStorage.getItem("cc2_county")||"";
   interests.value=localStorage.getItem("cc2_interests")||"";
 }
 loadProfile();
