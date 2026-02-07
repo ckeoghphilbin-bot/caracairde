@@ -1,270 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CC² — Cara Squared</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CaraCairde</title>
 
 <style>
 :root{
-  --blush:#ffe6f0;
-  --blush2:#ffd3e6;
-  --blue:#7aa7ff;
-  --blue2:#a9c1ff;
-  --ink:#2a2a2a;
-  --card:#ffffff;
-  --shadow:0 14px 32px rgba(0,0,0,.12);
+  --pink:#ffd6e8;
+  --pink-strong:#ff9fcf;
+  --blue:#b9e6ff;
+  --ink:#333;
+  --white:#fff;
 }
-
-*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family: system-ui, -apple-system, Arial, sans-serif;
-  background:
-    radial-gradient(900px 500px at 110% 0%, var(--blue2), transparent 40%),
-    radial-gradient(900px 500px at -10% 10%, var(--blush2), transparent 45%),
-    linear-gradient(135deg, var(--blush), #fff);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  background:linear-gradient(180deg,var(--pink),var(--blue));
   color:var(--ink);
+}
+
+header{
+  padding:20px;
   text-align:center;
 }
 
-/* ---------- GLOBAL ---------- */
-header{padding:70px 20px}
-h1{font-size:56px;margin:0}
-h1 span{
-  background:#fff;
-  color:var(--blue);
-  padding:6px 14px;
-  border-radius:18px;
-  box-shadow:var(--shadow)
+h1{
+  margin:0;
+  font-size:2.2rem;
 }
-p{line-height:1.5}
-small{color:#777}
+
+h1 span{
+  color:var(--pink-strong);
+}
+
+.tagline{
+  margin-top:8px;
+  font-size:1rem;
+  opacity:0.9;
+}
+
+.card{
+  background:var(--white);
+  border-radius:16px;
+  padding:20px;
+  margin:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
 
 .btn{
-  display:inline-block;
-  padding:14px 26px;
-  border-radius:18px;
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-  margin:8px;
-  cursor:pointer;
-  box-shadow:0 10px 22px rgba(122,167,255,.35);
+  display:block;
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  background:var(--pink-strong);
+  color:white;
   border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
 }
 
 .btn.alt{
-  background:#111;
-  box-shadow:0 10px 22px rgba(0,0,0,.25);
+  background:var(--blue);
+  color:#034;
 }
 
-/* ---------- PAGES ---------- */
-.page{
-  display:none;
-  background:var(--card);
-  border-radius:26px;
-  padding:36px 20px;
-  max-width:680px;
-  margin:20px auto;
-  box-shadow:var(--shadow);
-}
-
-.page.active{display:block}
-
-input, textarea{
-  width:92%;
-  padding:14px;
-  margin:10px 0;
-  font-size:16px;
-  border-radius:14px;
-  border:1px solid #e6e6e6;
-}
-
-textarea{min-height:80px}
-
-/* ---------- PROFILE ---------- */
-.avatar{
-  width:96px;height:96px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--blush2),var(--blue2));
-  display:flex;align-items:center;justify-content:center;
-  font-size:32px;
-  margin:0 auto 10px;
-}
-
-.tags span{
-  display:inline-block;
-  padding:6px 12px;
-  margin:4px;
-  border-radius:12px;
-  background:#f1f4ff;
-  font-size:14px;
-}
-
-/* ---------- PEOPLE ---------- */
-.card{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px;
-  margin:10px 0;
-  border-radius:16px;
-  background:#fafafa;
-}
-
-.card .name{font-weight:600}
-
-/* ---------- CHAT ---------- */
-.chatbox{
-  background:#fafafa;
-  border-radius:18px;
+input{
+  width:100%;
   padding:12px;
-  max-height:300px;
-  overflow-y:auto;
-  margin-bottom:10px;
-  text-align:left;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:15px;
 }
 
-.msg{
-  padding:8px 10px;
-  margin:6px 0;
-  background:#f1f4ff;
-  border-radius:12px;
-  max-width:90%;
+small{
+  display:block;
+  margin-top:10px;
+  opacity:0.7;
+  text-align:center;
 }
 
-/* ---------- FOOTER ---------- */
-footer{padding:40px;color:#444}
+.hidden{
+  display:none;
+}
 
-/* ---------- MOTION ---------- */
-.float{animation:float 4s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-6px)}}
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:0.85rem;
+  opacity:0.6;
+}
 </style>
-
-<script>
-let me = { name:"You", bio:"Say something kind about yourself." };
-
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function saveProfile(){
-  me.name=document.getElementById("pname").value||me.name;
-  me.bio=document.getElementById("pbio").value||me.bio;
-  document.getElementById("myname").innerText=me.name;
-  document.getElementById("mybio").innerText=me.bio;
-  showPage("profile");
-}
-
-function sendMessage(e,id){
-  if(e.key==="Enter" && e.target.value.trim()!==""){
-    const box=document.getElementById(id);
-    const msg=document.createElement("div");
-    msg.className="msg";
-    msg.textContent=e.target.value;
-    box.appendChild(msg);
-    e.target.value="";
-    box.scrollTop=box.scrollHeight;
-  }
-}
-</script>
 </head>
 
 <body>
 
-<!-- HEADER / HOME -->
 <header>
-  <h1 class="float">CC<span>²</span></h1>
-  <p>
-    Local friendship, shared interests.<br>
-    No dating. No pressure. No commitment.
-  </p>
-  <a class="btn" onclick="showPage('signup')">Join</a>
-  <a class="btn alt" onclick="showPage('login')">Log in</a>
+  <h1>Cara<span>Cairde</span></h1>
+  <div class="tagline">
+    Local friendship · shared interests · no dating · no pressure
+  </div>
 </header>
 
+<!-- LANDING -->
+<div id="landing" class="card">
+  <p>
+    CaraCairde is a calm, friendly place to meet people nearby who are also
+    just looking for connection — not romance.
+  </p>
+  <ul>
+    <li>✔ Friends only</li>
+    <li>✔ Message only after both accept</li>
+    <li>✔ Real people, real names</li>
+    <li>✔ Zero dating vibes</li>
+  </ul>
+  <button class="btn" onclick="showSignup()">Join CaraCairde</button>
+  <button class="btn alt" onclick="showLogin()">Log in</button>
+</div>
+
 <!-- SIGN UP -->
-<div id="signup" class="page">
-  <h2>Create account</h2>
-  <input placeholder="Name">
-  <input placeholder="Email">
-  <a class="btn" onclick="showPage('edit')">Continue</a>
+<div id="signup" class="card hidden">
+  <h3>Create account</h3>
+  <input id="signupEmail" type="email" placeholder="Email"/>
+  <input id="signupPassword" type="password" placeholder="Password"/>
+  <button class="btn" onclick="signup()">Sign up</button>
+  <small onclick="backHome()">← Back</small>
 </div>
 
 <!-- LOGIN -->
-<div id="login" class="page">
-  <h2>Welcome back</h2>
-  <input placeholder="Email">
-  <a class="btn" onclick="showPage('members')">Enter</a>
-</div>
-
-<!-- EDIT PROFILE -->
-<div id="edit" class="page">
-  <h2>Edit profile</h2>
-  <input id="pname" placeholder="Your name">
-  <textarea id="pbio" placeholder="About you"></textarea>
-  <a class="btn" onclick="saveProfile()">Save</a>
-</div>
-
-<!-- PROFILE -->
-<div id="profile" class="page">
-  <div class="avatar">😊</div>
-  <h2 id="myname">You</h2>
-  <p id="mybio">Say something kind about yourself.</p>
-  <div class="tags">
-    <span>music</span>
-    <span>walking</span>
-    <span>art</span>
-  </div>
-  <a class="btn" onclick="showPage('members')">Back</a>
+<div id="login" class="card hidden">
+  <h3>Welcome back</h3>
+  <input id="loginEmail" type="email" placeholder="Email"/>
+  <input id="loginPassword" type="password" placeholder="Password"/>
+  <button class="btn" onclick="login()">Log in</button>
+  <small onclick="backHome()">← Back</small>
 </div>
 
 <!-- MEMBERS -->
-<div id="members" class="page">
-  <h2>Members</h2>
-  <a class="btn" onclick="showPage('profile')">My profile</a>
-  <a class="btn" onclick="showPage('people')">People</a>
-  <a class="btn" onclick="showPage('chat')">Chat</a>
-  <a class="btn alt" onclick="showPage('rules')">Rules</a>
-</div>
-
-<!-- PEOPLE -->
-<div id="people" class="page">
-  <h2>People</h2>
-  <div class="card"><span class="name">Alex</span><button class="btn">Follow</button></div>
-  <div class="card"><span class="name">Jamie</span><button class="btn">Follow</button></div>
-  <div class="card"><span class="name">Rory</span><button class="btn">Follow</button></div>
-  <a class="btn alt" onclick="showPage('members')">Back</a>
-</div>
-
-<!-- CHAT -->
-<div id="chat" class="page">
-  <h2>Global chat</h2>
-  <div class="chatbox" id="chatbox"></div>
-  <input placeholder="Say something…" onkeydown="sendMessage(event,'chatbox')">
-  <a class="btn alt" onclick="showPage('members')">Back</a>
-</div>
-
-<!-- RULES -->
-<div id="rules" class="page">
-  <h2>Community rules</h2>
-  <ul>
-    <li>Friendship only</li>
-    <li>No dating or flirting</li>
-    <li>Respect boundaries</li>
-    <li>Be kind or leave</li>
-  </ul>
-  <a class="btn" onclick="showPage('members')">Agree & continue</a>
+<div id="members" class="card hidden">
+  <h3>You’re in 💖</h3>
+  <p>
+    This is your members space.<br>
+    Profiles, matching by interests, and chat will live here next.
+  </p>
+  <p><strong>Reminder:</strong> This is for friendship only.</p>
+  <button class="btn alt" onclick="logout()">Log out</button>
 </div>
 
 <footer>
-  CC² · Friendship first · Worldwide
+  CaraCairde · friendship without pressure
 </footer>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
+  authDomain: "ccsq-c2e3e.firebaseapp.com",
+  projectId: "ccsq-c2e3e",
+  storageBucket: "ccsq-c2e3e.firebasestorage.app",
+  messagingSenderId: "1092085359746",
+  appId: "1:1092085359746:web:9184879638b1183ce4009b"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// UI helpers
+window.showSignup = () => swap("signup");
+window.showLogin = () => swap("login");
+window.backHome = () => swap("landing");
+
+function swap(id){
+  ["landing","signup","login","members"].forEach(x=>{
+    document.getElementById(x).classList.add("hidden");
+  });
+  document.getElementById(id).classList.remove("hidden");
+}
+
+// Auth
+window.signup = () => {
+  createUserWithEmailAndPassword(
+    auth,
+    signupEmail.value,
+    signupPassword.value
+  ).catch(e=>alert(e.message));
+};
+
+window.login = () => {
+  signInWithEmailAndPassword(
+    auth,
+    loginEmail.value,
+    loginPassword.value
+  ).catch(e=>alert(e.message));
+};
+
+window.logout = () => signOut(auth);
+
+// Watch auth
+onAuthStateChanged(auth,user=>{
+  if(user){
+    swap("members");
+  }else{
+    swap("landing");
+  }
+});
+</script>
 
 </body>
 </html>
