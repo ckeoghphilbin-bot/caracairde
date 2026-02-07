@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit Profile · CC²</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  font-family:system-ui;
+  background:linear-gradient(135deg,#ffe9f1,#f6e7ff);
+}
+header{
+  padding:16px;
+  background:#f5b4d1;
+  font-weight:700;
+}
+.card{
+  background:white;
+  margin:20px;
+  padding:20px;
+  border-radius:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+input,select,textarea,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:14px;
+  border:1px solid #ccc;
+  font-size:15px;
+}
+button{
+  background:#cbb6ff;
+  font-weight:800;
+  margin-top:20px;
+}
+img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="profilec.html">← Back</a> · Edit Profile
+</header>
+
+<div class="card">
+
+<img id="preview">
+
+<label>Profile photo</label>
+<input type="file" accept="image/*" onchange="savePhoto(event)">
+
+<label>Name</label>
+<input id="name">
+
+<label>About you</label>
+<textarea id="about"></textarea>
+
+<label>Country</label>
+<select id="country" onchange="loadRegions()">
+  <option value="">Select</option>
+  <option>Ireland</option>
+  <option>United Kingdom</option>
+</select>
+
+<label>County / Area</label>
+<select id="region"></select>
+
+<button onclick="saveProfile()">Save profile</button>
+
+</div>
+
+<script>
+const ireland = [
+"Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal",
+"Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny",
+"Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath",
+"Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone",
+"Waterford","Westmeath","Wexford","Wicklow"
+];
+
+const uk = [
+"Bedfordshire","Berkshire","Bristol","Buckinghamshire","Cambridgeshire",
+"Cheshire","Cornwall","Cumbria","Derbyshire","Devon","Dorset","Durham",
+"East Sussex","Essex","Gloucestershire","Greater London","Greater Manchester",
+"Hampshire","Herefordshire","Hertfordshire","Kent","Lancashire",
+"Leicestershire","Lincolnshire","Merseyside","Norfolk","North Yorkshire",
+"Northamptonshire","Northumberland","Nottinghamshire","Oxfordshire",
+"Rutland","Shropshire","Somerset","South Yorkshire","Staffordshire",
+"Suffolk","Surrey","Tyne and Wear","Warwickshire","West Midlands",
+"West Sussex","West Yorkshire","Wiltshire","Worcestershire"
+];
+
+function loadRegions(){
+  region.innerHTML="";
+  const list = country.value==="Ireland" ? ireland :
+               country.value==="United Kingdom" ? uk : [];
+  list.forEach(r=>{
+    const o=document.createElement("option");
+    o.text=r; o.value=r;
+    region.add(o);
+  });
+}
+
+function savePhoto(e){
+  const reader=new FileReader();
+  reader.onload=()=>{
+    localStorage.setItem("cc2_avatar",reader.result);
+    preview.src=reader.result;
+  };
+  reader.readAsDataURL(e.target.files[0]);
+}
+
+function saveProfile(){
+  localStorage.setItem("cc2_name",name.value);
+  localStorage.setItem("cc2_about",about.value);
+  localStorage.setItem("cc2_country",country.value);
+  localStorage.setItem("cc2_region",region.value);
+  location.href="profilec.html";
+}
+
+preview.src = localStorage.getItem("cc2_avatar") || "";
+name.value = localStorage.getItem("cc2_name") || "";
+about.value = localStorage.getItem("cc2_about") || "";
+country.value = localStorage.getItem("cc2_country") || "";
+loadRegions();
+region.value = localStorage.getItem("cc2_region") || "";
+</script>
+
+</body>
+</html>
