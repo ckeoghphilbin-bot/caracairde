@@ -1,58 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>My Profile – CC²</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body{font-family:system-ui;background:#f6f0ff;margin:0;}
-header{background:#d9c8ff;padding:16px;display:flex;justify-content:space-between;align-items:center;}
-header a{font-weight:600;text-decoration:none;color:#000;}
-.card{background:white;margin:20px;padding:20px;border-radius:20px;}
-label{display:block;margin-top:12px;font-weight:600;}
-input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #ccc;margin-top:6px;}
-button{margin-top:16px;padding:12px;width:100%;border-radius:14px;border:none;background:#cbb6ff;font-weight:700;}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system;
+  background:linear-gradient(135deg,#f6e7ff,#ffe9f1);
+}
+header{
+  background:#d9c8ff;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:700;
+}
+header a{
+  text-decoration:none;
+  color:#000;
+}
+.card{
+  background:white;
+  margin:20px;
+  padding:20px;
+  border-radius:22px;
+}
+label{
+  display:block;
+  margin-top:14px;
+  font-weight:600;
+}
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  margin-top:6px;
+}
+textarea{resize:none}
+button{
+  margin-top:18px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:#cbb6ff;
+  font-weight:800;
+}
+img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#eee;
+}
 </style>
 </head>
+
 <body>
 
 <header>
   <a href="connections.html">Browse 👀</a>
-  <strong>CC² 💜</strong>
+  <span>CC² 💜</span>
   <a href="index.html">Log out</a>
 </header>
 
 <div class="card">
 <h2>My Profile</h2>
 
+<img id="avatar">
+
 <label>Profile photo</label>
-<input type="file">
+<input type="file" accept="image/*" onchange="savePhoto(event)">
+
+<label>Name</label>
+<input id="name">
 
 <label>About me</label>
-<textarea placeholder="A few words…"></textarea>
+<textarea id="about" rows="3"></textarea>
 
 <label>Country</label>
 <select id="country" onchange="loadRegions()">
-<option>Ireland</option>
-<option>United Kingdom</option>
+  <option value="">Select country</option>
+  <option value="IE">Ireland</option>
+  <option value="UK">United Kingdom</option>
 </select>
 
 <label>County / Area</label>
 <select id="region"></select>
 
-<button>Save profile</button>
+<button onclick="saveProfile()">Save profile</button>
 </div>
 
 <script>
-const ireland=["Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"];
-const uk=["Greater London","Manchester","Birmingham","Leeds","Liverpool","Bristol","Sheffield","Nottingham","Leicester","Coventry","Derby","York","Hull","Newcastle","Sunderland","Durham","Carlisle","Lancaster","Blackpool","Preston"];
+const ireland=[
+"Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down",
+"Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim",
+"Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon",
+"Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"
+];
+
+const uk=[
+"Greater London","Manchester","Birmingham","Leeds","Liverpool","Bristol",
+"Sheffield","Nottingham","Leicester","Derby","York","Newcastle","Durham"
+];
 
 function loadRegions(){
   const r=document.getElementById("region");
   r.innerHTML="";
-  const list=document.getElementById("country").value==="Ireland"?ireland:uk;
-  list.forEach(x=>{const o=document.createElement("option");o.text=x;r.add(o);});
+  const list=country.value==="IE"?ireland:
+             country.value==="UK"?uk:[];
+  list.forEach(x=>{
+    const o=document.createElement("option");
+    o.textContent=x;
+    r.appendChild(o);
+  });
+  r.value=localStorage.getItem("cc2_region")||"";
 }
-loadRegions();
+
+function savePhoto(e){
+  const reader=new FileReader();
+  reader.onload=()=>{
+    avatar.src=reader.result;
+    localStorage.setItem("cc2_avatar",reader.result);
+  };
+  reader.readAsDataURL(e.target.files[0]);
+}
+
+function saveProfile(){
+  localStorage.setItem("cc2_name",name.value);
+  localStorage.setItem("cc2_about",about.value);
+  localStorage.setItem("cc2_country",country.value);
+  localStorage.setItem("cc2_region",region.value);
+  alert("Profile saved 💜");
+}
+
+function loadProfile(){
+  if(localStorage.getItem("cc2_avatar")){
+    avatar.src=localStorage.getItem("cc2_avatar");
+  }
+  name.value=localStorage.getItem("cc2_name")||"";
+  about.value=localStorage.getItem("cc2_about")||"";
+  country.value=localStorage.getItem("cc2_country")||"";
+  loadRegions();
+}
+
+loadProfile();
 </script>
 
 </body>
