@@ -1,58 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Profile – CC²</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial;
-      background: #f3edff;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-    }
-    img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      float: right;
-    }
-    a {
-      color: purple;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Profile – CC²</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f4efff;
+  padding:20px;
+}
+.card{
+  background:white;
+  border-radius:24px;
+  padding:20px;
+  max-width:600px;
+  margin:auto;
+  position:relative;
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.photo{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.wave{
+  font-size:24px;
+  cursor:pointer;
+}
+.section{
+  margin-top:20px;
+}
+.badge{
+  display:inline-block;
+  background:#e6dcff;
+  padding:6px 12px;
+  border-radius:14px;
+  margin:4px;
+  font-size:14px;
+}
+.comment{
+  background:#f6f1ff;
+  padding:10px;
+  border-radius:14px;
+  margin-bottom:8px;
+}
+a{
+  color:#6a4cff;
+  font-weight:bold;
+  text-decoration:none;
+}
+</style>
 </head>
+
 <body>
 
 <div class="card">
-  <a href="index.html">Home</a> | 
-  <a href="editprofile.html">Edit</a>
 
-  <img id="photo">
+<div class="top">
+  <h2 id="name">Your name</h2>
+  <div>
+    <span class="wave">👋</span><br>
+    <img id="photo" class="photo">
+  </div>
+</div>
 
-  <h2 id="name"></h2>
-  <p id="location"></p>
+<p id="location"></p>
+
+<a href="enhanceprofile.html">✨ Enhance my profile</a>
+
+<div class="section">
+  <h3>About me</h3>
   <p id="bio"></p>
 </div>
 
+<div class="section">
+  <h3>My interests</h3>
+  <div id="interests"></div>
+</div>
+
+<div class="section">
+  <h3>Friendship style</h3>
+  <p id="availability"></p>
+</div>
+
+<div class="section">
+  <h3>Kind words 💜</h3>
+  <div id="comments"></div>
+</div>
+
+</div>
+
 <script>
-  const profile = JSON.parse(localStorage.getItem("cc2profile")) || {};
+const data = JSON.parse(localStorage.getItem("cc2profile")) || {};
 
-  document.getElementById("name").innerText = profile.name || "Your name";
-  document.getElementById("location").innerText = profile.location || "";
-  document.getElementById("bio").innerText = profile.bio || "";
+name.innerText = data.name || "Your name";
+location.innerText = data.location || "";
+bio.innerText = data.bio || "";
+availability.innerText = data.availability || "";
 
-  if (profile.photo) {
-    document.getElementById("photo").src = profile.photo;
-  }
+if(data.photo) photo.src = data.photo;
+
+if(data.interests){
+  data.interests.forEach(i=>{
+    interests.innerHTML += `<span class="badge">${i}</span>`;
+  });
+}
+
+if(data.comments){
+  data.comments.forEach(c=>{
+    comments.innerHTML += `<div class="comment">${c}</div>`;
+  });
+}
 </script>
 
 </body>
