@@ -21,18 +21,24 @@
 body{
   margin:0;
   font-family: system-ui, -apple-system, Arial, sans-serif;
-  color:var(--ink);
   background:
     radial-gradient(900px 500px at 110% 0%, var(--blue2), transparent 40%),
     radial-gradient(900px 500px at -10% 10%, var(--blush2), transparent 45%),
     linear-gradient(135deg, var(--blush), #fff);
+  color:var(--ink);
   text-align:center;
 }
 
 /* ---------- GLOBAL ---------- */
 header{padding:70px 20px}
 h1{font-size:56px;margin:0}
-h1 span{background:#fff;color:var(--blue);padding:6px 14px;border-radius:18px;box-shadow:var(--shadow)}
+h1 span{
+  background:#fff;
+  color:var(--blue);
+  padding:6px 14px;
+  border-radius:18px;
+  box-shadow:var(--shadow)
+}
 p{line-height:1.5}
 small{color:#777}
 
@@ -55,12 +61,13 @@ small{color:#777}
   box-shadow:0 10px 22px rgba(0,0,0,.25);
 }
 
+/* ---------- PAGES ---------- */
 .page{
   display:none;
   background:var(--card);
   border-radius:26px;
   padding:36px 20px;
-  max-width:600px;
+  max-width:680px;
   margin:20px auto;
   box-shadow:var(--shadow);
 }
@@ -80,13 +87,10 @@ textarea{min-height:80px}
 
 /* ---------- PROFILE ---------- */
 .avatar{
-  width:96px;
-  height:96px;
+  width:96px;height:96px;
   border-radius:50%;
   background:linear-gradient(135deg,var(--blush2),var(--blue2));
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;
   font-size:32px;
   margin:0 auto 10px;
 }
@@ -99,6 +103,19 @@ textarea{min-height:80px}
   background:#f1f4ff;
   font-size:14px;
 }
+
+/* ---------- PEOPLE ---------- */
+.card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px;
+  margin:10px 0;
+  border-radius:16px;
+  background:#fafafa;
+}
+
+.card .name{font-weight:600}
 
 /* ---------- CHAT ---------- */
 .chatbox{
@@ -128,11 +145,8 @@ footer{padding:40px;color:#444}
 </style>
 
 <script>
-let profile = {
-  name: "You",
-  bio: "Tell people a little about yourself.",
-  interests: ["music","walking","art"]
-};
+let me = { name:"You", bio:"Say something kind about yourself." };
+let people = ["Alex","Jamie","Rory","Sam","Taylor"];
 
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -141,21 +155,21 @@ function showPage(id){
 }
 
 function saveProfile(){
-  profile.name = document.getElementById('pname').value || profile.name;
-  profile.bio = document.getElementById('pbio').value || profile.bio;
-  document.getElementById('dname').innerText = profile.name;
-  document.getElementById('dbio').innerText = profile.bio;
-  showPage('profile');
+  me.name=document.getElementById("pname").value||me.name;
+  me.bio=document.getElementById("pbio").value||me.bio;
+  document.getElementById("myname").innerText=me.name;
+  document.getElementById("mybio").innerText=me.bio;
+  showPage("profile");
 }
 
-function sendMessage(e, id){
-  if(e.key==='Enter' && e.target.value.trim()!==''){
+function sendMessage(e,id){
+  if(e.key==="Enter" && e.target.value.trim()!==""){
     const box=document.getElementById(id);
-    const msg=document.createElement('div');
-    msg.className='msg';
+    const msg=document.createElement("div");
+    msg.className="msg";
     msg.textContent=e.target.value;
     box.appendChild(msg);
-    e.target.value='';
+    e.target.value="";
     box.scrollTop=box.scrollHeight;
   }
 }
@@ -164,15 +178,13 @@ function sendMessage(e, id){
 
 <body>
 
-<!-- HOME -->
 <header>
   <h1 class="float">CC<span>²</span></h1>
-  <p>Worldwide friendship · Pastels · No dating</p>
+  <p>Pastel social · Profiles · Friendship first</p>
   <a class="btn" onclick="showPage('signup')">Join</a>
   <a class="btn alt" onclick="showPage('login')">Log in</a>
 </header>
 
-<!-- SIGN UP -->
 <div id="signup" class="page">
   <h2>Create account</h2>
   <input placeholder="Name">
@@ -180,56 +192,63 @@ function sendMessage(e, id){
   <a class="btn" onclick="showPage('edit')">Continue</a>
 </div>
 
-<!-- LOGIN -->
 <div id="login" class="page">
   <h2>Welcome back</h2>
   <input placeholder="Email">
   <a class="btn" onclick="showPage('members')">Enter</a>
 </div>
 
-<!-- EDIT PROFILE -->
 <div id="edit" class="page">
   <h2>Edit profile</h2>
   <input id="pname" placeholder="Your name">
-  <textarea id="pbio" placeholder="A few words about you"></textarea>
+  <textarea id="pbio" placeholder="About you"></textarea>
   <a class="btn" onclick="saveProfile()">Save</a>
 </div>
 
-<!-- PROFILE -->
 <div id="profile" class="page">
   <div class="avatar">😊</div>
-  <h2 id="dname">You</h2>
-  <p id="dbio">Tell people a little about yourself.</p>
-
-  <div class="tags">
-    <span>music</span>
-    <span>walking</span>
-    <span>art</span>
-  </div>
-
-  <a class="btn" onclick="showPage('members')">Back to members</a>
+  <h2 id="myname">You</h2>
+  <p id="mybio">Say something kind about yourself.</p>
+  <div class="tags"><span>music</span><span>walking</span><span>art</span></div>
+  <a class="btn" onclick="showPage('members')">Back</a>
 </div>
 
-<!-- MEMBERS -->
 <div id="members" class="page">
   <h2>Members</h2>
-  <p>Explore · Chat · Connect</p>
-
   <a class="btn" onclick="showPage('profile')">My profile</a>
-  <a class="btn" onclick="showPage('room')">Global chat</a>
-  <a class="btn alt" onclick="showPage('edit')">Edit profile</a>
+  <a class="btn" onclick="showPage('people')">People</a>
+  <a class="btn" onclick="showPage('chat')">Chat</a>
+  <a class="btn alt" onclick="showPage('rules')">Rules</a>
 </div>
 
-<!-- CHAT -->
-<div id="room" class="page">
-  <h2>Global chat 🌍</h2>
-  <div class="chatbox" id="chat"></div>
-  <input placeholder="Say something…" onkeydown="sendMessage(event,'chat')">
+<div id="people" class="page">
+  <h2>People</h2>
+  <div class="card"><span class="name">Alex</span><button class="btn">Follow</button></div>
+  <div class="card"><span class="name">Jamie</span><button class="btn">Follow</button></div>
+  <div class="card"><span class="name">Rory</span><button class="btn">Follow</button></div>
   <a class="btn alt" onclick="showPage('members')">Back</a>
 </div>
 
+<div id="chat" class="page">
+  <h2>Global chat</h2>
+  <div class="chatbox" id="chatbox"></div>
+  <input placeholder="Say something…" onkeydown="sendMessage(event,'chatbox')">
+  <a class="btn alt" onclick="showPage('members')">Back</a>
+</div>
+
+<div id="rules" class="page">
+  <h2>Community rules</h2>
+  <ul>
+    <li>Friendship only</li>
+    <li>No dating or flirting</li>
+    <li>Be kind or leave</li>
+    <li>Report issues</li>
+  </ul>
+  <a class="btn" onclick="showPage('members')">Agree & continue</a>
+</div>
+
 <footer>
-  CC² · Pastel social · Friendship squared
+  CC² · Pastel · Profiles · Friendship squared
 </footer>
 
 </body>
