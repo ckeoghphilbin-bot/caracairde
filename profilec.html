@@ -1,37 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>My Profile</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{font-family:system-ui;background:#f6f0ff;margin:0}
-header{padding:16px;background:#d9c8ff;display:flex;justify-content:space-between}
-.card{background:white;margin:20px;padding:20px;border-radius:20px}
-img{width:90px;height:90px;border-radius:50%;background:#eee}
-</style>
+  <title>My Profile – CC²</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial;
+      background: #f3edff;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      float: right;
+    }
+    a {
+      color: purple;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html">Home</a>
-  <strong>My Profile</strong>
-  <a href="editprofile.html">Edit</a>
-</header>
-
 <div class="card">
-  <img id="avatar"><br><br>
-  <strong id="name"></strong>
-  <p id="about"></p>
-  <p><span id="country"></span> · <span id="region"></span></p>
+  <a href="index.html">Home</a> | 
+  <a href="editprofile.html">Edit</a>
+
+  <img id="photo">
+
+  <h2 id="name"></h2>
+  <p id="location"></p>
+  <p id="bio"></p>
 </div>
 
 <script>
-avatar.src=localStorage.getItem("cc2_avatar")||"";
-name.textContent=localStorage.getItem("cc2_name")||"";
-about.textContent=localStorage.getItem("cc2_about")||"";
-country.textContent=localStorage.getItem("cc2_country")||"";
-region.textContent=localStorage.getItem("cc2_region")||"";
+  const profile = JSON.parse(localStorage.getItem("cc2profile")) || {};
+
+  document.getElementById("name").innerText = profile.name || "Your name";
+  document.getElementById("location").innerText = profile.location || "";
+  document.getElementById("bio").innerText = profile.bio || "";
+
+  if (profile.photo) {
+    document.getElementById("photo").src = profile.photo;
+  }
 </script>
 
 </body>
