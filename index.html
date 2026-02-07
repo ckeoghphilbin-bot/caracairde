@@ -2,42 +2,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CC² – Friendship, squared</title>
+<title>CC² Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
-  font-family: system-ui;
-  background: linear-gradient(135deg,#f6e7ff,#ffe9f1);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+  margin:0;
+  font-family:system-ui;
+  background:linear-gradient(135deg,#f6e7ff,#ffe9f1);
 }
-.card{
-  background:white;
-  padding:40px;
-  border-radius:24px;
+h1{text-align:center;margin:20px 0}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  padding:20px;
+}
+.btn{
+  background:#f5b4d1;
+  border-radius:26px;
+  padding:30px;
   text-align:center;
-  width:90%;
-  max-width:400px;
-}
-a.button{
-  display:block;
-  padding:14px;
-  margin:12px 0;
-  background:#d9b6ff;
-  color:#000;
+  font-weight:800;
+  font-size:16px;
   text-decoration:none;
-  border-radius:14px;
-  font-weight:600;
+  color:#000;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
 }
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>CC² 💜</h1>
-  <p>Friendship first. No pressure. Ever.</p>
-  <a class="button" href="login.html">Log in</a>
-  <a class="button" href="signupcc.html">Create account</a>
+
+<h1>CC² 💜</h1>
+
+<div class="grid">
+  <a class="btn" href="#">💬 Chat Rooms</a>
+  <a class="btn" href="#">📍 Local Meet-ups</a>
+  <a class="btn" href="#">✉️ Messages</a>
+  <a class="btn" href="#">💎 Membership</a>
 </div>
+
+<div style="text-align:center;margin-bottom:30px">
+  <a href="profilec.html">My Profile</a> ·
+  <a href="connections.html">Browse</a>
+</div>
+
 </body>
 </html>
