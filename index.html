@@ -1,50 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CC²</title>
-
-<style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#f3e6ff;
-}
-.box {
-  max-width:420px;
-  margin:90px auto;
-  background:#fff;
-  padding:32px;
-  border-radius:22px;
-  text-align:center;
-}
-h1 {
-  margin:0;
-  font-size:34px;
-}
-p {
-  color:#555;
-}
-button {
-  width:100%;
-  padding:14px;
-  margin-top:16px;
-  border:none;
-  border-radius:14px;
-  font-size:16px;
-}
-.login { background:#bfa7ff; }
-.signup { background:#f6a6bd; }
-</style>
+  <title>CC² — Find Friends</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin:0;
+      font-family: system-ui;
+      background: linear-gradient(135deg,#fde7f1,#f4ecff);
+    }
+    header {
+      padding:20px;
+      text-align:center;
+      font-size:26px;
+      font-weight:700;
+    }
+    .grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+      gap:16px;
+      padding:16px;
+    }
+    .card {
+      background:white;
+      border-radius:18px;
+      padding:12px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    .avatar {
+      width:80px;
+      height:80px;
+      border-radius:50%;
+      background:#eee;
+      margin:0 auto 10px;
+      background-size:cover;
+      background-position:center;
+    }
+    button {
+      border:none;
+      padding:8px 14px;
+      border-radius:20px;
+      background:#f4b6cf;
+      font-weight:600;
+      cursor:pointer;
+    }
+    nav {
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      background:white;
+      display:flex;
+      justify-content:space-around;
+      padding:12px;
+      box-shadow:0 -4px 20px rgba(0,0,0,.1);
+    }
+    nav a { text-decoration:none; font-weight:600; color:#555 }
+  </style>
 </head>
-
 <body>
-<div class="box">
-  <h1>CC²</h1>
-  <p>Friendship · Community · No pressure</p>
-  <button class="login" onclick="location.href='login.html'">Log in</button>
-  <button class="signup" onclick="location.href='signupcc.html'">Create account</button>
+
+<header>CC² 💜<br><small>Friendship first</small></header>
+
+<div class="grid">
+  <div class="card">
+    <div class="avatar" style="background-image:url('https://i.pravatar.cc/150?1')"></div>
+    <strong>Aoife</strong><br>
+    Yoga • Coffee • Walks<br><br>
+    <button>Add Friend</button>
+  </div>
+
+  <div class="card">
+    <div class="avatar" style="background-image:url('https://i.pravatar.cc/150?2')"></div>
+    <strong>Mark</strong><br>
+    Parenting • Hiking<br><br>
+    <button>Add Friend</button>
+  </div>
+
+  <div class="card">
+    <div class="avatar" style="background-image:url('https://i.pravatar.cc/150?3')"></div>
+    <strong>Sinead</strong><br>
+    Art • Music • Chat<br><br>
+    <button>Add Friend</button>
+  </div>
 </div>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="profilec.html">My Profile</a>
+  <a href="login.html">Logout</a>
+</nav>
+
 </body>
 </html>
