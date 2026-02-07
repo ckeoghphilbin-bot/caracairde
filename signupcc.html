@@ -1,44 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Sign up — CC²</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Browse – CC²</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background:linear-gradient(135deg,#f4ecff,#fde7f1);
-      font-family:system-ui;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #f7e8ff;
+      padding: 16px;
     }
-    .box {
-      background:white;
-      padding:30px;
-      border-radius:24px;
-      width:90%;
-      max-width:360px;
-      text-align:center;
+    .card {
+      background: white;
+      padding: 16px;
+      border-radius: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    input,button {
-      width:100%;
-      padding:12px;
-      margin-top:12px;
-      border-radius:20px;
-      border:1px solid #ddd;
+    button {
+      background: #f472b6;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 12px;
     }
-    button { background:#f4b6cf; font-weight:700; border:none }
   </style>
 </head>
 <body>
 
-<div class="box">
-  <h2>Create account ✨</h2>
-  <input placeholder="Email">
-  <input type="password" placeholder="Password">
-  <button onclick="location.href='profilec.html'">Create account</button>
-  <p><a href="login.html">Already have an account?</a></p>
+<h2>Browse people 👀</h2>
+
+<div class="card">
+  <span>Aisling – Galway</span>
+  <button>👋 Wave</button>
 </div>
+
+<div class="card">
+  <span>James – Leeds</span>
+  <button>👋 Wave</button>
+</div>
+
+<a href="profilec.html">← Back to profile</a>
 
 </body>
 </html>
