@@ -1,124 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>My Profile – CC²</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: #f5edff;
-      padding: 16px;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin-top: 16px;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
-    }
-    img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #eee;
-    }
-    input, select, textarea, button {
-      width: 100%;
-      margin-top: 10px;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-    }
-    button {
-      background: #c084fc;
-      color: white;
-      border: none;
-      font-weight: 600;
-      margin-top: 16px;
-    }
-    .nav {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    .nav a {
-      flex: 1;
-      text-align: center;
-      padding: 12px;
-      background: #ede9fe;
-      border-radius: 12px;
-      text-decoration: none;
-      color: #111;
-      font-weight: 600;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>My Profile – CC²</title>
+<style>
+body{font-family:system-ui;background:#f6f0ff;margin:0;}
+header{background:#d9c8ff;padding:16px;display:flex;justify-content:space-between;align-items:center;}
+header a{font-weight:600;text-decoration:none;color:#000;}
+.card{background:white;margin:20px;padding:20px;border-radius:20px;}
+label{display:block;margin-top:12px;font-weight:600;}
+input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #ccc;margin-top:6px;}
+button{margin-top:16px;padding:12px;width:100%;border-radius:14px;border:none;background:#cbb6ff;font-weight:700;}
+</style>
 </head>
 <body>
 
-  <div class="header">
-    <h2>CC² 💜</h2>
-    <span>👋 0</span>
-  </div>
+<header>
+  <a href="connections.html">Browse 👀</a>
+  <strong>CC² 💜</strong>
+  <a href="index.html">Log out</a>
+</header>
 
-  <div class="card">
-    <img id="avatar">
-    <input type="file" accept="image/*" onchange="preview(event)">
-    <input id="name" placeholder="Name">
-    <textarea id="bio" placeholder="About me…"></textarea>
+<div class="card">
+<h2>My Profile</h2>
 
-    <select id="country" onchange="updateCounties()">
-      <option value="">Country</option>
-      <option value="IE">Ireland</option>
-      <option value="UK">United Kingdom</option>
-    </select>
+<label>Profile photo</label>
+<input type="file">
 
-    <select id="county">
-      <option value="">County / Area</option>
-    </select>
+<label>About me</label>
+<textarea placeholder="A few words…"></textarea>
 
-    <button onclick="saveProfile()">Save profile</button>
-  </div>
+<label>Country</label>
+<select id="country" onchange="loadRegions()">
+<option>Ireland</option>
+<option>United Kingdom</option>
+</select>
 
-  <div class="nav">
-    <a href="connections.html">Browse</a>
-    <a href="index.html">Log out</a>
-  </div>
+<label>County / Area</label>
+<select id="region"></select>
+
+<button>Save profile</button>
+</div>
 
 <script>
-const counties = {
-  IE: ["Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"],
-  UK: ["England","Scotland","Wales","Northern Ireland"]
-};
+const ireland=["Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"];
+const uk=["Greater London","Manchester","Birmingham","Leeds","Liverpool","Bristol","Sheffield","Nottingham","Leicester","Coventry","Derby","York","Hull","Newcastle","Sunderland","Durham","Carlisle","Lancaster","Blackpool","Preston"];
 
-function updateCounties() {
-  const c = document.getElementById("country").value;
-  const list = document.getElementById("county");
-  list.innerHTML = '<option value="">County / Area</option>';
-  if (counties[c]) {
-    counties[c].forEach(x => {
-      const o = document.createElement("option");
-      o.textContent = x;
-      list.appendChild(o);
-    });
-  }
+function loadRegions(){
+  const r=document.getElementById("region");
+  r.innerHTML="";
+  const list=document.getElementById("country").value==="Ireland"?ireland:uk;
+  list.forEach(x=>{const o=document.createElement("option");o.text=x;r.add(o);});
 }
-
-function preview(e) {
-  const img = document.getElementById("avatar");
-  img.src = URL.createObjectURL(e.target.files[0]);
-}
-
-function saveProfile() {
-  alert("Profile saved 💜");
-}
+loadRegions();
 </script>
 
 </body>
