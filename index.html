@@ -1,240 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CaraCairde 💗</title>
+  <meta charset="UTF-8" />
+  <title>CaraCairde · Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: linear-gradient(180deg,#f7c6d9,#fff7fa);
-  color:#444;
-}
-.container {
-  max-width:420px;
-  margin:auto;
-  padding:20px;
-}
-h1 { text-align:center; }
-.tagline {
-  text-align:center;
-  opacity:.75;
-  margin-bottom:20px;
-}
-.card {
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-input, select, textarea {
-  width:100%;
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:14px;
-  border:1px solid #eee;
-}
-button {
-  width:100%;
-  padding:12px;
-  border-radius:14px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-}
-.primary { background:#e78fb3;color:white; }
-.secondary { background:#7bb7d6;color:white; }
-.link {
-  text-align:center;
-  margin-top:10px;
-  color:#7bb7d6;
-  cursor:pointer;
-}
-.hidden { display:none; }
-img {
-  width:100%;
-  border-radius:16px;
-}
-.chat {
-  border:1px solid #eee;
-  border-radius:14px;
-  padding:10px;
-  height:200px;
-  overflow:auto;
-  margin-bottom:10px;
-  background:#fff7fa;
-}
-small { opacity:.7; }
-</style>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(180deg, #fde4ec, #f6f0ff);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 32px;
+      letter-spacing: -0.5px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 24px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .primary {
+      background: #f4a3c4;
+      color: #fff;
+    }
+
+    .secondary {
+      background: #eef2ff;
+      color: #5b5bd6;
+    }
+
+    .link {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
 </head>
 
 <body>
-<div class="container">
 
-<h1>CaraCairde</h1>
-<div class="tagline">
-Safe friendships · shared interests · no dating · no pressure
-</div>
+  <div class="card">
+    <h1>CaraCairde</h1>
+    <div class="tagline">
+      Local friendship · shared interests · no dating · no pressure
+    </div>
 
-<!-- LOGIN -->
-<div class="card" id="login">
-<h3>Log in</h3>
-<input id="loginEmail" placeholder="Email">
-<input id="loginPass" type="password" placeholder="Password">
-<button class="primary" onclick="login()">Log in</button>
-<div class="link" onclick="show('signup')">Create account</div>
-</div>
+    <input id="email" type="email" placeholder="Email" />
+    <input id="password" type="password" placeholder="Password" />
 
-<!-- SIGN UP -->
-<div class="card hidden" id="signup">
-<h3>Sign up</h3>
-<input id="signEmail" placeholder="Email">
-<input id="signPass" type="password" placeholder="Password">
-<input id="signConfirm" type="password" placeholder="Confirm password">
-<button class="secondary" onclick="signup()">Create account</button>
-<div class="link" onclick="show('login')">Back to login</div>
-</div>
+    <button class="primary" onclick="logIn()">Log in</button>
 
-<!-- PROFILE -->
-<div class="card hidden" id="profile">
-<h3>Your profile</h3>
+    <div class="link" onclick="goToSignup()">
+      New here? Create an account →
+    </div>
 
-<img id="avatar">
-<input type="file" onchange="uploadPic(event)">
+    <div class="link" onclick="resetPassword()">
+      Forgot password?
+    </div>
 
-<input id="age" placeholder="Age (circa)">
-<select id="sex">
-  <option>Rather not say</option>
-  <option>Female</option>
-  <option>Male</option>
-</select>
+    <div class="footer">
+      A calm place to meet people — not perform.
+    </div>
+  </div>
 
-<input id="location" placeholder="Location">
-<textarea id="interests" placeholder="Hobbies & interests"></textarea>
-<textarea id="availability" placeholder="Available times for meets"></textarea>
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
-<button class="primary" onclick="saveProfile()">Save profile</button>
-<button onclick="show('chats')">Go to chats 💬</button>
-</div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
+      authDomain: "ccsq-c2e3e.firebaseapp.com",
+      projectId: "ccsq-c2e3e",
+      storageBucket: "ccsq-c2e3e.firebasestorage.app",
+      messagingSenderId: "1092085359746",
+      appId: "1:1092085359746:web:9184879638b1183ce4009b"
+    };
 
-<!-- CHATS -->
-<div class="card hidden" id="chats">
-<h3>Community chats</h3>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-<select id="room" onchange="loadChat()">
-  <option value="general">General chat</option>
-  <option value="local">Local meets</option>
-  <option value="parents">Parents hub</option>
-</select>
+    window.logIn = async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
-<div class="chat" id="messages"></div>
-<input id="msg" placeholder="Say something kind…">
-<button class="secondary" onclick="send()">Send</button>
+      if (!email || !password) {
+        alert("Please enter email and password 💗");
+        return;
+      }
 
-<button onclick="logout()">Log out</button>
-</div>
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Logged in 💖");
+        window.location.href = "profile.html";
+      } catch (err) {
+        alert(err.message);
+      }
+    };
 
-<small style="text-align:center;display:block">
-A calm place to reach out — not perform 💗
-</small>
+    window.resetPassword = async () => {
+      const email = document.getElementById("email").value.trim();
+      if (!email) {
+        alert("Enter your email first 💌");
+        return;
+      }
 
-</div>
+      try {
+        await sendPasswordResetEmail(auth, email);
+        alert("Password reset email sent ✨");
+      } catch (err) {
+        alert(err.message);
+      }
+    };
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
-  authDomain: "ccsq-c2e3e.firebaseapp.com",
-  projectId: "ccsq-c2e3e",
-  storageBucket: "ccsq-c2e3e.appspot.com",
-  messagingSenderId: "1092085359746",
-  appId: "1:1092085359746:web:9184879638b1183ce4009b"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-let user;
-
-window.show = id => {
-  ["login","signup","profile","chats"].forEach(x=>document.getElementById(x).classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-};
-
-window.signup = async () => {
-  if(signPass.value!==signConfirm.value) return alert("Passwords don’t match");
-  const cred = await createUserWithEmailAndPassword(auth, signEmail.value, signPass.value);
-  user = cred.user;
-  show("profile");
-};
-
-window.login = async () => {
-  const cred = await signInWithEmailAndPassword(auth, loginEmail.value, loginPass.value);
-  user = cred.user;
-  const snap = await getDoc(doc(db,"profiles",user.uid));
-  show(snap.exists() ? "chats" : "profile");
-};
-
-window.logout = async () => {
-  await signOut(auth);
-  show("login");
-};
-
-window.saveProfile = async () => {
-  await setDoc(doc(db,"profiles",user.uid),{
-    age:age.value,
-    sex:sex.value,
-    location:location.value,
-    interests:interests.value,
-    availability:availability.value
-  });
-  show("chats");
-};
-
-window.uploadPic = async e => {
-  const file = e.target.files[0];
-  const r = ref(storage, "avatars/"+user.uid);
-  await uploadBytes(r,file);
-  avatar.src = await getDownloadURL(r);
-};
-
-let unsub;
-window.loadChat = () => {
-  if(unsub) unsub();
-  messages.innerHTML="";
-  const q = query(
-    collection(db,"messages"),
-    where("room","==",room.value),
-    orderBy("time")
-  );
-  unsub = onSnapshot(q,snap=>{
-    messages.innerHTML="";
-    snap.forEach(d=>{
-      messages.innerHTML += `<div>${d.data().text}</div>`;
-    });
-  });
-};
-loadChat();
-
-window.send = async () => {
-  if(!msg.value) return;
-  await addDoc(collection(db,"messages"),{
-    text:msg.value,
-    room:room.value,
-    time:Date.now()
-  });
-  msg.value="";
-};
-</script>
+    window.goToSignup = () => {
+      window.location.href = "signup.html";
+    };
+  </script>
 
 </body>
 </html>
