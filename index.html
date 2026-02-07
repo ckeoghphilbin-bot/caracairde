@@ -1,123 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CaraCairde 💗</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CaraCairde</title>
 
-  <style>
-    :root {
-      --blush: #f6c1d1;
-      --soft-pink: #fde7ef;
-      --lavender: #e6d9ff;
-      --ink: #333;
-      --card: #ffffffcc;
-      --btn: #d88bb0;
-      --btn-hover: #c4779e;
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, var(--soft-pink), var(--lavender));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink);
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 420px;
-      padding: 24px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: 28px;
-      padding: 36px 28px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    h1 span {
-      color: #c95a8f;
-    }
-
-    .tagline {
-      margin: 14px 0 28px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      opacity: 0.85;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      margin: 12px 0;
-      border-radius: 18px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      background: var(--btn);
-      color: white;
-      transition: 0.2s ease;
-    }
-
-    .btn:hover {
-      background: var(--btn-hover);
-    }
-
-    .btn.secondary {
-      background: transparent;
-      color: #7a3b5c;
-      border: 2px solid #e2a3c2;
-    }
-
-    .footer {
-      margin-top: 26px;
-      font-size: 0.8rem;
-      opacity: 0.7;
-    }
-
-    .footer span {
-      display: block;
-      margin-top: 6px;
-    }
-  </style>
+<style>
+body{margin:0;background:#f7cfd8;font-family:sans-serif;}
+.box{
+  max-width:500px;
+  margin:80px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+}
+.login{background:#9ec7ff;}
+.signup{background:#f3a7b7;}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
-      <h1>Cara<span>Cairde</span></h1>
-
-      <div class="tagline">
-        Local friendship · shared interests<br />
-        no dating · no pressure · just connection
-      </div>
-
-      <a class="btn" href="login.html">Log in</a>
-      <a class="btn secondary" href="signupcc.html">Create an account</a>
-
-      <div class="footer">
-        A calm place to meet people — not perform.
-        <span>💗</span>
-      </div>
-    </div>
-  </div>
+<div class="box">
+  <h1>CaraCairde</h1>
+  <p>Local friendship · no dating · no pressure</p>
+  <button class="login" onclick="location.href='login.html'">Log in</button>
+  <button class="signup" onclick="location.href='signupcc.html'">Create account</button>
+</div>
 </body>
 </html>
