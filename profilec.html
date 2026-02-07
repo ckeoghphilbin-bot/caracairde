@@ -6,118 +6,166 @@
 
 <style>
 body{
-  font-family: Arial, sans-serif;
-  background:#f4efff;
-  padding:20px;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3edff;
+}
+
+/* TOP BAR */
+.topbar{
+  background:#d8cfff;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.topbar a{
+  color:#5a3ec8;
+  font-weight:bold;
+  text-decoration:none;
+}
+.wave{
+  font-size:22px;
+}
+
+/* MAIN */
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:30px;
 }
 .card{
   background:white;
-  border-radius:24px;
-  padding:20px;
-  max-width:600px;
-  margin:auto;
-  position:relative;
+  border-radius:30px;
+  padding:30px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  margin-bottom:30px;
 }
-.top{
+
+/* HEADER */
+.header{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
 }
-.photo{
+.avatar{
   width:110px;
   height:110px;
   border-radius:50%;
   object-fit:cover;
+  background:#eee;
 }
-.wave{
-  font-size:24px;
-  cursor:pointer;
+.name{
+  font-size:28px;
+  font-weight:bold;
 }
-.section{
-  margin-top:20px;
-}
-.badge{
+
+/* BUTTON */
+.action{
   display:inline-block;
-  background:#e6dcff;
-  padding:6px 12px;
-  border-radius:14px;
-  margin:4px;
-  font-size:14px;
-}
-.comment{
-  background:#f6f1ff;
-  padding:10px;
-  border-radius:14px;
-  margin-bottom:8px;
-}
-a{
+  margin-top:14px;
   color:#6a4cff;
   font-weight:bold;
   text-decoration:none;
+}
+
+/* SECTIONS */
+.section{
+  margin-top:30px;
+}
+.section h3{
+  margin-bottom:10px;
+}
+.tag{
+  display:inline-block;
+  background:#ebe6ff;
+  padding:8px 14px;
+  border-radius:20px;
+  margin:5px;
+}
+
+/* COMMENTS */
+.comment{
+  background:#f6f3ff;
+  border-radius:20px;
+  padding:15px;
+  margin-top:10px;
+}
+textarea{
+  width:100%;
+  border-radius:20px;
+  border:1px solid #ddd;
+  padding:15px;
+  font-size:16px;
+}
+button{
+  margin-top:10px;
+  padding:12px 20px;
+  border:none;
+  border-radius:20px;
+  background:#b7a9ff;
+  color:white;
+  font-size:16px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- TOP NAV -->
+<div class="topbar">
+  <a href="index.html">Home</a>
+  <strong>My Profile</strong>
+  <span class="wave">👋</span>
+</div>
+
+<div class="container">
+
+<!-- PROFILE CARD -->
 <div class="card">
 
-<div class="top">
-  <h2 id="name">Your name</h2>
-  <div>
-    <span class="wave">👋</span><br>
-    <img id="photo" class="photo">
+  <div class="header">
+    <div>
+      <div class="name">Your name</div>
+      <a href="#" class="action">✨ Enhance my profile</a>
+    </div>
+    <img src="" class="avatar" alt="Profile photo">
   </div>
-</div>
 
-<p id="location"></p>
+  <div class="section">
+    <h3>About me</h3>
+    <p>This is where your story goes. Warm, friendly, human.</p>
+  </div>
 
-<a href="enhanceprofile.html">✨ Enhance my profile</a>
+  <div class="section">
+    <h3>My interests</h3>
+    <span class="tag">Walking</span>
+    <span class="tag">Coffee</span>
+    <span class="tag">Music</span>
+    <span class="tag">Nature</span>
+  </div>
 
-<div class="section">
-  <h3>About me</h3>
-  <p id="bio"></p>
-</div>
-
-<div class="section">
-  <h3>My interests</h3>
-  <div id="interests"></div>
-</div>
-
-<div class="section">
-  <h3>Friendship style</h3>
-  <p id="availability"></p>
-</div>
-
-<div class="section">
-  <h3>Kind words 💜</h3>
-  <div id="comments"></div>
-</div>
+  <div class="section">
+    <h3>Friendship style</h3>
+    <p>In-person meet-ups & online chats</p>
+  </div>
 
 </div>
 
-<script>
-const data = JSON.parse(localStorage.getItem("cc2profile")) || {};
+<!-- COMMENTS CARD -->
+<div class="card">
 
-name.innerText = data.name || "Your name";
-location.innerText = data.location || "";
-bio.innerText = data.bio || "";
-availability.innerText = data.availability || "";
+  <h3>Say hello 👋</h3>
 
-if(data.photo) photo.src = data.photo;
+  <div class="comment">Lovely profile 💜</div>
+  <div class="comment">Hope you're having a great day</div>
 
-if(data.interests){
-  data.interests.forEach(i=>{
-    interests.innerHTML += `<span class="badge">${i}</span>`;
-  });
-}
+  <textarea placeholder="Leave something kind…"></textarea>
+  <button>Post</button>
 
-if(data.comments){
-  data.comments.forEach(c=>{
-    comments.innerHTML += `<div class="comment">${c}</div>`;
-  });
-}
-</script>
+</div>
+
+</div>
 
 </body>
 </html>
