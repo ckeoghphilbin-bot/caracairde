@@ -1,155 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>My Profile – CC²</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>My Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{
-  margin:0;
-  font-family:system-ui,-apple-system;
-  background:linear-gradient(135deg,#f6e7ff,#ffe9f1);
-}
-header{
-  background:#d9c8ff;
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-weight:700;
-}
-header a{
-  text-decoration:none;
-  color:#000;
-}
-.card{
-  background:white;
-  margin:20px;
-  padding:20px;
-  border-radius:22px;
-}
-label{
-  display:block;
-  margin-top:14px;
-  font-weight:600;
-}
-input,select,textarea{
-  width:100%;
-  padding:10px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  margin-top:6px;
-}
-textarea{resize:none}
-button{
-  margin-top:18px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:16px;
-  background:#cbb6ff;
-  font-weight:800;
-}
-img{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#eee;
-}
+body{font-family:system-ui;background:#f6f0ff;margin:0}
+header{padding:16px;background:#d9c8ff;display:flex;justify-content:space-between}
+.card{background:white;margin:20px;padding:20px;border-radius:20px}
+img{width:90px;height:90px;border-radius:50%;background:#eee}
 </style>
 </head>
-
 <body>
 
 <header>
-  <a href="connections.html">Browse 👀</a>
-  <span>CC² 💜</span>
-  <a href="index.html">Log out</a>
+  <a href="index.html">Home</a>
+  <strong>My Profile</strong>
+  <a href="editprofile.html">Edit</a>
 </header>
 
 <div class="card">
-<h2>My Profile</h2>
-
-<img id="avatar">
-
-<label>Profile photo</label>
-<input type="file" accept="image/*" onchange="savePhoto(event)">
-
-<label>Name</label>
-<input id="name">
-
-<label>About me</label>
-<textarea id="about" rows="3"></textarea>
-
-<label>Country</label>
-<select id="country" onchange="loadRegions()">
-  <option value="">Select country</option>
-  <option value="IE">Ireland</option>
-  <option value="UK">United Kingdom</option>
-</select>
-
-<label>County / Area</label>
-<select id="region"></select>
-
-<button onclick="saveProfile()">Save profile</button>
+  <img id="avatar"><br><br>
+  <strong id="name"></strong>
+  <p id="about"></p>
+  <p><span id="country"></span> · <span id="region"></span></p>
 </div>
 
 <script>
-const ireland=[
-"Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down",
-"Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim",
-"Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon",
-"Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"
-];
-
-const uk=[
-"Greater London","Manchester","Birmingham","Leeds","Liverpool","Bristol",
-"Sheffield","Nottingham","Leicester","Derby","York","Newcastle","Durham"
-];
-
-function loadRegions(){
-  const r=document.getElementById("region");
-  r.innerHTML="";
-  const list=country.value==="IE"?ireland:
-             country.value==="UK"?uk:[];
-  list.forEach(x=>{
-    const o=document.createElement("option");
-    o.textContent=x;
-    r.appendChild(o);
-  });
-  r.value=localStorage.getItem("cc2_region")||"";
-}
-
-function savePhoto(e){
-  const reader=new FileReader();
-  reader.onload=()=>{
-    avatar.src=reader.result;
-    localStorage.setItem("cc2_avatar",reader.result);
-  };
-  reader.readAsDataURL(e.target.files[0]);
-}
-
-function saveProfile(){
-  localStorage.setItem("cc2_name",name.value);
-  localStorage.setItem("cc2_about",about.value);
-  localStorage.setItem("cc2_country",country.value);
-  localStorage.setItem("cc2_region",region.value);
-  alert("Profile saved 💜");
-}
-
-function loadProfile(){
-  if(localStorage.getItem("cc2_avatar")){
-    avatar.src=localStorage.getItem("cc2_avatar");
-  }
-  name.value=localStorage.getItem("cc2_name")||"";
-  about.value=localStorage.getItem("cc2_about")||"";
-  country.value=localStorage.getItem("cc2_country")||"";
-  loadRegions();
-}
-
-loadProfile();
+avatar.src=localStorage.getItem("cc2_avatar")||"";
+name.textContent=localStorage.getItem("cc2_name")||"";
+about.textContent=localStorage.getItem("cc2_about")||"";
+country.textContent=localStorage.getItem("cc2_country")||"";
+region.textContent=localStorage.getItem("cc2_region")||"";
 </script>
 
 </body>
