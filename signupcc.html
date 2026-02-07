@@ -2,97 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Create account 🌸</title>
+  <title>Create account · CaraCairde</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
-      background: #f6d3e2;
+      font-family: system-ui;
+      background: #f6d1dc;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
     }
-    .box {
-      background: #fff;
-      padding: 30px;
-      border-radius: 20px;
-      width: 100%;
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      width: 90%;
       max-width: 360px;
       text-align: center;
     }
-    input, button {
+    input {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
       border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 16px;
+      border: 1px solid #ccc;
     }
     button {
-      background: #e88fb5;
-      color: white;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
       border: none;
-      font-weight: bold;
+      background: #f2a6b3;
+      color: white;
+      font-weight: 600;
+      margin-top: 12px;
     }
     a {
       display: block;
-      margin-top: 10px;
-      color: #666;
+      margin-top: 16px;
+      color: #555;
       text-decoration: none;
     }
   </style>
 </head>
 <body>
 
-<div class="box">
-  <h2>Create account 💗</h2>
+  <div class="card">
+    <h2>Create account ✨</h2>
 
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password (min 6)">
-  <input id="confirm" type="password" placeholder="Confirm password">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <input type="password" placeholder="Confirm password">
 
-  <button onclick="signup()">Sign up</button>
+    <button>Create account</button>
 
-  <a href="login.html">Already have an account?</a>
-  <a href="index.html">← Back</a>
-</div>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
-    authDomain: "ccsq-c2e3e.firebaseapp.com",
-    projectId: "ccsq-c2e3e",
-    storageBucket: "ccsq-c2e3e.appspot.com",
-    messagingSenderId: "1092085359746",
-    appId: "1:1092085359746:web:9184879638b1183ce4009b"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.signup = async () => {
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-    const confirm = document.getElementById("confirm").value;
-
-    if (pass !== confirm) {
-      alert("Passwords don’t match");
-      return;
-    }
-
-    try {
-      await createUserWithEmailAndPassword(auth, email, pass);
-      window.location.href = "profile.html";
-    } catch (err) {
-      alert(err.message);
-    }
-  };
-</script>
+    <a href="index.html">← Back</a>
+  </div>
 
 </body>
 </html>
