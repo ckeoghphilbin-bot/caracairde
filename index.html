@@ -146,7 +146,6 @@ footer{padding:40px;color:#444}
 
 <script>
 let me = { name:"You", bio:"Say something kind about yourself." };
-let people = ["Alex","Jamie","Rory","Sam","Taylor"];
 
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -178,13 +177,18 @@ function sendMessage(e,id){
 
 <body>
 
+<!-- HEADER / HOME -->
 <header>
   <h1 class="float">CC<span>²</span></h1>
-  <p>Pastel social · Profiles · Friendship first</p>
+  <p>
+    Local friendship, shared interests.<br>
+    No dating. No pressure. No commitment.
+  </p>
   <a class="btn" onclick="showPage('signup')">Join</a>
   <a class="btn alt" onclick="showPage('login')">Log in</a>
 </header>
 
+<!-- SIGN UP -->
 <div id="signup" class="page">
   <h2>Create account</h2>
   <input placeholder="Name">
@@ -192,12 +196,14 @@ function sendMessage(e,id){
   <a class="btn" onclick="showPage('edit')">Continue</a>
 </div>
 
+<!-- LOGIN -->
 <div id="login" class="page">
   <h2>Welcome back</h2>
   <input placeholder="Email">
   <a class="btn" onclick="showPage('members')">Enter</a>
 </div>
 
+<!-- EDIT PROFILE -->
 <div id="edit" class="page">
   <h2>Edit profile</h2>
   <input id="pname" placeholder="Your name">
@@ -205,14 +211,20 @@ function sendMessage(e,id){
   <a class="btn" onclick="saveProfile()">Save</a>
 </div>
 
+<!-- PROFILE -->
 <div id="profile" class="page">
   <div class="avatar">😊</div>
   <h2 id="myname">You</h2>
   <p id="mybio">Say something kind about yourself.</p>
-  <div class="tags"><span>music</span><span>walking</span><span>art</span></div>
+  <div class="tags">
+    <span>music</span>
+    <span>walking</span>
+    <span>art</span>
+  </div>
   <a class="btn" onclick="showPage('members')">Back</a>
 </div>
 
+<!-- MEMBERS -->
 <div id="members" class="page">
   <h2>Members</h2>
   <a class="btn" onclick="showPage('profile')">My profile</a>
@@ -221,6 +233,7 @@ function sendMessage(e,id){
   <a class="btn alt" onclick="showPage('rules')">Rules</a>
 </div>
 
+<!-- PEOPLE -->
 <div id="people" class="page">
   <h2>People</h2>
   <div class="card"><span class="name">Alex</span><button class="btn">Follow</button></div>
@@ -229,6 +242,7 @@ function sendMessage(e,id){
   <a class="btn alt" onclick="showPage('members')">Back</a>
 </div>
 
+<!-- CHAT -->
 <div id="chat" class="page">
   <h2>Global chat</h2>
   <div class="chatbox" id="chatbox"></div>
@@ -236,19 +250,20 @@ function sendMessage(e,id){
   <a class="btn alt" onclick="showPage('members')">Back</a>
 </div>
 
+<!-- RULES -->
 <div id="rules" class="page">
   <h2>Community rules</h2>
   <ul>
     <li>Friendship only</li>
     <li>No dating or flirting</li>
+    <li>Respect boundaries</li>
     <li>Be kind or leave</li>
-    <li>Report issues</li>
   </ul>
   <a class="btn" onclick="showPage('members')">Agree & continue</a>
 </div>
 
 <footer>
-  CC² · Pastel · Profiles · Friendship squared
+  CC² · Friendship first · Worldwide
 </footer>
 
 </body>
