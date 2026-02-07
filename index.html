@@ -6,262 +6,209 @@
 <title>CaraCairde</title>
 
 <style>
-:root {
-  --blush: #f7b6cc;
-  --soft-pink: #fde4ec;
-  --pastel-blue: #cbe4f9;
-  --card: #ffffff;
-  --text: #333;
-  --muted: #666;
-}
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #fde2ea, #f7cdd8);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-* {
-  box-sizing: border-box;
-}
+  .card {
+    background: #fff;
+    width: 90%;
+    max-width: 420px;
+    padding: 24px;
+    border-radius: 22px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.1);
+    text-align: center;
+  }
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg, var(--soft-pink), var(--pastel-blue));
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  h1 {
+    margin: 0;
+    font-size: 28px;
+  }
 
-.container {
-  width: 92%;
-  max-width: 420px;
-  background: var(--card);
-  border-radius: 24px;
-  padding: 26px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-}
+  .tagline {
+    color: #666;
+    margin: 8px 0 20px;
+  }
 
-h1 {
-  text-align: center;
-  margin: 0;
-  font-size: 32px;
-}
+  input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
 
-.tagline {
-  text-align: center;
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 14px;
-}
+  button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 16px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
 
-hr {
-  border: none;
-  height: 1px;
-  background: #eee;
-  margin: 20px 0;
-}
+  .primary {
+    background: #e59ab0;
+    color: #fff;
+    margin-top: 10px;
+  }
 
-input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  border-radius: 14px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-}
+  .secondary {
+    background: #e8e8e8;
+    color: #333;
+    margin-top: 10px;
+  }
 
-button {
-  width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  background: var(--blush);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
+  .link {
+    margin-top: 14px;
+    color: #5a7bdc;
+    cursor: pointer;
+  }
 
-button.secondary {
-  background: #eee;
-  margin-top: 8px;
-}
+  .error {
+    color: #c0392b;
+    margin-top: 10px;
+  }
 
-button.link {
-  background: none;
-  color: #3b82f6;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.toggle {
-  font-size: 14px;
-  margin-bottom: 14px;
-}
-
-.small {
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 16px;
-}
-
-.hidden {
-  display: none;
-}
-
-.dashboard {
-  text-align: center;
-}
-
-.dashboard h2 {
-  margin-top: 0;
-}
-
-.card {
-  background: var(--soft-pink);
-  border-radius: 18px;
-  padding: 16px;
-  margin-top: 14px;
-}
+  .checkbox {
+    text-align: left;
+    font-size: 14px;
+    margin: 6px 0 14px;
+  }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<!-- AUTH VIEW -->
-<div id="authView">
-
-<h1>CaraCairde</h1>
-<div class="tagline">
-Local friendship · shared interests · no dating · no pressure
-</div>
-
-<hr>
-
-<input type="email" id="email" placeholder="Email">
-
-<input type="password" id="password" placeholder="Password (min 6 characters)">
-<input type="password" id="confirmPassword" placeholder="Confirm password">
-
-<div class="toggle">
-<label>
-<input type="checkbox" id="togglePassword"> Show password
-</label>
-</div>
-
-<button id="signupBtn">Create account</button>
-<button class="secondary" id="loginBtn">Log in</button>
-
-<button class="link" id="forgotPassword">Forgot password?</button>
-
-<div class="small">
-A calm place to meet people — not perform.
-</div>
-
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard" class="hidden dashboard">
-
-<h2>Welcome 💗</h2>
-<p>You’re signed in to CaraCairde.</p>
-
 <div class="card">
-<strong>What CaraCairde is:</strong>
-<p>
-• Friendship-first<br>
-• Local connections<br>
-• Shared interests<br>
-• No dating pressure
-</p>
-</div>
+  <h1>CaraCairde</h1>
+  <div class="tagline">Local friendship · shared interests · no dating · no pressure</div>
 
-<div class="card">
-<strong>What happens next:</strong>
-<p>
-Profiles, interests, and friend matching come next.
-</p>
-</div>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password (min 6 characters)">
+  <input id="confirm" type="password" placeholder="Confirm password">
 
-<button id="logoutBtn" class="secondary">Log out</button>
+  <div class="checkbox">
+    <input type="checkbox" id="showPass"> Show password
+  </div>
 
-</div>
+  <button class="primary" onclick="signUp()">Create account</button>
+  <button class="secondary" onclick="logIn()">Log in</button>
 
+  <div class="link" onclick="resetPassword()">Forgot password?</div>
+  <div id="error" class="error"></div>
+
+  <p style="margin-top:20px;color:#777;font-size:14px;">
+    A calm place to meet people — not perform.
+  </p>
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
-  authDomain: "ccsq-c2e3e.firebaseapp.com",
-  projectId: "ccsq-c2e3e",
-  storageBucket: "ccsq-c2e3e.firebasestorage.app",
-  messagingSenderId: "1092085359746",
-  appId: "1:1092085359746:web:9184879638b1183ce4009b"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
+    authDomain: "ccsq-c2e3e.firebaseapp.com",
+    projectId: "ccsq-c2e3e",
+    storageBucket: "ccsq-c2e3e.appspot.com",
+    messagingSenderId: "1092085359746",
+    appId: "1:1092085359746:web:9184879638b1183ce4009b"
+  };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const confirmPassword = document.getElementById("confirmPassword");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const confirmInput = document.getElementById("confirm");
+  const errorBox = document.getElementById("error");
+  const showPass = document.getElementById("showPass");
 
-const authView = document.getElementById("authView");
-const dashboard = document.getElementById("dashboard");
+  showPass.addEventListener("change", () => {
+    const type = showPass.checked ? "text" : "password";
+    passwordInput.type = type;
+    confirmInput.type = type;
+  });
 
-document.getElementById("togglePassword").addEventListener("change", e => {
-  const type = e.target.checked ? "text" : "password";
-  password.type = type;
-  confirmPassword.type = type;
-});
-
-document.getElementById("signupBtn").addEventListener("click", () => {
-  if (password.value !== confirmPassword.value) {
-    alert("Passwords do not match");
-    return;
+  function cleanEmail() {
+    return emailInput.value.trim();
   }
 
-  createUserWithEmailAndPassword(auth, email.value, password.value)
-    .catch(err => alert(err.message));
-});
+  window.signUp = () => {
+    errorBox.textContent = "";
 
-document.getElementById("loginBtn").addEventListener("click", () => {
-  signInWithEmailAndPassword(auth, email.value, password.value)
-    .catch(err => alert(err.message));
-});
+    const email = cleanEmail();
+    const password = passwordInput.value;
+    const confirm = confirmInput.value;
 
-document.getElementById("forgotPassword").addEventListener("click", () => {
-  if (!email.value) {
-    alert("Enter your email first");
-    return;
-  }
-  sendPasswordResetEmail(auth, email.value)
-    .then(() => alert("Password reset email sent"))
-    .catch(err => alert(err.message));
-});
+    if (!email) {
+      errorBox.textContent = "Please enter your email 💗";
+      return;
+    }
 
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  signOut(auth);
-});
+    if (password.length < 6) {
+      errorBox.textContent = "Password must be at least 6 characters";
+      return;
+    }
 
-onAuthStateChanged(auth, user => {
-  if (user) {
-    authView.classList.add("hidden");
-    dashboard.classList.remove("hidden");
-  } else {
-    dashboard.classList.add("hidden");
-    authView.classList.remove("hidden");
-  }
-});
+    if (password !== confirm) {
+      errorBox.textContent = "Passwords do not match";
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Account created 🎉");
+      })
+      .catch(err => {
+        errorBox.textContent = err.message;
+      });
+  };
+
+  window.logIn = () => {
+    errorBox.textContent = "";
+
+    const email = cleanEmail();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      errorBox.textContent = "Please enter email and password";
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Logged in 💗");
+      })
+      .catch(err => {
+        errorBox.textContent = err.message;
+      });
+  };
+
+  window.resetPassword = () => {
+    const email = cleanEmail();
+
+    if (!email) {
+      errorBox.textContent = "Enter your email to reset password";
+      return;
+    }
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Password reset email sent 💌");
+      })
+      .catch(err => {
+        errorBox.textContent = err.message;
+      });
+  };
 </script>
 
 </body>
