@@ -6,39 +6,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+:root{
+  --pink:#f4b6cf;
+  --lav:#e9ddff;
+  --cream:#fff7fb;
+  --ink:#222;
+}
+
 body{
   margin:0;
-  font-family: system-ui, -apple-system;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI";
   background: linear-gradient(135deg,#f3e9ff,#fde6ef);
+  color:var(--ink);
 }
 
 .container{
-  max-width:420px;
-  margin:24px auto 100px;
-  background:#fff;
-  border-radius:26px;
+  max-width:430px;
+  margin:20px auto 120px;
+  background:var(--cream);
+  border-radius:28px;
   padding:22px;
-  box-shadow:0 25px 60px rgba(0,0,0,.12);
+  box-shadow:0 25px 60px rgba(0,0,0,.15);
 }
 
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  margin-bottom:16px;
 }
 
-h1{
-  font-size:26px;
+.header h1{
   margin:0;
+  font-size:26px;
 }
 
 .avatar{
-  width:90px;
-  height:90px;
+  width:96px;
+  height:96px;
   border-radius:50%;
-  background:#eee;
+  background:#ddd;
   background-size:cover;
   background-position:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
 }
 
 label{
@@ -49,31 +59,43 @@ label{
 
 input, select, textarea{
   width:100%;
-  padding:10px 12px;
-  border-radius:14px;
+  padding:12px 14px;
+  border-radius:16px;
   border:1px solid #ddd;
   margin-top:6px;
-  font-size:14px;
+  font-size:15px;
+  background:white;
 }
 
 textarea{ resize:none }
 
 .section{
-  background:#f6f0ff;
-  padding:14px;
-  border-radius:18px;
-  margin-top:16px;
+  background:var(--lav);
+  padding:16px;
+  border-radius:22px;
+  margin-top:18px;
 }
 
 button{
   width:100%;
-  margin-top:18px;
-  padding:14px;
-  border-radius:22px;
+  margin-top:22px;
+  padding:16px;
+  border-radius:26px;
   border:none;
-  background:#f4b6cf;
+  background:linear-gradient(135deg,#f4b6cf,#d9b8ff);
+  font-weight:800;
+  font-size:16px;
+  color:#222;
+}
+
+button:active{ transform:scale(.98) }
+
+.saved{
+  text-align:center;
+  margin-top:12px;
   font-weight:700;
-  font-size:15px;
+  color:#5a2;
+  display:none;
 }
 
 nav{
@@ -84,13 +106,13 @@ nav{
   background:white;
   display:flex;
   justify-content:space-around;
-  padding:12px 0;
-  box-shadow:0 -6px 30px rgba(0,0,0,.12);
+  padding:14px 0;
+  box-shadow:0 -8px 40px rgba(0,0,0,.18);
 }
 
 nav a{
   text-decoration:none;
-  font-weight:700;
+  font-weight:800;
   color:#555;
 }
 </style>
@@ -110,50 +132,75 @@ nav a{
 
   <div class="section">
     <label>Name</label>
-    <input placeholder="Your name">
+    <input id="name">
 
     <label>About me</label>
-    <textarea rows="3" placeholder="Tell people who you are"></textarea>
+    <textarea id="about" rows="3"></textarea>
   </div>
 
   <div class="section">
-    <label>Country</label>
-    <select>
-      <option>Ireland</option>
-      <option>UK</option>
-      <option>Other</option>
-    </select>
-
     <label>County</label>
-    <select>
-      <option>Galway</option>
-      <option>Dublin</option>
-      <option>Cork</option>
-      <option>Mayo</option>
-      <option>Donegal</option>
+    <select id="county">
+      <option>Antrim</option><option>Armagh</option><option>Carlow</option>
+      <option>Cavan</option><option>Clare</option><option>Cork</option>
+      <option>Derry</option><option>Donegal</option><option>Down</option>
+      <option>Dublin</option><option>Fermanagh</option><option>Galway</option>
+      <option>Kerry</option><option>Kildare</option><option>Kilkenny</option>
+      <option>Laois</option><option>Leitrim</option><option>Limerick</option>
+      <option>Longford</option><option>Louth</option><option>Mayo</option>
+      <option>Meath</option><option>Monaghan</option><option>Offaly</option>
+      <option>Roscommon</option><option>Sligo</option>
+      <option>Tipperary</option><option>Tyrone</option>
+      <option>Waterford</option><option>Westmeath</option>
+      <option>Wexford</option><option>Wicklow</option>
     </select>
-  </div>
 
-  <div class="section">
     <label>Interests</label>
-    <input placeholder="Coffee, chats, walks, music…">
+    <input id="interests" placeholder="Coffee, chats, walks, music…">
   </div>
 
-  <button>Save profile</button>
+  <button onclick="saveProfile()">Save profile</button>
+  <div id="saved" class="saved">Profile saved 💾</div>
+
 </div>
 
 <nav>
   <a href="index.html">Home</a>
   <a href="profilec.html">Profile</a>
-  <a href="login.html">Logout</a>
+  <a href="login.html">Log out</a>
 </nav>
 
 <script>
 function previewPhoto(e){
-  const img = document.getElementById("avatar");
-  img.style.backgroundImage =
-    "url(" + URL.createObjectURL(e.target.files[0]) + ")";
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.getElementById("avatar").style.backgroundImage =
+      `url(${reader.result})`;
+    localStorage.setItem("cc2_avatar", reader.result);
+  };
+  reader.readAsDataURL(e.target.files[0]);
 }
+
+function saveProfile(){
+  localStorage.setItem("cc2_name", name.value);
+  localStorage.setItem("cc2_about", about.value);
+  localStorage.setItem("cc2_county", county.value);
+  localStorage.setItem("cc2_interests", interests.value);
+  saved.style.display="block";
+}
+
+function loadProfile(){
+  if(localStorage.getItem("cc2_avatar")){
+    avatar.style.backgroundImage =
+      `url(${localStorage.getItem("cc2_avatar")})`;
+  }
+  name.value = localStorage.getItem("cc2_name") || "";
+  about.value = localStorage.getItem("cc2_about") || "";
+  county.value = localStorage.getItem("cc2_county") || "Galway";
+  interests.value = localStorage.getItem("cc2_interests") || "";
+}
+
+loadProfile();
 </script>
 
 </body>
