@@ -1,97 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Log in · CaraCairde</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
-  authDomain: "ccsq-c2e3e.firebaseapp.com",
-  projectId: "ccsq-c2e3e",
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.login = async () => {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-  if (!email || !password) {
-    alert("Please fill everything in 💕");
-    return;
-  }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Logged in 💗");
-  } catch (err) {
-    alert(err.message);
-  }
-};
-
-window.resetPass = async () => {
-  const email = emailInput.value.trim();
-  if (!email) return alert("Enter your email first 💌");
-  await sendPasswordResetEmail(auth, email);
-  alert("Password reset sent ✨");
-};
-</script>
-
-<style>
-body {
-  background:#ffe4ec;
-  font-family:sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-.card {
-  background:#fff;
-  padding:30px;
-  border-radius:22px;
-  width:90%;
-  max-width:400px;
-}
-input,button {
-  width:100%;
-  padding:12px;
-  margin-top:12px;
-  border-radius:12px;
-  border:1px solid #ddd;
-}
-button {
-  background:#4f46e5;
-  color:#fff;
-  font-weight:600;
-  border:none;
-}
-.link {
-  margin-top:14px;
-  text-align:center;
-  color:#4f46e5;
-  cursor:pointer;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Log in 💗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f4c9da;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    button {
+      background: #e88fb5;
+      color: white;
+      border: none;
+      font-weight: bold;
+    }
+    a {
+      display: block;
+      margin-top: 10px;
+      color: #666;
+      text-decoration: none;
+    }
+  </style>
 </head>
-
 <body>
-<div class="card">
+
+<div class="box">
   <h2>Welcome back 💕</h2>
 
-  <input id="emailInput" placeholder="Email">
-  <input id="passwordInput" type="password" placeholder="Password">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
   <button onclick="login()">Log in</button>
 
-  <div class="link" onclick="resetPass()">Forgot password?</div>
-  <div class="link" onclick="location.href='index.html'">← Back</div>
+  <a href="signup.html">Create account</a>
+  <a href="index.html">← Back</a>
 </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
+    authDomain: "ccsq-c2e3e.firebaseapp.com",
+    projectId: "ccsq-c2e3e",
+    storageBucket: "ccsq-c2e3e.appspot.com",
+    messagingSenderId: "1092085359746",
+    appId: "1:1092085359746:web:9184879638b1183ce4009b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.login = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      window.location.href = "profile.html";
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+</script>
+
 </body>
 </html>
