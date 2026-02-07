@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sign up · CaraCairde</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
+  authDomain: "ccsq-c2e3e.firebaseapp.com",
+  projectId: "ccsq-c2e3e",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.signup = async () => {
+  const email = emailInput.value.trim();
+  const pass = passwordInput.value;
+  const confirm = confirmInput.value;
+
+  if (!email || !pass || !confirm) {
+    alert("Fill everything in 💕");
+    return;
+  }
+  if (pass !== confirm) {
+    alert("Passwords don’t match 😬");
+    return;
+  }
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, pass);
+    alert("Account created 💖");
+    location.href = "login.html";
+  } catch (err) {
+    alert(err.message);
+  }
+};
+</script>
+
+<style>
+body {
+  background:linear-gradient(180deg,#fce7f3,#e0e7ff);
+  font-family:sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.card {
+  background:#fff;
+  padding:30px;
+  border-radius:22px;
+  width:90%;
+  max-width:400px;
+}
+input,button {
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+}
+button {
+  background:#f472b6;
+  color:#fff;
+  font-weight:600;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h2>Create account 🌸</h2>
+
+  <input id="emailInput" placeholder="Email">
+  <input id="passwordInput" type="password" placeholder="Password (min 6)">
+  <input id="confirmInput" type="password" placeholder="Confirm password">
+
+  <button onclick="signup()">Sign up</button>
+</div>
+</body>
+</html>
