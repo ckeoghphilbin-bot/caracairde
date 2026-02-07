@@ -1,169 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CaraCairde</title>
 
 <style>
-:root{
-  --pink:#ffd6e8;
-  --pink-strong:#ff9fcf;
-  --blue:#b9e6ff;
-  --ink:#333;
-  --white:#fff;
+:root {
+  --pink: #f7b6cc;
+  --blue: #9cc9e8;
+  --card: #ffffff;
+  --text: #333;
 }
 
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-  background:linear-gradient(180deg,var(--pink),var(--blue));
-  color:var(--ink);
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg, var(--pink), var(--blue));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-header{
-  padding:20px;
-  text-align:center;
+.container {
+  background: var(--card);
+  width: 90%;
+  max-width: 380px;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-h1{
-  margin:0;
-  font-size:2.2rem;
+h1 {
+  text-align: center;
+  margin-bottom: 6px;
 }
 
-h1 span{
-  color:var(--pink-strong);
+.tagline {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
 }
 
-.tagline{
-  margin-top:8px;
-  font-size:1rem;
-  opacity:0.9;
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  font-size: 16px;
 }
 
-.card{
-  background:var(--white);
-  border-radius:16px;
-  padding:20px;
-  margin:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: var(--pink);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.btn{
-  display:block;
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  background:var(--pink-strong);
-  color:white;
-  border:none;
-  border-radius:12px;
-  font-size:16px;
-  font-weight:600;
-  cursor:pointer;
+button:hover {
+  opacity: 0.9;
 }
 
-.btn.alt{
-  background:var(--blue);
-  color:#034;
+.link {
+  background: none;
+  border: none;
+  color: #2f7cff;
+  margin-top: 10px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-input{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:10px;
-  border:1px solid #ddd;
-  font-size:15px;
+.small {
+  font-size: 13px;
+  color: #666;
+  margin-top: 12px;
+  text-align: center;
 }
 
-small{
-  display:block;
-  margin-top:10px;
-  opacity:0.7;
-  text-align:center;
-}
-
-.hidden{
-  display:none;
-}
-
-footer{
-  text-align:center;
-  padding:20px;
-  font-size:0.85rem;
-  opacity:0.6;
+.toggle {
+  font-size: 14px;
+  margin-bottom: 12px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Cara<span>Cairde</span></h1>
-  <div class="tagline">
-    Local friendship · shared interests · no dating · no pressure
-  </div>
-</header>
+<div class="container">
 
-<!-- LANDING -->
-<div id="landing" class="card">
-  <p>
-    CaraCairde is a calm, friendly place to meet people nearby who are also
-    just looking for connection — not romance.
-  </p>
-  <ul>
-    <li>✔ Friends only</li>
-    <li>✔ Message only after both accept</li>
-    <li>✔ Real people, real names</li>
-    <li>✔ Zero dating vibes</li>
-  </ul>
-  <button class="btn" onclick="showSignup()">Join CaraCairde</button>
-  <button class="btn alt" onclick="showLogin()">Log in</button>
+<h1>CaraCairde</h1>
+<div class="tagline">
+Local friendship · shared interests · no dating · no pressure
 </div>
 
-<!-- SIGN UP -->
-<div id="signup" class="card hidden">
-  <h3>Create account</h3>
-  <input id="signupEmail" type="email" placeholder="Email"/>
-  <input id="signupPassword" type="password" placeholder="Password"/>
-  <button class="btn" onclick="signup()">Sign up</button>
-  <small onclick="backHome()">← Back</small>
+<input type="email" id="email" placeholder="Email" required>
+
+<input type="password" id="password" placeholder="Password (min 6 characters)">
+<input type="password" id="confirmPassword" placeholder="Confirm password">
+
+<div class="toggle">
+  <label>
+    <input type="checkbox" id="togglePassword"> Show password
+  </label>
 </div>
 
-<!-- LOGIN -->
-<div id="login" class="card hidden">
-  <h3>Welcome back</h3>
-  <input id="loginEmail" type="email" placeholder="Email"/>
-  <input id="loginPassword" type="password" placeholder="Password"/>
-  <button class="btn" onclick="login()">Log in</button>
-  <small onclick="backHome()">← Back</small>
+<button id="signupBtn">Sign up</button>
+
+<button class="link" id="loginBtn">Already have an account? Log in</button>
+<button class="link" id="forgotPassword">Forgot password?</button>
+
+<div class="small">
+CaraCairde · friendship without pressure
 </div>
 
-<!-- MEMBERS -->
-<div id="members" class="card hidden">
-  <h3>You’re in 💖</h3>
-  <p>
-    This is your members space.<br>
-    Profiles, matching by interests, and chat will live here next.
-  </p>
-  <p><strong>Reminder:</strong> This is for friendship only.</p>
-  <button class="btn alt" onclick="logout()">Log out</button>
 </div>
 
-<footer>
-  CaraCairde · friendship without pressure
-</footer>
-
-<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  onAuthStateChanged,
-  signOut
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -178,44 +144,42 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// UI helpers
-window.showSignup = () => swap("signup");
-window.showLogin = () => swap("login");
-window.backHome = () => swap("landing");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
 
-function swap(id){
-  ["landing","signup","login","members"].forEach(x=>{
-    document.getElementById(x).classList.add("hidden");
-  });
-  document.getElementById(id).classList.remove("hidden");
-}
+document.getElementById("togglePassword").addEventListener("change", e => {
+  const type = e.target.checked ? "text" : "password";
+  password.type = type;
+  confirmPassword.type = type;
+});
 
-// Auth
-window.signup = () => {
-  createUserWithEmailAndPassword(
-    auth,
-    signupEmail.value,
-    signupPassword.value
-  ).catch(e=>alert(e.message));
-};
-
-window.login = () => {
-  signInWithEmailAndPassword(
-    auth,
-    loginEmail.value,
-    loginPassword.value
-  ).catch(e=>alert(e.message));
-};
-
-window.logout = () => signOut(auth);
-
-// Watch auth
-onAuthStateChanged(auth,user=>{
-  if(user){
-    swap("members");
-  }else{
-    swap("landing");
+document.getElementById("signupBtn").addEventListener("click", () => {
+  if (password.value !== confirmPassword.value) {
+    alert("Passwords do not match");
+    return;
   }
+
+  createUserWithEmailAndPassword(auth, email.value, password.value)
+    .then(() => alert("Account created 💗"))
+    .catch(err => alert(err.message));
+});
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+  signInWithEmailAndPassword(auth, email.value, password.value)
+    .then(() => alert("Welcome back 💙"))
+    .catch(err => alert(err.message));
+});
+
+document.getElementById("forgotPassword").addEventListener("click", () => {
+  if (!email.value) {
+    alert("Enter your email first");
+    return;
+  }
+
+  sendPasswordResetEmail(auth, email.value)
+    .then(() => alert("Password reset email sent 💌"))
+    .catch(err => alert(err.message));
 });
 </script>
 
