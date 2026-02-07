@@ -15,25 +15,24 @@
 
 body{
   margin:0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI";
-  background: linear-gradient(135deg,#f3e9ff,#fde6ef);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  background:linear-gradient(135deg,#f3e9ff,#fde6ef);
   color:var(--ink);
 }
 
 .container{
-  max-width:430px;
+  max-width:440px;
   margin:20px auto 120px;
   background:var(--cream);
-  border-radius:28px;
-  padding:22px;
-  box-shadow:0 25px 60px rgba(0,0,0,.15);
+  border-radius:30px;
+  padding:24px;
+  box-shadow:0 25px 60px rgba(0,0,0,.18);
 }
 
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:16px;
 }
 
 .header h1{
@@ -42,25 +41,25 @@ body{
 }
 
 .avatar{
-  width:96px;
-  height:96px;
+  width:100px;
+  height:100px;
   border-radius:50%;
   background:#ddd;
   background-size:cover;
   background-position:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
 label{
-  font-weight:600;
-  margin-top:14px;
+  font-weight:700;
+  margin-top:16px;
   display:block;
 }
 
 input, select, textarea{
   width:100%;
   padding:12px 14px;
-  border-radius:16px;
+  border-radius:18px;
   border:1px solid #ddd;
   margin-top:6px;
   font-size:15px;
@@ -71,30 +70,27 @@ textarea{ resize:none }
 
 .section{
   background:var(--lav);
-  padding:16px;
-  border-radius:22px;
+  padding:18px;
+  border-radius:24px;
   margin-top:18px;
 }
 
 button{
   width:100%;
-  margin-top:22px;
+  margin-top:24px;
   padding:16px;
-  border-radius:26px;
+  border-radius:30px;
   border:none;
   background:linear-gradient(135deg,#f4b6cf,#d9b8ff);
-  font-weight:800;
+  font-weight:900;
   font-size:16px;
-  color:#222;
 }
-
-button:active{ transform:scale(.98) }
 
 .saved{
   text-align:center;
-  margin-top:12px;
-  font-weight:700;
-  color:#5a2;
+  margin-top:14px;
+  font-weight:800;
+  color:#2f8f2f;
   display:none;
 }
 
@@ -107,12 +103,12 @@ nav{
   display:flex;
   justify-content:space-around;
   padding:14px 0;
-  box-shadow:0 -8px 40px rgba(0,0,0,.18);
+  box-shadow:0 -10px 40px rgba(0,0,0,.2);
 }
 
 nav a{
   text-decoration:none;
-  font-weight:800;
+  font-weight:900;
   color:#555;
 }
 </style>
@@ -139,20 +135,46 @@ nav a{
   </div>
 
   <div class="section">
-    <label>County</label>
-    <select id="county">
-      <option>Antrim</option><option>Armagh</option><option>Carlow</option>
-      <option>Cavan</option><option>Clare</option><option>Cork</option>
-      <option>Derry</option><option>Donegal</option><option>Down</option>
-      <option>Dublin</option><option>Fermanagh</option><option>Galway</option>
-      <option>Kerry</option><option>Kildare</option><option>Kilkenny</option>
-      <option>Laois</option><option>Leitrim</option><option>Limerick</option>
-      <option>Longford</option><option>Louth</option><option>Mayo</option>
-      <option>Meath</option><option>Monaghan</option><option>Offaly</option>
-      <option>Roscommon</option><option>Sligo</option>
-      <option>Tipperary</option><option>Tyrone</option>
-      <option>Waterford</option><option>Westmeath</option>
-      <option>Wexford</option><option>Wicklow</option>
+    <label>Location</label>
+    <select id="location">
+      <option value="">Select area</option>
+
+      <!-- IRELAND (32) -->
+      <optgroup label="Ireland">
+        <option>Antrim</option><option>Armagh</option><option>Carlow</option>
+        <option>Cavan</option><option>Clare</option><option>Cork</option>
+        <option>Derry</option><option>Donegal</option><option>Down</option>
+        <option>Dublin</option><option>Fermanagh</option><option>Galway</option>
+        <option>Kerry</option><option>Kildare</option><option>Kilkenny</option>
+        <option>Laois</option><option>Leitrim</option><option>Limerick</option>
+        <option>Longford</option><option>Louth</option><option>Mayo</option>
+        <option>Meath</option><option>Monaghan</option><option>Offaly</option>
+        <option>Roscommon</option><option>Sligo</option><option>Tipperary</option>
+        <option>Tyrone</option><option>Waterford</option><option>Westmeath</option>
+        <option>Wexford</option><option>Wicklow</option>
+      </optgroup>
+
+      <!-- UK -->
+      <optgroup label="England">
+        <option>Greater London</option><option>Greater Manchester</option>
+        <option>West Midlands</option><option>Merseyside</option>
+        <option>West Yorkshire</option><option>South Yorkshire</option>
+        <option>Kent</option><option>Essex</option><option>Surrey</option>
+        <option>Hampshire</option><option>Devon</option><option>Cornwall</option>
+        <option>Norfolk</option><option>Suffolk</option>
+      </optgroup>
+
+      <optgroup label="Scotland">
+        <option>Glasgow</option><option>Edinburgh</option>
+        <option>Aberdeenshire</option><option>Highlands</option>
+        <option>Dundee</option><option>Fife</option>
+      </optgroup>
+
+      <optgroup label="Wales">
+        <option>Cardiff</option><option>Swansea</option>
+        <option>Newport</option><option>Gwynedd</option>
+        <option>Powys</option>
+      </optgroup>
     </select>
 
     <label>Interests</label>
@@ -160,7 +182,7 @@ nav a{
   </div>
 
   <button onclick="saveProfile()">Save profile</button>
-  <div id="saved" class="saved">Profile saved 💾</div>
+  <div id="saved" class="saved">Profile saved ✔</div>
 
 </div>
 
@@ -172,34 +194,30 @@ nav a{
 
 <script>
 function previewPhoto(e){
-  const reader = new FileReader();
-  reader.onload = () => {
-    document.getElementById("avatar").style.backgroundImage =
-      `url(${reader.result})`;
-    localStorage.setItem("cc2_avatar", reader.result);
+  const reader=new FileReader();
+  reader.onload=()=>{
+    avatar.style.backgroundImage=`url(${reader.result})`;
+    localStorage.setItem("cc2_avatar",reader.result);
   };
   reader.readAsDataURL(e.target.files[0]);
 }
 
 function saveProfile(){
-  localStorage.setItem("cc2_name", name.value);
-  localStorage.setItem("cc2_about", about.value);
-  localStorage.setItem("cc2_county", county.value);
-  localStorage.setItem("cc2_interests", interests.value);
+  localStorage.setItem("cc2_name",name.value);
+  localStorage.setItem("cc2_about",about.value);
+  localStorage.setItem("cc2_location",location.value);
+  localStorage.setItem("cc2_interests",interests.value);
   saved.style.display="block";
 }
 
 function loadProfile(){
-  if(localStorage.getItem("cc2_avatar")){
-    avatar.style.backgroundImage =
-      `url(${localStorage.getItem("cc2_avatar")})`;
-  }
-  name.value = localStorage.getItem("cc2_name") || "";
-  about.value = localStorage.getItem("cc2_about") || "";
-  county.value = localStorage.getItem("cc2_county") || "Galway";
-  interests.value = localStorage.getItem("cc2_interests") || "";
+  if(localStorage.getItem("cc2_avatar"))
+    avatar.style.backgroundImage=`url(${localStorage.getItem("cc2_avatar")})`;
+  name.value=localStorage.getItem("cc2_name")||"";
+  about.value=localStorage.getItem("cc2_about")||"";
+  location.value=localStorage.getItem("cc2_location")||"";
+  interests.value=localStorage.getItem("cc2_interests")||"";
 }
-
 loadProfile();
 </script>
 
