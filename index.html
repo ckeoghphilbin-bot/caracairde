@@ -3,91 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CaraCairde</title>
 
 <style>
 :root {
-  --pink: #f7b6cc;
-  --blue: #9cc9e8;
+  --blush: #f7b6cc;
+  --soft-pink: #fde4ec;
+  --pastel-blue: #cbe4f9;
   --card: #ffffff;
   --text: #333;
+  --muted: #666;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg, var(--pink), var(--blue));
+  background: linear-gradient(180deg, var(--soft-pink), var(--pastel-blue));
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .container {
+  width: 92%;
+  max-width: 420px;
   background: var(--card);
-  width: 90%;
-  max-width: 380px;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 6px;
+  margin: 0;
+  font-size: 32px;
 }
 
 .tagline {
   text-align: center;
+  margin-top: 8px;
+  color: var(--muted);
   font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #eee;
+  margin: 20px 0;
 }
 
 input {
   width: 100%;
   padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
   margin-bottom: 12px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
   font-size: 16px;
 }
 
 button {
   width: 100%;
   padding: 14px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: none;
-  background: var(--pink);
+  background: var(--blush);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.9;
+button.secondary {
+  background: #eee;
+  margin-top: 8px;
 }
 
-.link {
+button.link {
   background: none;
-  border: none;
-  color: #2f7cff;
-  margin-top: 10px;
+  color: #3b82f6;
   font-size: 14px;
-  cursor: pointer;
-}
-
-.small {
-  font-size: 13px;
-  color: #666;
-  margin-top: 12px;
-  text-align: center;
+  margin-top: 10px;
 }
 
 .toggle {
   font-size: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.small {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+.dashboard {
+  text-align: center;
+}
+
+.dashboard h2 {
+  margin-top: 0;
+}
+
+.card {
+  background: var(--soft-pink);
+  border-radius: 18px;
+  padding: 16px;
+  margin-top: 14px;
 }
 </style>
 </head>
@@ -96,29 +127,63 @@ button:hover {
 
 <div class="container">
 
+<!-- AUTH VIEW -->
+<div id="authView">
+
 <h1>CaraCairde</h1>
 <div class="tagline">
 Local friendship · shared interests · no dating · no pressure
 </div>
 
-<input type="email" id="email" placeholder="Email" required>
+<hr>
+
+<input type="email" id="email" placeholder="Email">
 
 <input type="password" id="password" placeholder="Password (min 6 characters)">
 <input type="password" id="confirmPassword" placeholder="Confirm password">
 
 <div class="toggle">
-  <label>
-    <input type="checkbox" id="togglePassword"> Show password
-  </label>
+<label>
+<input type="checkbox" id="togglePassword"> Show password
+</label>
 </div>
 
-<button id="signupBtn">Sign up</button>
+<button id="signupBtn">Create account</button>
+<button class="secondary" id="loginBtn">Log in</button>
 
-<button class="link" id="loginBtn">Already have an account? Log in</button>
 <button class="link" id="forgotPassword">Forgot password?</button>
 
 <div class="small">
-CaraCairde · friendship without pressure
+A calm place to meet people — not perform.
+</div>
+
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden dashboard">
+
+<h2>Welcome 💗</h2>
+<p>You’re signed in to CaraCairde.</p>
+
+<div class="card">
+<strong>What CaraCairde is:</strong>
+<p>
+• Friendship-first<br>
+• Local connections<br>
+• Shared interests<br>
+• No dating pressure
+</p>
+</div>
+
+<div class="card">
+<strong>What happens next:</strong>
+<p>
+Profiles, interests, and friend matching come next.
+</p>
+</div>
+
+<button id="logoutBtn" class="secondary">Log out</button>
+
 </div>
 
 </div>
@@ -129,7 +194,9 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -148,6 +215,9 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 
+const authView = document.getElementById("authView");
+const dashboard = document.getElementById("dashboard");
+
 document.getElementById("togglePassword").addEventListener("change", e => {
   const type = e.target.checked ? "text" : "password";
   password.type = type;
@@ -161,13 +231,11 @@ document.getElementById("signupBtn").addEventListener("click", () => {
   }
 
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => alert("Account created 💗"))
     .catch(err => alert(err.message));
 });
 
 document.getElementById("loginBtn").addEventListener("click", () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => alert("Welcome back 💙"))
     .catch(err => alert(err.message));
 });
 
@@ -176,10 +244,23 @@ document.getElementById("forgotPassword").addEventListener("click", () => {
     alert("Enter your email first");
     return;
   }
-
   sendPasswordResetEmail(auth, email.value)
-    .then(() => alert("Password reset email sent 💌"))
+    .then(() => alert("Password reset email sent"))
     .catch(err => alert(err.message));
+});
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  signOut(auth);
+});
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    authView.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+  } else {
+    dashboard.classList.add("hidden");
+    authView.classList.remove("hidden");
+  }
 });
 </script>
 
