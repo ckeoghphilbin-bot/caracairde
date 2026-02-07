@@ -1,93 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Profile — CC²</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin:0;
-      font-family: system-ui;
-      background: linear-gradient(135deg,#f4ecff,#fde7f1);
-    }
-    .wrap {
-      max-width:420px;
-      margin:30px auto;
-      background:white;
-      border-radius:28px;
-      padding:24px;
-      box-shadow:0 20px 50px rgba(0,0,0,.12);
-    }
-    h1 { margin:0; }
-    .avatar {
-      width:120px;
-      height:120px;
-      border-radius:50%;
-      background:#eee;
-      margin-left:auto;
-      background-size:cover;
-      background-position:center;
-    }
-    label { font-weight:600; display:block; margin-top:14px }
-    input, select, textarea {
-      width:100%;
-      padding:10px;
-      border-radius:14px;
-      border:1px solid #ddd;
-      margin-top:6px;
-    }
-    button {
-      margin-top:20px;
-      width:100%;
-      border:none;
-      padding:12px;
-      border-radius:22px;
-      background:#f4b6cf;
-      font-weight:700;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>My Profile · CC²</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  font-family: system-ui, -apple-system;
+  background: linear-gradient(135deg,#f3e9ff,#fde6ef);
+}
+
+.container{
+  max-width:420px;
+  margin:24px auto 100px;
+  background:#fff;
+  border-radius:26px;
+  padding:22px;
+  box-shadow:0 25px 60px rgba(0,0,0,.12);
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+h1{
+  font-size:26px;
+  margin:0;
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#eee;
+  background-size:cover;
+  background-position:center;
+}
+
+label{
+  font-weight:600;
+  margin-top:14px;
+  display:block;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid #ddd;
+  margin-top:6px;
+  font-size:14px;
+}
+
+textarea{ resize:none }
+
+.section{
+  background:#f6f0ff;
+  padding:14px;
+  border-radius:18px;
+  margin-top:16px;
+}
+
+button{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border-radius:22px;
+  border:none;
+  background:#f4b6cf;
+  font-weight:700;
+  font-size:15px;
+}
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 30px rgba(0,0,0,.12);
+}
+
+nav a{
+  text-decoration:none;
+  font-weight:700;
+  color:#555;
+}
+</style>
 </head>
+
 <body>
 
-<div class="wrap">
-  <div style="display:flex;align-items:center;gap:20px">
-    <h1>My Profile 💖</h1>
+<div class="container">
+
+  <div class="header">
+    <h1>My Profile 💜</h1>
     <div id="avatar" class="avatar"></div>
   </div>
 
   <label>Profile photo</label>
-  <input type="file" accept="image/*" onchange="loadPic(event)">
+  <input type="file" accept="image/*" onchange="previewPhoto(event)">
 
-  <label>Name</label>
-  <input placeholder="Your name">
+  <div class="section">
+    <label>Name</label>
+    <input placeholder="Your name">
 
-  <label>About me</label>
-  <textarea rows="3" placeholder="A few lines about you"></textarea>
+    <label>About me</label>
+    <textarea rows="3" placeholder="Tell people who you are"></textarea>
+  </div>
 
-  <label>Country</label>
-  <select>
-    <option>Ireland</option>
-    <option>UK</option>
-    <option>Other</option>
-  </select>
+  <div class="section">
+    <label>Country</label>
+    <select>
+      <option>Ireland</option>
+      <option>UK</option>
+      <option>Other</option>
+    </select>
 
-  <label>County</label>
-  <select>
-    <option>Galway</option>
-    <option>Dublin</option>
-    <option>Cork</option>
-    <option>Mayo</option>
-  </select>
+    <label>County</label>
+    <select>
+      <option>Galway</option>
+      <option>Dublin</option>
+      <option>Cork</option>
+      <option>Mayo</option>
+      <option>Donegal</option>
+    </select>
+  </div>
 
-  <label>My interests</label>
-  <input placeholder="Coffee, walking, chatting…">
+  <div class="section">
+    <label>Interests</label>
+    <input placeholder="Coffee, chats, walks, music…">
+  </div>
 
   <button>Save profile</button>
 </div>
 
+<nav>
+  <a href="index.html">Home</a>
+  <a href="profilec.html">Profile</a>
+  <a href="login.html">Logout</a>
+</nav>
+
 <script>
-function loadPic(e){
-  const img = document.getElementById('avatar');
-  img.style.backgroundImage = `url(${URL.createObjectURL(e.target.files[0])})`;
+function previewPhoto(e){
+  const img = document.getElementById("avatar");
+  img.style.backgroundImage =
+    "url(" + URL.createObjectURL(e.target.files[0]) + ")";
 }
 </script>
 
