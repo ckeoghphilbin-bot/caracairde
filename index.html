@@ -1,215 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CaraCairde</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CaraCairde 💗</title>
 
-<style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(180deg, #fde2ea, #f7cdd8);
-    min-height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #ffe4ec, #f7d9ff, #dbeafe);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  .card {
-    background: #fff;
-    width: 90%;
-    max-width: 420px;
-    padding: 24px;
-    border-radius: 22px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.1);
-    text-align: center;
-  }
+    .card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 28px;
+      padding: 32px 26px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      text-align: center;
+    }
 
-  h1 {
-    margin: 0;
-    font-size: 28px;
-  }
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 800;
+    }
 
-  .tagline {
-    color: #666;
-    margin: 8px 0 20px;
-  }
+    h1 span {
+      color: #ec4899;
+    }
 
-  input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 12px;
-    border-radius: 14px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-  }
+    .tagline {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #555;
+    }
 
-  button {
-    width: 100%;
-    padding: 14px;
-    border-radius: 16px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-  }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-top: 14px;
+      border-radius: 14px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      outline: none;
+    }
 
-  .primary {
-    background: #e59ab0;
-    color: #fff;
-    margin-top: 10px;
-  }
+    input:focus {
+      border-color: #ec4899;
+    }
 
-  .secondary {
-    background: #e8e8e8;
-    color: #333;
-    margin-top: 10px;
-  }
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 14px;
+    }
 
-  .link {
-    margin-top: 14px;
-    color: #5a7bdc;
-    cursor: pointer;
-  }
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 14px;
+      border-radius: 16px;
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-  .error {
-    color: #c0392b;
-    margin-top: 10px;
-  }
+    .primary {
+      background: linear-gradient(135deg, #ec4899, #a855f7);
+      color: white;
+    }
 
-  .checkbox {
-    text-align: left;
-    font-size: 14px;
-    margin: 6px 0 14px;
-  }
-</style>
+    .secondary {
+      background: #e5e7eb;
+      color: #333;
+    }
+
+    .link {
+      margin-top: 14px;
+      color: #2563eb;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>CaraCairde</h1>
-  <div class="tagline">Local friendship · shared interests · no dating · no pressure</div>
+  <div class="card">
+    <h1>Cara<span>Cairde</span></h1>
+    <div class="tagline">
+      Local friendship · shared interests · no dating · no pressure
+    </div>
 
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password (min 6 characters)">
-  <input id="confirm" type="password" placeholder="Confirm password">
+    <input id="email" type="email" placeholder="Email" />
+    <input id="password" type="password" placeholder="Password (min 6 characters)" />
+    <input id="confirmPassword" type="password" placeholder="Confirm password (sign up only)" />
 
-  <div class="checkbox">
-    <input type="checkbox" id="showPass"> Show password
+    <div class="checkbox">
+      <input type="checkbox" id="showPassword" />
+      <label for="showPassword">Show password</label>
+    </div>
+
+    <button class="primary" onclick="signUp()">Create account</button>
+    <button class="secondary" onclick="logIn()">Log in</button>
+
+    <div class="link" onclick="resetPassword()">Forgot password?</div>
+
+    <div class="footer">
+      A calm place to meet people — not perform.
+    </div>
   </div>
 
-  <button class="primary" onclick="signUp()">Create account</button>
-  <button class="secondary" onclick="logIn()">Log in</button>
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
-  <div class="link" onclick="resetPassword()">Forgot password?</div>
-  <div id="error" class="error"></div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
+      authDomain: "ccsq-c2e3e.firebaseapp.com",
+      projectId: "ccsq-c2e3e",
+      storageBucket: "ccsq-c2e3e.firebasestorage.app",
+      messagingSenderId: "1092085359746",
+      appId: "1:1092085359746:web:9184879638b1183ce4009b"
+    };
 
-  <p style="margin-top:20px;color:#777;font-size:14px;">
-    A calm place to meet people — not perform.
-  </p>
-</div>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    // Show / hide password
+    document.getElementById("showPassword").addEventListener("change", e => {
+      const type = e.target.checked ? "text" : "password";
+      document.getElementById("password").type = type;
+      document.getElementById("confirmPassword").type = type;
+    });
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
-    authDomain: "ccsq-c2e3e.firebaseapp.com",
-    projectId: "ccsq-c2e3e",
-    storageBucket: "ccsq-c2e3e.appspot.com",
-    messagingSenderId: "1092085359746",
-    appId: "1:1092085359746:web:9184879638b1183ce4009b"
-  };
+    window.signUp = () => {
+      const email = email.value.trim();
+      const pass = password.value;
+      const confirm = confirmPassword.value;
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+      if (!email || !pass || !confirm) {
+        alert("Please fill everything in 💗");
+        return;
+      }
 
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-  const confirmInput = document.getElementById("confirm");
-  const errorBox = document.getElementById("error");
-  const showPass = document.getElementById("showPass");
+      if (pass !== confirm) {
+        alert("Passwords don’t match 💗");
+        return;
+      }
 
-  showPass.addEventListener("change", () => {
-    const type = showPass.checked ? "text" : "password";
-    passwordInput.type = type;
-    confirmInput.type = type;
-  });
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then(() => {
+          window.location.href = "members.html";
+        })
+        .catch(err => alert(err.message));
+    };
 
-  function cleanEmail() {
-    return emailInput.value.trim();
-  }
+    window.logIn = () => {
+      const emailVal = email.value.trim();
+      const passVal = password.value;
 
-  window.signUp = () => {
-    errorBox.textContent = "";
+      if (!emailVal || !passVal) {
+        alert("Enter email and password 💗");
+        return;
+      }
 
-    const email = cleanEmail();
-    const password = passwordInput.value;
-    const confirm = confirmInput.value;
+      signInWithEmailAndPassword(auth, emailVal, passVal)
+        .then(() => {
+          window.location.href = "members.html";
+        })
+        .catch(err => alert(err.message));
+    };
 
-    if (!email) {
-      errorBox.textContent = "Please enter your email 💗";
-      return;
-    }
+    window.resetPassword = () => {
+      const emailVal = email.value.trim();
+      if (!emailVal) {
+        alert("Enter your email first 💗");
+        return;
+      }
 
-    if (password.length < 6) {
-      errorBox.textContent = "Password must be at least 6 characters";
-      return;
-    }
-
-    if (password !== confirm) {
-      errorBox.textContent = "Passwords do not match";
-      return;
-    }
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        alert("Account created 🎉");
-      })
-      .catch(err => {
-        errorBox.textContent = err.message;
-      });
-  };
-
-  window.logIn = () => {
-    errorBox.textContent = "";
-
-    const email = cleanEmail();
-    const password = passwordInput.value;
-
-    if (!email || !password) {
-      errorBox.textContent = "Please enter email and password";
-      return;
-    }
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        alert("Logged in 💗");
-      })
-      .catch(err => {
-        errorBox.textContent = err.message;
-      });
-  };
-
-  window.resetPassword = () => {
-    const email = cleanEmail();
-
-    if (!email) {
-      errorBox.textContent = "Enter your email to reset password";
-      return;
-    }
-
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        alert("Password reset email sent 💌");
-      })
-      .catch(err => {
-        errorBox.textContent = err.message;
-      });
-  };
-</script>
+      sendPasswordResetEmail(auth, emailVal)
+        .then(() => alert("Password reset email sent 💌"))
+        .catch(err => alert(err.message));
+    };
+  </script>
 
 </body>
 </html>
