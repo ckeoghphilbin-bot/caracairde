@@ -1,171 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CaraCairde 💗</title>
 
 <style>
-:root {
-  --blush: #f7c6d9;
-  --pink: #f3a7c3;
-  --rose: #e78fb3;
-  --blue: #7bb7d6;
-  --cream: #fff7fa;
-  --text: #444;
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: linear-gradient(180deg, var(--blush), var(--cream));
-  color: var(--text);
-  min-height: 100vh;
+  background: linear-gradient(180deg,#f7c6d9,#fff7fa);
+  color:#444;
 }
-
 .container {
-  max-width: 420px;
-  margin: auto;
-  padding: 24px;
+  max-width:420px;
+  margin:auto;
+  padding:20px;
 }
-
-h1 {
-  text-align: center;
-  font-size: 2.4rem;
-  margin-bottom: 8px;
-}
-
+h1 { text-align:center; }
 .tagline {
-  text-align: center;
-  opacity: 0.8;
-  margin-bottom: 24px;
+  text-align:center;
+  opacity:.75;
+  margin-bottom:20px;
 }
-
 .card {
-  background: white;
-  border-radius: 22px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-
-input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  border-radius: 14px;
-  border: 1px solid #eee;
-  font-size: 1rem;
+input, select, textarea {
+  width:100%;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:14px;
+  border:1px solid #eee;
 }
-
 button {
-  width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 8px;
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
 }
-
-.primary {
-  background: var(--rose);
-  color: white;
-}
-
-.secondary {
-  background: var(--blue);
-  color: white;
-}
-
+.primary { background:#e78fb3;color:white; }
+.secondary { background:#7bb7d6;color:white; }
 .link {
-  text-align: center;
-  margin-top: 12px;
-  color: var(--blue);
-  cursor: pointer;
+  text-align:center;
+  margin-top:10px;
+  color:#7bb7d6;
+  cursor:pointer;
 }
-
-.hidden {
-  display: none;
+.hidden { display:none; }
+img {
+  width:100%;
+  border-radius:16px;
 }
-
-.small {
-  font-size: 0.9rem;
-  opacity: 0.7;
-  text-align: center;
-  margin-top: 16px;
+.chat {
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:10px;
+  height:200px;
+  overflow:auto;
+  margin-bottom:10px;
+  background:#fff7fa;
 }
-
-.toggle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-}
+small { opacity:.7; }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
-  <h1>CaraCairde</h1>
-  <div class="tagline">
-    Local friendship · shared interests · no dating · no pressure
-  </div>
+<h1>CaraCairde</h1>
+<div class="tagline">
+Safe friendships · shared interests · no dating · no pressure
+</div>
 
-  <!-- LOGIN -->
-  <div class="card" id="loginCard">
-    <h3>Log in</h3>
+<!-- LOGIN -->
+<div class="card" id="login">
+<h3>Log in</h3>
+<input id="loginEmail" placeholder="Email">
+<input id="loginPass" type="password" placeholder="Password">
+<button class="primary" onclick="login()">Log in</button>
+<div class="link" onclick="show('signup')">Create account</div>
+</div>
 
-    <input id="loginEmail" type="email" placeholder="Email" />
-    <input id="loginPassword" type="password" placeholder="Password" />
+<!-- SIGN UP -->
+<div class="card hidden" id="signup">
+<h3>Sign up</h3>
+<input id="signEmail" placeholder="Email">
+<input id="signPass" type="password" placeholder="Password">
+<input id="signConfirm" type="password" placeholder="Confirm password">
+<button class="secondary" onclick="signup()">Create account</button>
+<div class="link" onclick="show('login')">Back to login</div>
+</div>
 
-    <div class="toggle">
-      <input type="checkbox" onclick="togglePassword('loginPassword')" />
-      Show password
-    </div>
+<!-- PROFILE -->
+<div class="card hidden" id="profile">
+<h3>Your profile</h3>
 
-    <button class="primary" onclick="logIn()">Log in</button>
+<img id="avatar">
+<input type="file" onchange="uploadPic(event)">
 
-    <div class="link" onclick="forgotPassword()">Forgot password?</div>
-    <div class="link" onclick="showSignup()">Create an account</div>
-  </div>
+<input id="age" placeholder="Age (circa)">
+<select id="sex">
+  <option>Rather not say</option>
+  <option>Female</option>
+  <option>Male</option>
+</select>
 
-  <!-- SIGN UP -->
-  <div class="card hidden" id="signupCard">
-    <h3>Create account</h3>
+<input id="location" placeholder="Location">
+<textarea id="interests" placeholder="Hobbies & interests"></textarea>
+<textarea id="availability" placeholder="Available times for meets"></textarea>
 
-    <input id="signupEmail" type="email" placeholder="Email" />
-    <input id="signupPassword" type="password" placeholder="Password (min 6)" />
-    <input id="signupConfirm" type="password" placeholder="Confirm password" />
+<button class="primary" onclick="saveProfile()">Save profile</button>
+<button onclick="show('chats')">Go to chats 💬</button>
+</div>
 
-    <div class="toggle">
-      <input type="checkbox" onclick="togglePassword('signupPassword','signupConfirm')" />
-      Show password
-    </div>
+<!-- CHATS -->
+<div class="card hidden" id="chats">
+<h3>Community chats</h3>
 
-    <button class="secondary" onclick="signUp()">Sign up</button>
+<select id="room" onchange="loadChat()">
+  <option value="general">General chat</option>
+  <option value="local">Local meets</option>
+  <option value="parents">Parents hub</option>
+</select>
 
-    <div class="link" onclick="showLogin()">Back to login</div>
-  </div>
+<div class="chat" id="messages"></div>
+<input id="msg" placeholder="Say something kind…">
+<button class="secondary" onclick="send()">Send</button>
 
-  <div class="small">
-    A calm place to meet people — not perform.
-  </div>
+<button onclick="logout()">Log out</button>
+</div>
+
+<small style="text-align:center;display:block">
+A calm place to reach out — not perform 💗
+</small>
 
 </div>
 
-<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDs3isKSoDrgTV00P0XQbm3RP5RZOufvIE",
@@ -178,77 +160,79 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
-window.togglePassword = (...ids) => {
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    el.type = el.type === "password" ? "text" : "password";
+let user;
+
+window.show = id => {
+  ["login","signup","profile","chats"].forEach(x=>document.getElementById(x).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+};
+
+window.signup = async () => {
+  if(signPass.value!==signConfirm.value) return alert("Passwords don’t match");
+  const cred = await createUserWithEmailAndPassword(auth, signEmail.value, signPass.value);
+  user = cred.user;
+  show("profile");
+};
+
+window.login = async () => {
+  const cred = await signInWithEmailAndPassword(auth, loginEmail.value, loginPass.value);
+  user = cred.user;
+  const snap = await getDoc(doc(db,"profiles",user.uid));
+  show(snap.exists() ? "chats" : "profile");
+};
+
+window.logout = async () => {
+  await signOut(auth);
+  show("login");
+};
+
+window.saveProfile = async () => {
+  await setDoc(doc(db,"profiles",user.uid),{
+    age:age.value,
+    sex:sex.value,
+    location:location.value,
+    interests:interests.value,
+    availability:availability.value
+  });
+  show("chats");
+};
+
+window.uploadPic = async e => {
+  const file = e.target.files[0];
+  const r = ref(storage, "avatars/"+user.uid);
+  await uploadBytes(r,file);
+  avatar.src = await getDownloadURL(r);
+};
+
+let unsub;
+window.loadChat = () => {
+  if(unsub) unsub();
+  messages.innerHTML="";
+  const q = query(
+    collection(db,"messages"),
+    where("room","==",room.value),
+    orderBy("time")
+  );
+  unsub = onSnapshot(q,snap=>{
+    messages.innerHTML="";
+    snap.forEach(d=>{
+      messages.innerHTML += `<div>${d.data().text}</div>`;
+    });
   });
 };
+loadChat();
 
-window.showSignup = () => {
-  loginCard.classList.add("hidden");
-  signupCard.classList.remove("hidden");
-};
-
-window.showLogin = () => {
-  signupCard.classList.add("hidden");
-  loginCard.classList.remove("hidden");
-};
-
-window.signUp = async () => {
-  const email = signupEmail.value.trim();
-  const pass = signupPassword.value;
-  const confirm = signupConfirm.value;
-
-  if (!email || !pass || !confirm) {
-    alert("Please fill everything in 💗");
-    return;
-  }
-
-  if (pass !== confirm) {
-    alert("Passwords don’t match");
-    return;
-  }
-
-  try {
-    await createUserWithEmailAndPassword(auth, email, pass);
-    alert("Account created 💕");
-    showLogin();
-  } catch (e) {
-    alert(e.message);
-  }
-};
-
-window.logIn = async () => {
-  const email = loginEmail.value.trim();
-  const pass = loginPassword.value;
-
-  if (!email || !pass) {
-    alert("Enter email & password");
-    return;
-  }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, pass);
-    alert("Logged in 💗");
-  } catch (e) {
-    alert(e.message);
-  }
-};
-
-window.forgotPassword = async () => {
-  const email = loginEmail.value.trim();
-  if (!email) {
-    alert("Enter your email first");
-    return;
-  }
-  try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset sent 💌");
-  } catch (e) {
-    alert(e.message);
-  }
+window.send = async () => {
+  if(!msg.value) return;
+  await addDoc(collection(db,"messages"),{
+    text:msg.value,
+    room:room.value,
+    time:Date.now()
+  });
+  msg.value="";
 };
 </script>
 
