@@ -1,144 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CC² · The Café</title>
+<meta charset="UTF-8">
+<title>CC² · Café</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #f6b7d2, #cbb7ff, #b7e3e0);
-      min-height: 100vh;
-      color: #2b2b2b;
-    }
+<style>
+:root{
+  --bg1:#f3c6e8;
+  --bg2:#cbb7f5;
+  --card:#ffffff20;
+  --text:#2b2233;
+  --soft:#ffffff55;
+}
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 22px;
-      font-weight: 600;
-    }
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
 
-    .logo {
-      font-size: 22px;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);
+}
 
-    .home-btn {
-      text-decoration: none;
-      background: rgba(255,255,255,0.35);
-      padding: 10px 16px;
-      border-radius: 18px;
-      color: #2b2b2b;
-      font-weight: 600;
-    }
+/* Header */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+}
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+.logo{
+  font-size:22px;
+  font-weight:700;
+}
 
-    .room-card {
-      background: rgba(255,255,255,0.35);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
+.header a{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+}
 
-    h1 {
-      margin-top: 0;
-      font-size: 26px;
-    }
+/* Page container */
+.wrap{
+  max-width:900px;
+  margin:0 auto;
+  padding:10px 16px 40px;
+}
 
-    .chat-box {
-      margin-top: 20px;
-      background: rgba(255,255,255,0.55);
-      border-radius: 18px;
-      padding: 16px;
-      height: 300px;
-      overflow-y: auto;
-      font-size: 15px;
-    }
+/* Café title */
+.cafe-title{
+  text-align:center;
+  margin:20px 0 10px;
+  font-size:26px;
+}
 
-    .message {
-      margin-bottom: 10px;
-    }
+.cafe-sub{
+  text-align:center;
+  opacity:.75;
+  margin-bottom:20px;
+}
 
-    .message strong {
-      color: #6b4eff;
-    }
+/* Chat area */
+.chat-box{
+  background:var(--card);
+  backdrop-filter:blur(12px);
+  border-radius:26px;
+  padding:16px;
+  min-height:300px;
+  display:flex;
+  flex-direction:column;
+}
 
-    .input-area {
-      display: flex;
-      gap: 10px;
-      margin-top: 14px;
-    }
+/* Messages */
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding-bottom:10px;
+}
 
-    input[type="text"] {
-      flex: 1;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: none;
-      font-size: 15px;
-    }
+.msg{
+  background:var(--soft);
+  border-radius:18px;
+  padding:10px 14px;
+  margin-bottom:10px;
+  max-width:75%;
+}
 
-    button {
-      padding: 12px 18px;
-      border-radius: 14px;
-      border: none;
-      background: #6b4eff;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-    }
-  </style>
+.msg.you{
+  margin-left:auto;
+  background:#ffffff80;
+}
+
+/* Input */
+.input-row{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.input-row input{
+  flex:1;
+  border:none;
+  border-radius:18px;
+  padding:12px 14px;
+  font-size:15px;
+}
+
+.input-row button{
+  border:none;
+  border-radius:18px;
+  padding:12px 18px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ffb3da,#cbb7f5);
+}
+
+footer{
+  text-align:center;
+  font-size:12px;
+  opacity:.6;
+  margin-top:20px;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">☕ CC² Café</div>
-  <a class="home-btn" href="home.html">Home</a>
-</header>
+<div class="header">
+  <div class="logo">CC²</div>
+  <a href="home.html">Home</a>
+</div>
 
-<div class="container">
-  <div class="room-card">
-    <h1>Welcome to the Café</h1>
-    <p>
-      This is a relaxed, live group space. Say hello, join the chat,
-      or just sit quietly with a virtual cuppa.
-    </p>
+<div class="wrap">
+  <div class="cafe-title">☕ Café Room</div>
+  <div class="cafe-sub">Relaxed chat · good intentions only</div>
 
-    <div class="chat-box" id="chatBox">
-      <div class="message"><strong>James:</strong> Evening all 👋</div>
-      <div class="message"><strong>Aoife:</strong> Anyone else wrecked today?</div>
+  <div class="chat-box">
+    <div class="messages" id="messages">
+      <div class="msg">👋 Welcome to the Café. Say hello.</div>
     </div>
 
-    <div class="input-area">
-      <input type="text" id="chatInput" placeholder="Say something nice…" />
-      <button onclick="sendMessage()">Send</button>
+    <div class="input-row">
+      <input id="msgInput" placeholder="Type something kind…" />
+      <button onclick="sendMsg()">Send</button>
     </div>
   </div>
+
+  <footer>Made with love in Éire 🇮🇪</footer>
 </div>
 
 <script>
-  function sendMessage() {
-    const input = document.getElementById("chatInput");
-    const box = document.getElementById("chatBox");
+/* login guard */
+if(!localStorage.getItem("cc2_logged_in")){
+  window.location.href="login.html";
+}
 
-    if (input.value.trim() === "") return;
+function sendMsg(){
+  const input=document.getElementById("msgInput");
+  const text=input.value.trim();
+  if(!text) return;
 
-    const msg = document.createElement("div");
-    msg.className = "message";
-    msg.innerHTML = "<strong>You:</strong> " + input.value;
+  const msg=document.createElement("div");
+  msg.className="msg you";
+  msg.textContent=text;
 
-    box.appendChild(msg);
-    box.scrollTop = box.scrollHeight;
-    input.value = "";
-  }
+  document.getElementById("messages").appendChild(msg);
+  input.value="";
+  document.getElementById("messages").scrollTop=9999;
+}
 </script>
 
 </body>
