@@ -1,123 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Enhance Profile – CC²</title>
 
 <style>
 body{
-  font-family:Arial;
-  background:#f4efff;
-  padding:20px;
+  margin:0;
+  font-family:system-ui;
+  background:linear-gradient(180deg,#1f133f,#5a2ea6);
+  color:#fff;
 }
 .box{
-  background:white;
-  border-radius:24px;
-  padding:20px;
-  max-width:600px;
+  max-width:760px;
   margin:auto;
+  padding:30px;
+}
+.card{
+  background:linear-gradient(145deg,#7b5cff,#ff5fa2);
+  border-radius:36px;
+  padding:30px;
+  box-shadow:0 30px 60px rgba(0,0,0,.4);
 }
 input,textarea,select{
   width:100%;
-  padding:10px;
-  margin-bottom:12px;
-  border-radius:12px;
-  border:1px solid #ccc;
-}
-button{
-  background:#cbb9ff;
-  border:none;
   padding:14px;
   border-radius:20px;
-  width:100%;
-  font-size:16px;
+  border:none;
+  margin-bottom:16px;
 }
-small{color:#777;}
+button{
+  background:#1f133f;
+  color:#fff;
+  border:none;
+  padding:16px;
+  border-radius:999px;
+  font-weight:900;
+  width:100%;
+}
 </style>
 </head>
 
 <body>
-
 <div class="box">
+<div class="card">
+
 <h2>Enhance my profile ✨</h2>
 
-<input id="name" placeholder="Your name">
-<input id="location" placeholder="Country · County / Area">
+<input id="name" placeholder="Name">
+<input id="location" placeholder="Country · Area">
+<textarea id="bio" placeholder="Who are you when nobody’s watching?"></textarea>
 
-<textarea id="bio" placeholder="Tell people about you..."></textarea>
-
-<label>Profile photo</label>
-<input type="file" id="photo">
-
-<label>How do you like to connect?</label>
 <select id="availability">
-  <option>In-person meet-ups</option>
   <option>Online friendship</option>
+  <option>In-person meet-ups</option>
   <option>Both</option>
 </select>
 
-<label>Interests (search + add)</label>
-<input id="interestInput" placeholder="Type an interest and press Add">
-<button type="button" onclick="addInterest()">Add interest</button>
+<input type="file" id="photo">
+
+<input id="interestInput" placeholder="Add an interest">
+<button onclick="addInterest()">Add interest</button>
 <div id="interestList"></div>
 
-<label>Leave a kind message (positive only)</label>
-<textarea id="commentInput" placeholder="Say hello 👋 or something kind"></textarea>
-<button type="button" onclick="addComment()">Add message</button>
+<textarea id="commentInput" placeholder="Leave a positive message for your profile"></textarea>
+<button onclick="addComment()">Add message</button>
 
-<button onclick="save()">Save profile 💜</button>
+<button onclick="save()">Save profile</button>
+
+</div>
 </div>
 
 <script>
-let interests=[];
-let comments=[];
-const banned=["hate","kill","slur","abuse","idiot","ugly"];
+let interests=[],comments=[];
+const banned=["hate","kill","abuse","ugly","slur"];
 
 function addInterest(){
-  const v=interestInput.value.trim();
-  if(v){
-    interests.push(v);
-    interestList.innerHTML += `<span>${v}</span><br>`;
+  if(interestInput.value){
+    interests.push(interestInput.value);
+    interestList.innerHTML+=interestInput.value+"<br>";
     interestInput.value="";
   }
 }
 
 function addComment(){
-  let txt=commentInput.value.toLowerCase();
-  if(banned.some(w=>txt.includes(w))){
-    alert("Please keep things kind 💜");
-    return;
-  }
+  const t=commentInput.value.toLowerCase();
+  if(banned.some(w=>t.includes(w))) return alert("Keep it kind 💜");
   comments.push(commentInput.value);
   commentInput.value="";
 }
 
 function save(){
-  const reader=new FileReader();
-  const file=photo.files[0];
-
-  let data={
-    name:name.value,
-    location:location.value,
-    bio:bio.value,
-    availability:availability.value,
-    interests,
-    comments
-  };
-
-  if(file){
-    reader.onload=()=>{
-      data.photo=reader.result;
-      localStorage.setItem("cc2profile",JSON.stringify(data));
-      window.location="profilec.html";
-    };
-    reader.readAsDataURL(file);
+  const r=new FileReader();
+  const f=photo.files[0];
+  let d={name:name.value,location:location.value,bio:bio.value,availability:availability.value,interests,comments};
+  if(f){
+    r.onload=()=>{d.photo=r.result;localStorage.setItem("cc2profile",JSON.stringify(d));location.href="profilec.html"};
+    r.readAsDataURL(f);
   }else{
-    localStorage.setItem("cc2profile",JSON.stringify(data));
-    window.location="profilec.html";
+    localStorage.setItem("cc2profile",JSON.stringify(d));
+    location.href="profilec.html";
   }
 }
 </script>
-
 </body>
 </html>
