@@ -1,237 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>CC² · Waves</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-:root{
-  --pink:#f2b6d9;
-  --lav:#cdbdf6;
-  --mint:#c8e6df;
-  --card:#ffffff22;
-  --soft:#ffffff55;
-  --text:#2c2434;
-  --hand:#f7c3d8;
-}
-
-*{
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-}
-
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
-  color:var(--text);
+  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
-
-/* Header */
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 22px;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:800;
-}
-
-.header a{
-  text-decoration:none;
-  font-weight:600;
-  color:var(--text);
-}
-
-/* Layout */
-.wrap{
-  max-width:900px;
-  margin:0 auto;
-  padding:10px 16px 60px;
-}
-
-/* Intro */
-.intro{
-  background:var(--card);
-  backdrop-filter:blur(14px);
-  border-radius:28px;
-  padding:18px 22px;
-  margin-bottom:20px;
-  font-size:14px;
-}
-
-/* Tabs */
-.tabs{
-  display:flex;
-  gap:12px;
-  margin-bottom:20px;
-}
-
-.tab{
-  padding:12px 18px;
-  border-radius:22px;
-  background:var(--soft);
-  font-weight:600;
-  cursor:pointer;
-}
-
-.tab.active{
-  background:linear-gradient(135deg,var(--pink),var(--lav));
-}
-
-/* Cards */
-.list{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:16px;
-}
-
 .card{
-  background:var(--card);
-  backdrop-filter:blur(14px);
-  border-radius:26px;
-  padding:18px;
+  background:rgba(255,255,255,.25);
+  padding:20px;
+  margin:20px;
+  border-radius:28px;
 }
-
-.name{
-  font-weight:700;
-  font-size:16px;
-}
-
-.meta{
-  font-size:13px;
-  opacity:.75;
-  margin:6px 0 14px;
-}
-
-/* Custom hand */
-.wave-btn{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  background:linear-gradient(135deg,var(--hand),var(--lav));
-  border:none;
-  border-radius:26px;
-  padding:12px 18px;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.hand{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.6);
-  position:relative;
-}
-
-.hand::before{
-  content:"";
-  position:absolute;
-  width:14px;
-  height:22px;
-  border-radius:10px;
-  background:var(--hand);
-  top:6px;
-  left:10px;
-  transform-origin:bottom center;
-  animation:wave 2.6s infinite ease-in-out;
-}
-
-@keyframes wave{
-  0%{transform:rotate(0deg)}
-  15%{transform:rotate(18deg)}
-  30%{transform:rotate(-12deg)}
-  45%{transform:rotate(18deg)}
-  60%{transform:rotate(0deg)}
-  100%{transform:rotate(0deg)}
-}
-
-/* Connect */
-.connect{
-  background:linear-gradient(135deg,var(--mint),#b8e0d6);
-  border:none;
-  border-radius:22px;
-  padding:12px 18px;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.waiting{
-  font-size:13px;
-  opacity:.7;
-}
+.footer{text-align:center;font-size:12px;opacity:.6}
 </style>
 </head>
-
 <body>
 
-<div class="header">
-  <div class="logo">CC²</div>
-  <a href="home.html">Home</a>
+<div class="card">
+  James waved at you
+  <button onclick="location.href='messages.html'">Wave back</button>
 </div>
 
-<div class="wrap">
-
-<div class="intro">
-  A wave is a gentle hello.  
-  Wave back to open a conversation — no pressure.
-</div>
-
-<div class="tabs">
-  <div class="tab active" onclick="showTab('incoming')">Waves to you</div>
-  <div class="tab" onclick="showTab('sent')">Waves you’ve sent</div>
-</div>
-
-<div id="incoming" class="list">
-
-  <div class="card">
-    <div class="name">James</div>
-    <div class="meta">Dublin · Books · Music</div>
-
-    <button class="wave-btn" onclick="waveBack(this)">
-      <div class="hand"></div>
-      Wave back
-    </button>
-  </div>
-
-</div>
-
-<div id="sent" class="list" style="display:none">
-
-  <div class="card">
-    <div class="name">Aoife</div>
-    <div class="meta">Galway · Walking · Coffee chats</div>
-    <div class="waiting">Wave sent — waiting</div>
-  </div>
-
-</div>
-
+<div class="footer">
+  Made with love in Éire · <a href="safety.html">Safety & community</a>
 </div>
 
 <script>
-if(!localStorage.getItem("cc2_logged_in")){
-  window.location.href="login.html";
-}
-
-function showTab(tab){
-  incoming.style.display = tab==="incoming"?"grid":"none";
-  sent.style.display = tab==="sent"?"grid":"none";
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  event.target.classList.add("active");
-}
-
-function waveBack(btn){
-  btn.outerHTML = `<button class="connect" onclick="connect()">Connect</button>`;
-}
-
-function connect(){
-  window.location.href="messages.html";
-}
+if(!localStorage.cc2_logged_in) location.href="login.html";
 </script>
 
 </body>
