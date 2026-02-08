@@ -1,188 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>CC² · Messages</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-:root{
-  --pink:#f2b6d9;
-  --lav:#cdbdf6;
-  --mint:#c8e6df;
-  --card:#ffffff22;
-  --soft:#ffffff55;
-  --text:#2c2434;
-}
-
-*{
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-}
-
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
-  color:var(--text);
+  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
-
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 22px;
+.card{
+  background:rgba(255,255,255,.25);
+  padding:20px;
+  margin:20px;
+  border-radius:28px;
 }
-
-.logo{
-  font-size:22px;
-  font-weight:800;
-}
-
-.header a{
-  text-decoration:none;
-  font-weight:600;
-  color:var(--text);
-}
-
-.wrap{
-  max-width:900px;
-  margin:0 auto;
-  padding:10px 16px 60px;
-}
-
-.inbox{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-.thread{
-  background:var(--card);
-  backdrop-filter:blur(14px);
-  border-radius:26px;
-  padding:18px;
-  cursor:pointer;
-  font-weight:700;
-}
-
-.chat{
-  display:none;
-  background:var(--card);
-  backdrop-filter:blur(14px);
-  border-radius:26px;
-  padding:18px;
-}
-
-.chat-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-
-.report{
-  font-size:12px;
-  opacity:.6;
-  cursor:pointer;
-}
-
-.chat-box{
-  background:var(--soft);
-  border-radius:20px;
-  padding:14px;
-  min-height:240px;
-  margin-bottom:12px;
-}
-
-.msg{
-  margin-bottom:10px;
-  padding:10px 14px;
-  border-radius:16px;
-  background:#ffffff80;
-  max-width:75%;
-}
-
-.input-row{
-  display:flex;
-  gap:10px;
-}
-
-.input-row input{
-  flex:1;
-  border:none;
-  border-radius:18px;
-  padding:12px 14px;
-}
-
-.input-row button{
-  border:none;
-  border-radius:18px;
-  padding:12px 18px;
-  font-weight:600;
-  background:linear-gradient(135deg,var(--pink),var(--lav));
-}
+.footer{text-align:center;font-size:12px;opacity:.6}
 </style>
 </head>
-
 <body>
 
-<div class="header">
-  <div class="logo">CC²</div>
-  <a href="home.html">Home</a>
+<div class="card">
+  Conversation with James
+  <div>Hello there</div>
 </div>
 
-<div class="wrap">
-
-<div id="inbox" class="inbox">
-  <div class="thread" onclick="openChat('James')">James</div>
-</div>
-
-<div id="chat" class="chat">
-
-  <div class="chat-header">
-    <div id="chatName"></div>
-    <div class="report" onclick="reportChat()">Report conversation</div>
-  </div>
-
-  <div class="chat-box" id="chatBox">
-    <div class="msg">Thanks for connecting.</div>
-  </div>
-
-  <div class="input-row">
-    <input id="msgInput" placeholder="Type something friendly…" />
-    <button onclick="sendMsg()">Send</button>
-  </div>
-
-</div>
-
+<div class="footer">
+  Made with love in Éire · <a href="safety.html">Safety & community</a>
 </div>
 
 <script>
-if(!localStorage.getItem("cc2_logged_in")){
-  window.location.href="login.html";
-}
-
-function openChat(name){
-  inbox.style.display="none";
-  chat.style.display="block";
-  chatName.textContent=name;
-}
-
-function sendMsg(){
-  if(!msgInput.value.trim()) return;
-  const m=document.createElement("div");
-  m.className="msg";
-  m.textContent=msgInput.value;
-  chatBox.appendChild(m);
-  msgInput.value="";
-}
-
-function reportChat(){
-  if(confirm("Report this conversation for review?")){
-    alert("Thank you. We’ll review this discreetly.");
-  }
-}
+if(!localStorage.cc2_logged_in) location.href="login.html";
 </script>
 
 </body>
