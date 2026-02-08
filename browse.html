@@ -10,9 +10,10 @@
   --pink:#f2b6d9;
   --lav:#cdbdf6;
   --mint:#c8e6df;
-  --card:#ffffff25;
+  --card:#ffffff22;
   --soft:#ffffff55;
   --text:#2c2434;
+  --accent:#e6c7ff;
 }
 
 *{
@@ -56,10 +57,16 @@ body{
 /* Filters */
 .filters{
   background:var(--card);
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(16px);
   border-radius:30px;
-  padding:20px;
-  margin-bottom:24px;
+  padding:22px;
+  margin-bottom:26px;
+  animation:breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe{
+  0%,100%{box-shadow:0 0 0 rgba(255,255,255,0)}
+  50%{box-shadow:0 0 28px rgba(255,255,255,0.25)}
 }
 
 .filters h2{
@@ -89,15 +96,28 @@ select{
   padding:16px;
   border-radius:28px;
   border:none;
-  font-size:17px;
+  font-size:16px;
   font-weight:700;
   cursor:pointer;
   background:linear-gradient(135deg,var(--pink),var(--lav));
-  opacity:.6;
+  position:relative;
+  overflow:hidden;
+  opacity:.7;
 }
 
-.search-btn.enabled{
-  opacity:1;
+.search-btn.enabled{opacity:1}
+
+.search-btn::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle,var(--accent),transparent 60%);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+
+.search-btn:active::after{
+  opacity:.8;
 }
 
 /* Results */
@@ -105,33 +125,60 @@ select{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:18px;
+  animation:fadeUp .6s ease forwards;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 .card{
   background:var(--card);
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(16px);
   border-radius:28px;
   padding:18px;
   cursor:pointer;
-  transition:transform .15s ease;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
 .card:hover{
-  transform:translateY(-3px);
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 22px 44px rgba(0,0,0,.15);
 }
 
-.avatar{
-  width:100%;
-  height:140px;
-  border-radius:22px;
-  background:var(--soft);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  margin-bottom:12px;
+/* CUSTOM ICON — EYE / LENS */
+.icon-eye{
+  width:64px;
+  height:42px;
+  margin:0 auto 14px;
+  position:relative;
 }
 
+.eye-outline{
+  position:absolute;
+  inset:0;
+  border-radius:50% / 60%;
+  background:rgba(255,255,255,0.5);
+}
+
+.eye-core{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:var(--accent);
+  transform:translate(-50%,-50%);
+  transition:transform .4s ease;
+}
+
+.card:hover .eye-core{
+  transform:translate(-50%,-50%) scale(1.3);
+}
+
+/* Card text */
 .name{
   font-weight:700;
   font-size:16px;
@@ -154,9 +201,8 @@ select{
 
 <div class="wrap">
 
-<!-- FILTERS -->
 <div class="filters">
-  <h2>Browse people</h2>
+  <h2>Have a snoop</h2>
 
   <div class="filter-grid">
     <select id="country" onchange="populateCounties(); enableSearch()">
@@ -169,7 +215,7 @@ select{
       <option value="">County / Area</option>
     </select>
 
-    <select id="interest" onchange="enableSearch()">
+    <select onchange="enableSearch()">
       <option value="">Interest</option>
       <option>Coffee chats</option>
       <option>Walking</option>
@@ -181,7 +227,7 @@ select{
       <option>Fitness</option>
     </select>
 
-    <select id="availability" onchange="enableSearch()">
+    <select onchange="enableSearch()">
       <option value="">Availability</option>
       <option>Online friendships</option>
       <option>Meet ups</option>
@@ -189,20 +235,25 @@ select{
     </select>
   </div>
 
-  <button id="searchBtn" class="search-btn" onclick="search()">🔍 Search</button>
+  <button id="searchBtn" class="search-btn" onclick="search()">Search</button>
 </div>
 
-<!-- RESULTS -->
 <div id="results" class="results" style="display:none">
 
   <div class="card" onclick="location.href='profilec.html'">
-    <div class="avatar">Profile photo</div>
+    <div class="icon-eye">
+      <div class="eye-outline"></div>
+      <div class="eye-core"></div>
+    </div>
     <div class="name">James</div>
     <div class="meta">Dublin · Books · Meet ups</div>
   </div>
 
   <div class="card" onclick="location.href='profilec.html'">
-    <div class="avatar">Profile photo</div>
+    <div class="icon-eye">
+      <div class="eye-outline"></div>
+      <div class="eye-core"></div>
+    </div>
     <div class="name">Aoife</div>
     <div class="meta">Galway · Walking · Online</div>
   </div>
@@ -222,11 +273,10 @@ const counties={
 };
 
 function populateCounties(){
-  const c=document.getElementById("country").value;
   county.innerHTML='<option value="">County / Area</option>';
-  (counties[c]||[]).forEach(x=>{
+  (counties[country.value]||[]).forEach(c=>{
     const o=document.createElement("option");
-    o.textContent=x;
+    o.textContent=c;
     county.appendChild(o);
   });
 }
