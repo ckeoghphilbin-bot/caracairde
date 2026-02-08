@@ -2,81 +2,50 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CC² · Log in</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CC² • Log in</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-:root{
-  --bg1:#2b1b3f;
-  --bg2:#4a2f6f;
-  --bg3:#7b5c8f;
-  --text:#2d1b3f;
-}
-
 body{
   margin:0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #e9dcff, #cbb7f5);
   min-height:100vh;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at top, #ffb7d5, #c7b7ff);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:var(--text);
 }
-
 .card{
-  background:rgba(255,255,255,0.96);
+  background:#efe6ff;
+  padding:30px;
   border-radius:24px;
-  padding:40px 30px;
   width:90%;
-  max-width:420px;
-  text-align:center;
-  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+  max-width:360px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
-
-h1{
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-p{
-  font-size:15px;
-  opacity:.85;
-  margin-bottom:28px;
-}
-
+h1{text-align:center;}
 input{
   width:100%;
   padding:14px;
-  margin-bottom:14px;
-  border-radius:16px;
-  border:1px solid #ddd;
-  font-size:15px;
+  margin:12px 0;
+  border-radius:14px;
+  border:none;
+  font-size:16px;
 }
-
 button{
   width:100%;
-  padding:16px;
-  border-radius:18px;
+  padding:14px;
   border:none;
-  font-size:17px;
-  font-weight:600;
-  cursor:pointer;
-  background:linear-gradient(135deg,#b388ff,#8c6cff);
+  border-radius:16px;
+  background:#7a5cff;
   color:white;
+  font-size:16px;
 }
-
 .link{
-  margin-top:18px;
-  font-size:14px;
+  text-align:center;
+  margin-top:12px;
 }
-
-.link a{
-  color:#7a4fff;
-  font-weight:600;
-  text-decoration:none;
-}
+a{color:#5b3dc6;text-decoration:none;}
 </style>
 </head>
 
@@ -84,30 +53,21 @@ button{
 
 <div class="card">
   <h1>Welcome back 💜</h1>
-  <p>Log in to CC²</p>
 
-  <input id="email" type="email" placeholder="Email">
+  <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
 
   <button onclick="login()">Log in</button>
 
   <div class="link">
-    New here? <a href="signupcc.html">Create an account</a>
+    <a href="signupcc.html">New here? Create an account ✨</a>
   </div>
 </div>
 
 <script>
 function login(){
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  if(!email || !password){
-    alert("Please enter email and password");
-    return;
-  }
-
-  localStorage.setItem("cc2_logged_in","true");
-  window.location.href = "home.html";
+  localStorage.setItem("cc2_logged_in","yes");
+  window.location.href="index.html";
 }
 </script>
 
