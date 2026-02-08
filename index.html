@@ -1,47 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CC² Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5efff;
-      margin: 0;
-      padding: 30px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      max-width: 400px;
-      margin: auto;
-    }
-    .btn {
-      background: #e6d9ff;
-      border-radius: 25px;
-      padding: 40px 20px;
-      text-align: center;
-      font-size: 18px;
-      text-decoration: none;
-      color: #333;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CC²</title>
 
-<h1>Welcome to CC² 💜</h1>
+<style>
+body{
+  margin:0;
+  font-family:system-ui;
+  background:radial-gradient(circle at top, #ff6fae, #7a5cff, #1f133f);
+  color:#f7f3ff;
+}
+.wrapper{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.logo{
+  font-size:38px;
+  font-weight:900;
+  margin-bottom:40px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,160px);
+  gap:24px;
+}
+.card{
+  background:linear-gradient(145deg,#ff87c7,#9d7cff);
+  border-radius:28px;
+  padding:28px;
+  text-align:center;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  transition:.2s;
+}
+.card:hover{transform:scale(1.05)}
+.footer{
+  margin-top:40px;
+  font-size:12px;
+  opacity:.7;
+}
+a{color:inherit;text-decoration:none}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+<div class="logo">CC²</div>
 
 <div class="grid">
-  <a class="btn" href="connections.html">👋 Connections</a>
-  <a class="btn" href="#">💬 Chat Rooms</a>
-  <a class="btn" href="#">📍 Meet-ups</a>
-  <a class="btn" href="profilec.html">👤 My Profile</a>
+  <a href="browse.html"><div class="card">👀<br>Browse</div></a>
+  <a href="connections.html"><div class="card">👋<br>Waves</div></a>
+  <a href="#"><div class="card">💬<br>Chat Rooms</div></a>
+  <a href="profilec.html"><div class="card">🧍‍♀️<br>My Profile</div></a>
 </div>
 
+<div class="footer">Made with love in Ireland 🇮🇪</div>
+
+</div>
 </body>
 </html>
