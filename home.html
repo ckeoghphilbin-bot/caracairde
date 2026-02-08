@@ -13,10 +13,7 @@
   --card:#ffffff22;
   --soft:#ffffff55;
   --text:#2c2434;
-
-  /* Motion system */
-  --ease:cubic-bezier(.4,.0,.2,1);
-  --lift:translateY(-6px) scale(1.02);
+  --ease:cubic-bezier(.4,0,.2,1);
 }
 
 *{
@@ -29,12 +26,6 @@ body{
   min-height:100vh;
   background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
   color:var(--text);
-  animation:breathe 8s ease-in-out infinite;
-}
-
-@keyframes breathe{
-  0%,100%{filter:saturate(1)}
-  50%{filter:saturate(1.05)}
 }
 
 /* Header */
@@ -61,17 +52,16 @@ body{
 .wrap{
   max-width:900px;
   margin:0 auto;
-  padding:20px 16px 60px;
+  padding:20px 16px 40px;
 }
 
-/* Buttons grid */
+/* Buttons */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
 
-/* Main buttons */
 .tile{
   background:var(--card);
   backdrop-filter:blur(16px);
@@ -79,25 +69,23 @@ body{
   padding:30px 20px;
   text-align:center;
   cursor:pointer;
-  transition:
-    transform .35s var(--ease),
-    box-shadow .35s var(--ease);
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
 }
 
 .tile:hover{
-  transform:var(--lift);
+  transform:translateY(-6px) scale(1.02);
   box-shadow:0 22px 44px rgba(0,0,0,.18);
 }
 
 .title{
   font-size:18px;
   font-weight:700;
-  margin-bottom:6px;
 }
 
 .sub{
   font-size:13px;
   opacity:.75;
+  margin-top:6px;
 }
 
 /* Footer */
@@ -105,7 +93,17 @@ body{
   margin-top:40px;
   text-align:center;
   font-size:12px;
-  opacity:.6;
+  opacity:.65;
+}
+
+.footer a{
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.footer a:hover{
+  text-decoration:underline;
 }
 </style>
 </head>
@@ -120,7 +118,6 @@ body{
 <div class="wrap">
 
 <div class="grid">
-
   <div class="tile" onclick="location.href='messages.html'">
     <div class="title">You’ve got post</div>
     <div class="sub">Private one-to-one chats</div>
@@ -140,11 +137,11 @@ body{
     <div class="title">All about me</div>
     <div class="sub">Your CC² space</div>
   </div>
-
 </div>
 
 <div class="footer">
-  Made with love in Éire
+  Made with love in Éire ·
+  <a href="safety.html">Safety & community</a>
 </div>
 
 </div>
