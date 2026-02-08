@@ -1,159 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>CC² · Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-:root{
-  --pink:#f2b6d9;
-  --lav:#cdbdf6;
-  --mint:#c8e6df;
-  --card:#ffffff22;
-  --soft:#ffffff55;
-  --text:#2c2434;
-  --ease:cubic-bezier(.4,0,.2,1);
-}
-
-*{
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-}
-
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
-  color:var(--text);
+  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
-
-/* Header */
 .header{
+  padding:18px 22px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  padding:18px 22px;
 }
-
-.logo{
-  font-size:22px;
-  font-weight:800;
-}
-
-.header button{
-  background:none;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-}
-
-/* Layout */
-.wrap{
-  max-width:900px;
-  margin:0 auto;
-  padding:20px 16px 40px;
-}
-
-/* Buttons */
 .grid{
+  max-width:900px;
+  margin:40px auto;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
+  padding:0 16px;
 }
-
 .tile{
-  background:var(--card);
+  background:rgba(255,255,255,.25);
   backdrop-filter:blur(16px);
+  padding:28px;
   border-radius:36px;
-  padding:30px 20px;
   text-align:center;
   cursor:pointer;
-  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+  transition:.3s;
 }
-
 .tile:hover{
-  transform:translateY(-6px) scale(1.02);
-  box-shadow:0 22px 44px rgba(0,0,0,.18);
+  transform:translateY(-6px);
 }
-
-.title{
-  font-size:18px;
-  font-weight:700;
-}
-
-.sub{
-  font-size:13px;
-  opacity:.75;
-  margin-top:6px;
-}
-
-/* Footer */
 .footer{
-  margin-top:40px;
   text-align:center;
   font-size:12px;
-  opacity:.65;
+  opacity:.6;
 }
-
-.footer a{
-  color:inherit;
-  text-decoration:none;
-  font-weight:600;
-}
-
-.footer a:hover{
-  text-decoration:underline;
-}
+a{color:inherit;text-decoration:none}
 </style>
 </head>
-
 <body>
 
 <div class="header">
-  <div class="logo">CC²</div>
+  <strong>CC²</strong>
   <button onclick="logout()">Log out</button>
 </div>
 
-<div class="wrap">
-
 <div class="grid">
-  <div class="tile" onclick="location.href='messages.html'">
-    <div class="title">You’ve got post</div>
-    <div class="sub">Private one-to-one chats</div>
-  </div>
-
-  <div class="tile" onclick="location.href='connections.html'">
-    <div class="title">Waves</div>
-    <div class="sub">Gentle hellos & connections</div>
-  </div>
-
-  <div class="tile" onclick="location.href='browse.html'">
-    <div class="title">Have a snoop</div>
-    <div class="sub">Find people like you</div>
-  </div>
-
-  <div class="tile" onclick="location.href='profilec.html'">
-    <div class="title">All about me</div>
-    <div class="sub">Your CC² space</div>
-  </div>
+  <div class="tile" onclick="location.href='messages.html'">You’ve got post</div>
+  <div class="tile" onclick="location.href='connections.html'">Waves</div>
+  <div class="tile" onclick="location.href='browse.html'">Have a snoop</div>
+  <div class="tile" onclick="location.href='profilec.html'">All about me</div>
 </div>
 
 <div class="footer">
-  Made with love in Éire ·
-  <a href="safety.html">Safety & community</a>
-</div>
-
+  Made with love in Éire · <a href="safety.html">Safety & community</a>
 </div>
 
 <script>
-if(!localStorage.getItem("cc2_logged_in")){
-  window.location.href="login.html";
-}
-
+if(!localStorage.cc2_logged_in) location.href="login.html";
 function logout(){
   localStorage.removeItem("cc2_logged_in");
-  window.location.href="login.html";
+  location.href="login.html";
 }
 </script>
 
