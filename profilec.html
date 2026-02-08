@@ -26,49 +26,78 @@ body{
   color:var(--text);
 }
 
+/* ---------- TOP BAR ---------- */
 .topbar{
-  padding:20px 28px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:18px 28px;
 }
 
-.topbar a{
+.brand{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.topbar .right{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.topbar a, .topbar button{
+  font-size:13px;
   color:var(--text);
+  background:#241536;
+  border:none;
+  border-radius:999px;
+  padding:10px 16px;
+  cursor:pointer;
   text-decoration:none;
-  font-size:14px;
-  opacity:.8;
+  opacity:.9;
 }
 
+.topbar a:hover,
+.topbar button:hover{
+  opacity:1;
+}
+
+/* ---------- PAGE ---------- */
 .container{
-  max-width:1000px;
+  max-width:1100px;
   margin:0 auto;
-  padding:20px 28px 60px;
+  padding:32px 28px 80px;
 }
 
-.grid-top{
-  display:grid;
-  grid-template-columns:1fr 160px;
-  gap:28px;
-  margin-bottom:32px;
-}
-
-.info-card{
+.section{
   background:linear-gradient(145deg,var(--surface),var(--surface2));
-  border-radius:28px;
-  padding:22px 24px;
+  border-radius:40px;
+  padding:36px 38px;
+  margin-bottom:36px;
+  box-shadow:
+    0 26px 60px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
 }
 
-.info-card p{
-  margin:6px 0;
+/* ---------- PROFILE HEADER ---------- */
+.header{
+  display:grid;
+  grid-template-columns:1fr 180px;
+  gap:36px;
+  align-items:start;
+}
+
+.info p{
+  margin:8px 0;
   font-size:14px;
   opacity:.9;
 }
 
 .photo{
-  width:160px;
-  height:160px;
-  border-radius:24px;
+  width:180px;
+  height:180px;
+  border-radius:28px;
   background:#241536;
   display:flex;
   align-items:center;
@@ -77,112 +106,81 @@ body{
   opacity:.7;
 }
 
-.about{
-  background:linear-gradient(145deg,var(--surface),var(--surface2));
-  border-radius:36px;
-  padding:28px 30px;
-  margin-bottom:36px;
-  animation:breathe 10s ease-in-out infinite;
-}
-
-.about h2{
-  margin:0 0 12px;
-  font-weight:600;
-}
-
+/* ---------- ABOUT ---------- */
 .about p{
-  margin:0;
-  line-height:1.7;
   font-size:15px;
-  opacity:.92;
+  line-height:1.7;
+  opacity:.95;
 }
 
-.grid-bottom{
+/* ---------- LOWER GRID ---------- */
+.grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:28px;
+  gap:36px;
 }
 
-.section{
-  background:linear-gradient(145deg,var(--surface),var(--surface2));
-  border-radius:32px;
-  padding:24px 26px;
-}
-
-.section h3{
-  margin:0 0 14px;
-  font-weight:600;
+.tag{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(0,0,0,.25);
+  font-size:13px;
+  margin:6px 6px 0 0;
 }
 
 .comment{
   background:rgba(0,0,0,.22);
   padding:14px 16px;
   border-radius:18px;
-  margin-bottom:12px;
   font-size:14px;
+  margin-bottom:12px;
 }
 
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.tag{
-  background:rgba(0,0,0,.25);
-  padding:8px 14px;
-  border-radius:999px;
-  font-size:13px;
-}
-
-.footer-actions{
-  margin-top:36px;
+/* ---------- FOOT ---------- */
+.actions{
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-button{
-  padding:12px 20px;
-  border-radius:999px;
-  border:none;
+.actions a{
+  text-decoration:none;
   background:#241536;
   color:var(--text);
+  padding:12px 20px;
+  border-radius:999px;
   font-size:14px;
-  cursor:pointer;
-  transition:
-    transform .25s cubic-bezier(.4,0,.2,1),
-    box-shadow .25s cubic-bezier(.4,0,.2,1);
-}
-
-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 22px rgba(0,0,0,.35);
-}
-
-@keyframes breathe{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.01)}
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN PROTECTION -->
+<script>
+if(localStorage.getItem("cc2_logged_in") !== "true"){
+  window.location.href = "login.html";
+}
+</script>
+
+<!-- TOP BAR -->
 <div class="topbar">
-  <a href="index.html">← Home</a>
-  <span>CC² · All About Me</span>
-  <span>👋</span>
+  <div class="brand">CC²</div>
+  <div class="right">
+    <a href="index.html">Home</a>
+    <button onclick="logout()">Log out</button>
+  </div>
 </div>
 
 <div class="container">
 
-  <!-- TOP -->
-  <div class="grid-top">
-    <div class="info-card">
+  <!-- PROFILE HEADER -->
+  <div class="section header">
+    <div class="info">
       <p><strong>Hometown:</strong> Galway</p>
       <p><strong>Gender:</strong> Prefer not to say</p>
-      <p><strong>Age range:</strong> 30–35</p>
+      <p><strong>Age range:</strong> Hidden</p>
     </div>
 
     <div class="photo">
@@ -191,47 +189,48 @@ button:hover{
   </div>
 
   <!-- ABOUT -->
-  <div class="about">
+  <div class="section about">
     <h2>A bit about me</h2>
     <p>
-      Easy-going, enjoys meaningful chats and quiet routines.
-      Here for genuine connections without pressure.
+      Easy-going, likes meaningful conversations and calm spaces.
+      Here for friendship without pressure or expectations.
     </p>
   </div>
 
-  <!-- BOTTOM -->
-  <div class="grid-bottom">
+  <!-- LOWER -->
+  <div class="grid">
 
-    <!-- COMMENTS -->
     <div class="section">
-      <h3>Say hello 👋</h3>
-
-      <div class="comment">Hi, you seem lovely!</div>
+      <h3>Kind words</h3>
+      <div class="comment">You seem very sound!</div>
       <div class="comment">Nice to see someone else into walking.</div>
-
-      <button>Report</button>
     </div>
 
-    <!-- INTERESTS -->
     <div class="section">
       <h3>Interests</h3>
-
-      <div class="tags">
-        <div class="tag">Walking</div>
-        <div class="tag">Coffee</div>
-        <div class="tag">Books</div>
-        <div class="tag">Music</div>
-      </div>
+      <span class="tag">Walking</span>
+      <span class="tag">Coffee</span>
+      <span class="tag">Books</span>
+      <span class="tag">Quiet chats</span>
     </div>
 
   </div>
 
-  <div class="footer-actions">
-    <button onclick="location.href='enhanceprofile.html'">Enhance my profile</button>
-    <span></span>
+  <!-- ACTIONS -->
+  <div class="section actions">
+    <a href="enhanceprofile.html">Enhance my profile</a>
+    <span>👋</span>
   </div>
 
 </div>
+
+<!-- LOGOUT -->
+<script>
+function logout(){
+  localStorage.removeItem("cc2_logged_in");
+  window.location.href = "login.html";
+}
+</script>
 
 </body>
 </html>
