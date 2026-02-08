@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CC² · Café</title>
+<title>CC² · Coffee Room</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
-  --bg1:#f3c6e8;
-  --bg2:#cbb7f5;
-  --card:#ffffff20;
-  --text:#2b2233;
+  --pink:#f2b6d9;
+  --lav:#cdbdf6;
+  --mint:#c8e6df;
+  --card:#ffffff22;
   --soft:#ffffff55;
+  --text:#2c2434;
 }
 
 *{
@@ -22,109 +23,62 @@
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
   color:var(--text);
 }
 
-/* Header */
 .header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  padding:16px 20px;
+  padding:18px 22px;
 }
 
 .logo{
   font-size:22px;
-  font-weight:700;
+  font-weight:800;
+  cursor:pointer;
 }
 
-.header a{
-  text-decoration:none;
-  color:var(--text);
-  font-weight:600;
-}
-
-/* Page container */
 .wrap{
   max-width:900px;
-  margin:0 auto;
-  padding:10px 16px 40px;
+  margin:auto;
+  padding:20px 16px 60px;
 }
 
-/* Café title */
-.cafe-title{
-  text-align:center;
-  margin:20px 0 10px;
-  font-size:26px;
-}
-
-.cafe-sub{
-  text-align:center;
-  opacity:.75;
-  margin-bottom:20px;
-}
-
-/* Chat area */
-.chat-box{
+.room{
   background:var(--card);
-  backdrop-filter:blur(12px);
-  border-radius:26px;
-  padding:16px;
-  min-height:300px;
-  display:flex;
-  flex-direction:column;
+  backdrop-filter:blur(18px);
+  border-radius:36px;
+  padding:24px;
 }
 
-/* Messages */
-.messages{
-  flex:1;
-  overflow-y:auto;
-  padding-bottom:10px;
-}
-
-.msg{
+.message{
   background:var(--soft);
   border-radius:18px;
-  padding:10px 14px;
+  padding:12px 16px;
   margin-bottom:10px;
-  max-width:75%;
+  max-width:80%;
 }
 
-.msg.you{
-  margin-left:auto;
-  background:#ffffff80;
-}
-
-/* Input */
-.input-row{
+.input{
   display:flex;
   gap:10px;
-  margin-top:10px;
+  margin-top:16px;
 }
 
-.input-row input{
+input{
   flex:1;
   border:none;
   border-radius:18px;
-  padding:12px 14px;
-  font-size:15px;
+  padding:12px;
 }
 
-.input-row button{
+button{
   border:none;
   border-radius:18px;
   padding:12px 18px;
+  background:linear-gradient(135deg,var(--pink),var(--lav));
   font-weight:600;
-  cursor:pointer;
-  background:linear-gradient(135deg,#ffb3da,#cbb7f5);
-}
-
-footer{
-  text-align:center;
-  font-size:12px;
-  opacity:.6;
-  margin-top:20px;
 }
 </style>
 </head>
@@ -132,46 +86,37 @@ footer{
 <body>
 
 <div class="header">
-  <div class="logo">CC²</div>
-  <a href="home.html">Home</a>
+  <div class="logo" onclick="location.href='home.html'">CC²</div>
+  <div>☕ Coffee Room</div>
 </div>
 
 <div class="wrap">
-  <div class="cafe-title">☕ Café Room</div>
-  <div class="cafe-sub">Relaxed chat · good intentions only</div>
 
-  <div class="chat-box">
-    <div class="messages" id="messages">
-      <div class="msg">👋 Welcome to the Café. Say hello.</div>
-    </div>
+<div class="room" id="room">
+  <div class="message">Aoife: Morning everyone ☕</div>
+  <div class="message">James: Anyone else working from home today?</div>
+</div>
 
-    <div class="input-row">
-      <input id="msgInput" placeholder="Type something kind…" />
-      <button onclick="sendMsg()">Send</button>
-    </div>
-  </div>
+<div class="input">
+  <input id="msg" placeholder="Say hello, keep it kind…" />
+  <button onclick="send()">Send</button>
+</div>
 
-  <footer>Made with love in Éire 🇮🇪</footer>
 </div>
 
 <script>
-/* login guard */
 if(!localStorage.getItem("cc2_logged_in")){
   window.location.href="login.html";
 }
 
-function sendMsg(){
-  const input=document.getElementById("msgInput");
-  const text=input.value.trim();
-  if(!text) return;
-
-  const msg=document.createElement("div");
-  msg.className="msg you";
-  msg.textContent=text;
-
-  document.getElementById("messages").appendChild(msg);
-  input.value="";
-  document.getElementById("messages").scrollTop=9999;
+function send(){
+  if(!msg.value.trim()) return;
+  const m=document.createElement("div");
+  m.className="message";
+  m.textContent="You: "+msg.value;
+  room.appendChild(m);
+  msg.value="";
+  room.scrollTop=room.scrollHeight;
 }
 </script>
 
