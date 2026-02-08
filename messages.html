@@ -10,9 +10,10 @@
   --pink:#f2b6d9;
   --lav:#cdbdf6;
   --mint:#c8e6df;
-  --card:#ffffff25;
+  --card:#ffffff22;
   --soft:#ffffff55;
   --text:#2c2434;
+  --accent:#e6c7ff;
 }
 
 *{
@@ -61,7 +62,6 @@ body{
   padding:18px 22px;
   margin-bottom:20px;
   font-size:14px;
-  opacity:.9;
 }
 
 /* Inbox */
@@ -71,22 +71,62 @@ body{
   gap:14px;
 }
 
+/* Thread */
 .thread{
   background:var(--card);
   backdrop-filter:blur(14px);
   border-radius:26px;
   padding:18px;
+  display:flex;
+  align-items:center;
+  gap:16px;
   cursor:pointer;
-  transition:transform .15s ease;
+  transition:transform .2s ease;
+}
+
+.thread:hover{
+  transform:translateY(-3px);
+}
+
+/* Mail swirl icon */
+.mail{
+  width:44px;
+  height:32px;
+  position:relative;
+}
+
+.mail::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:8px;
+  background:rgba(255,255,255,0.5);
+}
+
+.mail::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:3px solid var(--accent);
+  top:6px;
+  left:13px;
+  border-color:var(--accent) transparent transparent transparent;
+  animation:spin 3s linear infinite;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+.name{
   font-weight:700;
   font-size:16px;
 }
 
-.thread:hover{
-  transform:translateY(-2px);
-}
-
-/* Chat view */
+/* Chat */
 .chat{
   display:none;
   flex-direction:column;
@@ -110,9 +150,7 @@ body{
   opacity:.75;
 }
 
-/* Messages */
 .chat-box{
-  flex:1;
   background:var(--soft);
   border-radius:20px;
   padding:14px;
@@ -169,45 +207,52 @@ body{
 <div class="wrap">
 
 <div class="intro">
-  Messages open only after both people wave back 👋  
-  Click a name to begin chatting.
+  Messages open only after both people wave back.  
+  Click a name to read.
 </div>
 
 <!-- INBOX -->
 <div id="inbox" class="inbox">
-  <div class="thread" onclick="openChat('James')">James</div>
-  <div class="thread" onclick="openChat('Aoife')">Aoife</div>
+
+  <div class="thread" onclick="openChat('James')">
+    <div class="mail"></div>
+    <div class="name">James</div>
+  </div>
+
+  <div class="thread" onclick="openChat('Aoife')">
+    <div class="mail"></div>
+    <div class="name">Aoife</div>
+  </div>
+
 </div>
 
 <!-- CHAT -->
 <div id="chat" class="chat">
+
   <div class="chat-header">
     <div id="chatName"></div>
     <div class="back" onclick="backToInbox()">← Back</div>
   </div>
 
   <div class="chat-box" id="chatBox">
-    <div class="msg">👋 Thanks for connecting!</div>
+    <div class="msg">Thanks for connecting.</div>
   </div>
 
   <div class="input-row">
     <input id="msgInput" placeholder="Type something friendly…" />
     <button onclick="sendMsg()">Send</button>
   </div>
+
 </div>
 
 </div>
 
 <script>
-/* login guard */
 if(!localStorage.getItem("cc2_logged_in")){
   window.location.href="login.html";
 }
 
-let currentChat="";
-
 function openChat(name){
-  currentChat=name;
   inbox.style.display="none";
   chat.style.display="flex";
   chatName.textContent=name;
@@ -220,16 +265,15 @@ function backToInbox(){
 
 function sendMsg(){
   const input=document.getElementById("msgInput");
-  const text=input.value.trim();
-  if(!text) return;
+  if(!input.value.trim()) return;
 
   const msg=document.createElement("div");
   msg.className="msg you";
-  msg.textContent=text;
+  msg.textContent=input.value;
 
-  document.getElementById("chatBox").appendChild(msg);
+  chatBox.appendChild(msg);
   input.value="";
-  document.getElementById("chatBox").scrollTop=9999;
+  chatBox.scrollTop=9999;
 }
 </script>
 
