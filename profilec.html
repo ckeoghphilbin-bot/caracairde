@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CC² · My Profile</title>
+<title>CC² · Profile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -10,9 +10,10 @@
   --pink:#f2b6d9;
   --lav:#cdbdf6;
   --mint:#c8e6df;
-  --card:#ffffff25;
+  --card:#ffffff22;
   --soft:#ffffff55;
   --text:#2c2434;
+  --glyph:#e7d4ff;
 }
 
 *{
@@ -48,105 +49,87 @@ body{
 
 /* Layout */
 .wrap{
-  max-width:900px;
+  max-width:960px;
   margin:0 auto;
-  padding:10px 16px 60px;
+  padding:10px 16px 70px;
 }
 
-.card{
+/* Profile card */
+.profile{
   background:var(--card);
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(16px);
   border-radius:34px;
   padding:26px;
-  margin-bottom:24px;
 }
 
 /* Top section */
 .top{
   display:grid;
-  grid-template-columns:1fr 180px;
-  gap:20px;
+  grid-template-columns:1fr 160px;
+  gap:24px;
 }
 
-.avatar{
-  width:180px;
-  height:180px;
-  border-radius:28px;
-  background:var(--soft);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  text-align:center;
-  overflow:hidden;
+/* Custom glyph */
+.glyph{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background:radial-gradient(circle at top,var(--glyph),var(--lav));
+  position:relative;
+  animation:float 5s ease-in-out infinite;
 }
 
-.avatar img{
+.glyph::before{
+  content:"";
+  position:absolute;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.5);
+  top:22px;
+  left:44px;
+}
+
+.glyph::after{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:46px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.35);
+  bottom:22px;
+  left:30px;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* Inputs */
+textarea, select{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  border:none;
+  border-radius:22px;
+  padding:16px;
+  background:var(--soft);
+  font-size:15px;
 }
 
-input[type=file]{
-  margin-top:10px;
-  font-size:12px;
-}
+textarea{min-height:120px}
 
 /* Sections */
-h2{
-  margin-top:0;
-  font-size:22px;
+.section{
+  margin-top:26px;
 }
 
-textarea{
-  width:100%;
-  border:none;
-  border-radius:20px;
-  padding:16px;
-  min-height:120px;
-  background:var(--soft);
-  resize:none;
-  font-size:15px;
-}
-
-select, input[type=text]{
-  width:100%;
-  border:none;
-  border-radius:18px;
-  padding:14px;
-  background:var(--soft);
-  font-size:15px;
-}
-
-/* Interests */
-.interests{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:12px;
-}
-
-.interests label{
-  background:var(--soft);
-  padding:12px;
-  border-radius:18px;
-  font-size:14px;
-}
-
-/* Comments */
-.comment-box{
-  background:var(--soft);
-  border-radius:20px;
-  padding:14px;
-  margin-top:10px;
-}
-
-.comment{
+.section h3{
   margin-bottom:10px;
-  font-size:14px;
 }
 
 /* Save */
-.save-btn{
+.save{
+  margin-top:30px;
   width:100%;
   padding:18px;
   border-radius:30px;
@@ -155,14 +138,6 @@ select, input[type=text]{
   font-weight:700;
   cursor:pointer;
   background:linear-gradient(135deg,var(--pink),var(--lav));
-}
-
-/* Footer note */
-.note{
-  text-align:center;
-  font-size:12px;
-  opacity:.65;
-  margin-top:10px;
 }
 </style>
 </head>
@@ -176,127 +151,63 @@ select, input[type=text]{
 
 <div class="wrap">
 
-<!-- TOP -->
-<div class="card top">
-  <div>
-    <h2>A bit about me</h2>
-    <textarea id="about" placeholder="Share as much or as little as you like…"></textarea>
-  </div>
+<div class="profile">
 
-  <div>
-    <div class="avatar" id="avatarBox">
-      <span>Profile photo<br>(optional)</span>
+  <div class="top">
+    <div>
+      <h2>A bit about me</h2>
+      <textarea id="about" placeholder="Share as much or as little as you like…"></textarea>
     </div>
-    <input type="file" accept="image/*" onchange="loadPhoto(event)">
+
+    <div class="glyph"></div>
   </div>
-</div>
 
-<!-- LOCATION -->
-<div class="card">
-  <h2>Location</h2>
-  <select id="country" onchange="updateCounties()">
-    <option value="">Select country</option>
-    <option value="ireland">Ireland</option>
-    <option value="uk">United Kingdom</option>
-  </select>
-  <br><br>
-  <select id="county">
-    <option value="">Select county / area</option>
-  </select>
-</div>
-
-<!-- AVAILABILITY -->
-<div class="card">
-  <h2>Availability</h2>
-  <select id="availability">
-    <option>Online friendships</option>
-    <option>Meet ups</option>
-    <option>Both</option>
-  </select>
-</div>
-
-<!-- INTERESTS -->
-<div class="card">
-  <h2>Interests (required)</h2>
-  <div class="interests">
-    <label><input type="checkbox"> Coffee chats</label>
-    <label><input type="checkbox"> Walking</label>
-    <label><input type="checkbox"> Parenting</label>
-    <label><input type="checkbox"> Music</label>
-    <label><input type="checkbox"> Books</label>
-    <label><input type="checkbox"> Neurodiversity</label>
-    <label><input type="checkbox"> Creativity</label>
-    <label><input type="checkbox"> Fitness</label>
+  <div class="section">
+    <h3>Location</h3>
+    <select id="country">
+      <option value="">Country</option>
+      <option>Ireland</option>
+      <option>United Kingdom</option>
+    </select>
+    <br><br>
+    <select id="county">
+      <option value="">County / Area</option>
+    </select>
   </div>
-</div>
 
-<!-- COMMENTS -->
-<div class="card">
-  <h2>Say hello</h2>
-  <input type="text" placeholder="Leave something kind…">
-  <div class="comment-box">
-    <div class="comment">👋 Welcome to CC²</div>
+  <div class="section">
+    <h3>Availability</h3>
+    <select id="availability">
+      <option>Online friendships</option>
+      <option>Meet ups</option>
+      <option>Both</option>
+    </select>
   </div>
-</div>
 
-<button class="save-btn" onclick="saveProfile()">Enhance my profile</button>
-<div class="note">Profiles save automatically on this device</div>
+  <button class="save" onclick="saveProfile()">Enhance my profile</button>
+
+</div>
 
 </div>
 
 <script>
-/* login guard */
 if(!localStorage.getItem("cc2_logged_in")){
   window.location.href="login.html";
 }
 
-/* Photo */
-function loadPhoto(e){
-  const file=e.target.files[0];
-  if(!file) return;
-  const reader=new FileReader();
-  reader.onload=()=>{
-    avatarBox.innerHTML=`<img src="${reader.result}">`;
-    localStorage.avatar=reader.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-/* Country logic */
-const counties={
-  ireland:["Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"],
-  uk:["London","Manchester","Birmingham","Leeds","Liverpool","Bristol","Brighton","Glasgow","Edinburgh","Cardiff","Belfast"]
-};
-
-function updateCounties(){
-  county.innerHTML='<option value="">Select county / area</option>';
-  const list=counties[country.value]||[];
-  list.forEach(c=>{
-    const o=document.createElement("option");
-    o.textContent=c;
-    county.appendChild(o);
-  });
-}
-
-/* Save */
 function saveProfile(){
-  localStorage.about=about.value;
-  localStorage.country=country.value;
-  localStorage.county=county.value;
-  localStorage.availability=availability.value;
+  localStorage.about = about.value;
+  localStorage.country = country.value;
+  localStorage.county = county.value;
+  localStorage.availability = availability.value;
   alert("Profile saved ✨");
 }
 
-/* Load */
 window.onload=()=>{
-  if(localStorage.about) about.value=localStorage.about;
-  if(localStorage.avatar) avatarBox.innerHTML=`<img src="${localStorage.avatar}">`;
-  if(localStorage.country){
-    country.value=localStorage.country;
-    updateCounties();
-    county.value=localStorage.county||"";
-  }
-  if(localStorage.availability) availability.value=localStorage.availability;
+  if(localStorage.about) about.value = localStorage.about;
+  if(localStorage.country) country.value = localStorage.country;
+  if(localStorage.county) county.value = localStorage.county;
+  if(localStorage.availability) availability.value = localStorage.availability;
 };
 </script>
 
