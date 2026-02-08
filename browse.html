@@ -1,46 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>CC² · Browse</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
+:root{
+  --pink:#f2b6d9;
+  --lav:#cdbdf6;
+  --mint:#c8e6df;
+  --card:#ffffff22;
+  --soft:#ffffff55;
+  --text:#2c2434;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
+  color:var(--text);
+  animation:bgBreathe 10s ease-in-out infinite;
 }
-.wrap{max-width:900px;margin:auto;padding:20px}
+
+@keyframes bgBreathe{
+  0%,100%{filter:saturate(1)}
+  50%{filter:saturate(1.08)}
+}
+
+/* Header */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 22px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* Layout */
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:20px 16px 60px;
+}
+
+/* Search */
+.search{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+input{
+  flex:1;
+  border:none;
+  border-radius:18px;
+  padding:12px;
+  background:var(--soft);
+}
+
+/* Profile cards */
 .card{
-  background:rgba(255,255,255,.25);
-  backdrop-filter:blur(16px);
-  padding:20px;
-  border-radius:28px;
-  margin-top:16px;
+  background:var(--card);
+  backdrop-filter:blur(18px);
+  border-radius:34px;
+  padding:22px;
+  margin-bottom:18px;
+  cursor:pointer;
+  animation:float 7s ease-in-out infinite, fadeIn .4s ease;
 }
-.footer{text-align:center;font-size:12px;opacity:.6;margin-top:40px}
+
+.card:nth-child(3){animation-delay:1.5s}
+.card:nth-child(4){animation-delay:3s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.name{
+  font-weight:700;
+}
+.meta{
+  font-size:13px;
+  opacity:.75;
+  margin-top:4px;
+}
 </style>
 </head>
+
 <body>
 
+<div class="header">
+  <div class="logo" onclick="location.href='home.html'">CC²</div>
+  <div>Browse</div>
+</div>
+
 <div class="wrap">
-  <h2>Have a snoop</h2>
-  <button onclick="show()">Search</button>
 
-  <div id="results" style="display:none">
-    <div class="card" onclick="location.href='profilec.html'">James · Dublin</div>
-    <div class="card" onclick="location.href='profilec.html'">Aoife · Galway</div>
-  </div>
+<div class="search">
+  <input placeholder="Search by interest or location…" />
+</div>
 
-  <div class="footer">
-    Made with love in Éire · <a href="safety.html">Safety & community</a>
-  </div>
+<div class="card" onclick="location.href='profilec.html'">
+  <div class="name">James</div>
+  <div class="meta">Dublin · Walking · Coffee</div>
+</div>
+
+<div class="card" onclick="location.href='profilec.html'">
+  <div class="name">Aoife</div>
+  <div class="meta">Galway · Art · Swimming</div>
+</div>
+
+<div class="footer">
+  Made with love in Éire · <a href="safety.html">Safety & community</a>
+</div>
+
 </div>
 
 <script>
-if(!localStorage.cc2_logged_in) location.href="login.html";
-function show(){results.style.display="block"}
+if(!localStorage.getItem("cc2_logged_in")){
+  window.location.href="login.html";
+}
 </script>
 
 </body>
