@@ -1,195 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>CC² · Profile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-:root{
-  --pink:#f2b6d9;
-  --lav:#cdbdf6;
-  --mint:#c8e6df;
-  --card:#ffffff22;
-  --soft:#ffffff55;
-  --text:#2c2434;
-  --glyph:#e7d4ff;
-}
-
-*{
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-}
-
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
-  color:var(--text);
+  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
-
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 22px;
+.box{
+  max-width:800px;
+  margin:40px auto;
+  background:rgba(255,255,255,.25);
+  padding:28px;
+  border-radius:36px;
 }
-
-.logo{
-  font-size:22px;
-  font-weight:800;
-}
-
-.header a{
-  text-decoration:none;
-  font-weight:600;
-  color:var(--text);
-}
-
-.wrap{
-  max-width:960px;
-  margin:0 auto;
-  padding:10px 16px 70px;
-}
-
-.profile{
-  background:var(--card);
-  backdrop-filter:blur(16px);
-  border-radius:34px;
-  padding:26px;
-  position:relative;
-}
-
-/* Glyph */
-.glyph{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  background:radial-gradient(circle at top,var(--glyph),var(--lav));
-  position:absolute;
-  top:26px;
-  right:26px;
-  animation:float 5s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-}
-
-/* Content */
-textarea, select{
-  width:100%;
-  border:none;
-  border-radius:22px;
-  padding:16px;
-  background:var(--soft);
-  font-size:15px;
-}
-
-.section{
-  margin-top:24px;
-}
-
-.save{
-  margin-top:30px;
-  width:100%;
-  padding:18px;
-  border-radius:30px;
-  border:none;
-  font-size:18px;
-  font-weight:700;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--pink),var(--lav));
-}
-
-/* Report */
-.report{
-  position:absolute;
-  bottom:18px;
-  right:22px;
-  font-size:12px;
-  opacity:.65;
-  cursor:pointer;
-}
-
-.report:hover{
-  opacity:1;
-}
+.footer{text-align:center;font-size:12px;opacity:.6;margin-top:40px}
 </style>
 </head>
-
 <body>
 
-<div class="header">
-  <div class="logo">CC²</div>
-  <a href="home.html">Home</a>
-</div>
-
-<div class="wrap">
-
-<div class="profile">
-
-  <div class="glyph"></div>
-
+<div class="box">
   <h2>A bit about me</h2>
-  <textarea id="about" placeholder="Share as much or as little as you like…"></textarea>
-
-  <div class="section">
-    <h3>Location</h3>
-    <select id="country">
-      <option value="">Country</option>
-      <option>Ireland</option>
-      <option>United Kingdom</option>
-    </select>
-    <br><br>
-    <select id="county">
-      <option value="">County / Area</option>
-    </select>
-  </div>
-
-  <div class="section">
-    <h3>Availability</h3>
-    <select id="availability">
-      <option>Online friendships</option>
-      <option>Meet ups</option>
-      <option>Both</option>
-    </select>
-  </div>
-
-  <button class="save" onclick="saveProfile()">Enhance my profile</button>
-
-  <div class="report" onclick="reportProfile()">Report profile</div>
-
+  <textarea style="width:100%;height:120px"></textarea>
+  <button>Enhance my profile</button>
 </div>
 
+<div class="footer">
+  Made with love in Éire · <a href="safety.html">Safety & community</a>
 </div>
 
 <script>
-if(!localStorage.getItem("cc2_logged_in")){
-  window.location.href="login.html";
-}
-
-function saveProfile(){
-  localStorage.about=about.value;
-  localStorage.country=country.value;
-  localStorage.county=county.value;
-  localStorage.availability=availability.value;
-  alert("Profile saved");
-}
-
-function reportProfile(){
-  if(confirm("Report this profile for review?")){
-    alert("Thank you. We’ll look into this discreetly.");
-  }
-}
-
-window.onload=()=>{
-  if(localStorage.about) about.value=localStorage.about;
-  if(localStorage.country) country.value=localStorage.country;
-  if(localStorage.county) county.value=localStorage.county;
-  if(localStorage.availability) availability.value=localStorage.availability;
-};
+if(!localStorage.cc2_logged_in) location.href="login.html";
 </script>
 
 </body>
