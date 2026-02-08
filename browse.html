@@ -1,33 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Browse • CC²</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CC² — Have a Snoop</title>
+
+<script>
+if(localStorage.getItem("cc2_logged_in") !== "true"){
+  window.location.href = "index.html";
+}
+</script>
+
 <style>
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont;
-  background:linear-gradient(135deg,#b79cff,#f4b7d8);
-  color:#2d1536;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:linear-gradient(135deg,#c9b6ff,#f3b7d8,#bfe8e6);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  color:#2b2b2b;
 }
+
+.wrapper{
+  width:95%;
+  max-width:1100px;
+  margin:28px 0;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(14px);
+  border-radius:36px;
+  padding:28px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.15);
+}
+
+/* Header */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.brand{
+  font-size:22px;
+  font-weight:800;
+}
+
+.brand span{font-size:14px;opacity:.7}
+
+.home{
+  font-size:13px;
+  cursor:pointer;
+  opacity:.75;
+}
+
+/* Filters */
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+select{
+  padding:12px 14px;
+  border-radius:16px;
+  border:none;
+  background:rgba(255,255,255,0.65);
+  font-size:14px;
+}
+
+/* Cards */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:20px;
+}
+
 .card{
-  max-width:700px;
-  margin:40px auto;
-  background:#d9c7ff;
-  padding:25px;
-  border-radius:22px;
+  background:rgba(255,255,255,0.45);
+  border-radius:28px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.12);
 }
-a{color:#4a136a;font-weight:600;text-decoration:none}
+
+.avatar{
+  width:100%;
+  height:160px;
+  border-radius:22px;
+  background:#bbb;
+}
+
+.name{
+  font-size:16px;
+  font-weight:800;
+}
+
+.meta{
+  font-size:13px;
+  opacity:.8;
+}
+
+.interests{
+  font-size:13px;
+  opacity:.75;
+}
+
+.wave{
+  margin-top:auto;
+  padding:12px;
+  border-radius:18px;
+  border:none;
+  background:linear-gradient(135deg,#9b7dff,#f39acb);
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
 </style>
-<script>
-if(!localStorage.getItem("cc2_logged_in")) location.href="login.html";
-</script>
 </head>
+
 <body>
-<div class="card">
-<h2>👀 Have a Snoop</h2>
-<p>Browse friendly faces by county and interests (coming next).</p>
-<a href="index.html">← Back Home</a>
+
+<div class="wrapper">
+
+<header>
+  <div class="brand">CC<span>²</span> · Have a Snoop</div>
+  <div class="home" onclick="goHome()">Home</div>
+</header>
+
+<!-- Filters -->
+<div class="filters">
+  <select>
+    <option>Country</option>
+    <option>Ireland</option>
+    <option>United Kingdom</option>
+  </select>
+
+  <select>
+    <option>County / Area</option>
+    <option>Dublin</option>
+    <option>Cork</option>
+    <option>Galway</option>
+    <option>London</option>
+    <option>Manchester</option>
+    <option>Leeds</option>
+  </select>
+
+  <select>
+    <option>Availability</option>
+    <option>Online friendships</option>
+    <option>Meet ups</option>
+    <option>Both</option>
+  </select>
+
+  <select>
+    <option>Interest</option>
+    <option>Coffee chats</option>
+    <option>Walking</option>
+    <option>Parenting</option>
+    <option>Creative arts</option>
+    <option>Books</option>
+    <option>Fitness</option>
+  </select>
 </div>
+
+<!-- Profiles -->
+<div class="grid">
+
+  <div class="card">
+    <div class="avatar"></div>
+    <div class="name">Aoife</div>
+    <div class="meta">Galway · Meet ups</div>
+    <div class="interests">Walking · Coffee chats · Mindfulness</div>
+    <button class="wave" onclick="wave()">👋 Send wave</button>
+  </div>
+
+  <div class="card">
+    <div class="avatar"></div>
+    <div class="name">James</div>
+    <div class="meta">Dublin · Online friendships</div>
+    <div class="interests">Books · Music · Neurodiversity</div>
+    <button class="wave" onclick="wave()">👋 Send wave</button>
+  </div>
+
+  <div class="card">
+    <div class="avatar"></div>
+    <div class="name">Sarah</div>
+    <div class="meta">London · Both</div>
+    <div class="interests">Parenting · Coffee chats · Walking</div>
+    <button class="wave" onclick="wave()">👋 Send wave</button>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+function goHome(){
+  window.location.href="home.html";
+}
+
+function wave(){
+  alert("Wave sent 👋 If they wave back, you’ll be able to connect.");
+}
+</script>
+
 </body>
 </html>
