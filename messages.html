@@ -19,176 +19,132 @@
 
 body{
   margin:0;
-  height:100vh;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
-    radial-gradient(1200px at 10% 10%, #7b5c8f, transparent),
+    radial-gradient(1200px at 20% 10%, #7b5c8f, transparent),
     linear-gradient(180deg,var(--bg1),var(--bg2));
   color:var(--text);
 }
 
+/* ---------- TOP BAR ---------- */
 .topbar{
-  padding:18px 26px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:18px 28px;
 }
 
-.topbar a{
-  color:var(--text);
-  text-decoration:none;
-  font-size:14px;
-  opacity:.8;
+.brand{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.08em;
 }
 
-.wrapper{
-  display:grid;
-  grid-template-columns:280px 1fr;
-  height:calc(100vh - 64px);
-}
-
-.inbox{
-  background:linear-gradient(180deg,var(--surface),var(--surface2));
-  padding:24px 18px;
-  overflow-y:auto;
-}
-
-.thread{
-  padding:32px 36px;
+.topbar .right{
   display:flex;
-  flex-direction:column;
+  gap:14px;
 }
 
-.message-preview{
-  padding:14px 16px;
-  border-radius:18px;
-  background:rgba(0,0,0,.18);
-  margin-bottom:12px;
-  cursor:pointer;
-  transition:background .25s ease;
-}
-
-.message-preview:hover{
-  background:rgba(0,0,0,.28);
-}
-
-.message-preview strong{
-  display:block;
-  font-size:14px;
-}
-
-.message-preview span{
+.topbar a, .topbar button{
   font-size:13px;
-  opacity:.7;
+  color:var(--text);
+  background:#241536;
+  border:none;
+  border-radius:999px;
+  padding:10px 16px;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+/* ---------- CONTENT ---------- */
+.container{
+  max-width:900px;
+  margin:0 auto;
+  padding:32px 28px 80px;
 }
 
 .letter{
-  background:linear-gradient(145deg,#6a4f86,#7b5c8f);
+  background:linear-gradient(145deg,var(--surface),var(--surface2));
   border-radius:42px;
   padding:36px 38px;
-  box-shadow:
-    0 30px 70px rgba(0,0,0,.4),
-    inset 0 1px 0 rgba(255,255,255,.08);
-  flex:1;
-  animation:breathe 10s ease-in-out infinite;
+  box-shadow:0 30px 70px rgba(0,0,0,.4);
 }
 
 .letter h2{
-  margin:0 0 12px;
-  font-weight:600;
+  margin:0 0 14px;
 }
 
 .letter p{
-  line-height:1.7;
   font-size:15px;
-  opacity:.92;
-}
-
-.reply{
-  margin-top:22px;
-  display:flex;
-  gap:12px;
+  line-height:1.7;
+  opacity:.9;
 }
 
 textarea{
-  flex:1;
+  width:100%;
+  margin-top:24px;
   padding:14px 16px;
   border-radius:18px;
   border:none;
-  resize:none;
   background:#241536;
   color:var(--text);
-  font-family:inherit;
+  resize:none;
 }
 
-button{
-  padding:14px 22px;
+button.send{
+  margin-top:14px;
+  padding:12px 20px;
   border-radius:999px;
   border:none;
   background:#241536;
   color:var(--text);
-  font-size:14px;
   cursor:pointer;
-}
-
-@keyframes breathe{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.012)}
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN PROTECTION -->
+<script>
+if(localStorage.getItem("cc2_logged_in") !== "true"){
+  window.location.href = "login.html";
+}
+</script>
+
+<!-- TOP BAR -->
 <div class="topbar">
-  <a href="index.html">← Home</a>
-  <span>CC² · You’ve Got Post</span>
-  <span></span>
+  <div class="brand">CC²</div>
+  <div class="right">
+    <a href="index.html">Home</a>
+    <button onclick="logout()">Log out</button>
+  </div>
 </div>
 
-<div class="wrapper">
-
-  <!-- INBOX -->
-  <div class="inbox">
-    <div class="message-preview" onclick="openMsg('Aoife')">
-      <strong>Aoife</strong>
-      <span>Hey, saw you like walking…</span>
-    </div>
-
-    <div class="message-preview" onclick="openMsg('James')">
-      <strong>James</strong>
-      <span>That coffee chat was nice</span>
-    </div>
-
-    <div class="message-preview" onclick="openMsg('Saoirse')">
-      <strong>Saoirse</strong>
-      <span>Just saying hello 👋</span>
-    </div>
+<div class="container">
+  <div class="letter" id="letter">
+    <h2>Letters arrive in their own time.</h2>
+    <p>Select a connection to begin.</p>
   </div>
 
-  <!-- MESSAGE -->
-  <div class="thread">
-    <div class="letter" id="letter">
-      <h2>Open a letter</h2>
-      <p>Select a conversation on the left.</p>
-    </div>
-
-    <div class="reply">
-      <textarea placeholder="Write back when you feel ready…"></textarea>
-      <button>Send</button>
-    </div>
-  </div>
-
+  <textarea placeholder="Write when you’re ready…"></textarea>
+  <button class="send">Send gently</button>
 </div>
 
 <script>
-function openMsg(name){
-  document.getElementById("letter").innerHTML =
-    `<h2>${name}</h2>
-     <p>
-       This is a quiet space to exchange thoughts without pressure.
-       Messages don’t demand instant replies.
-     </p>`;
+function logout(){
+  localStorage.removeItem("cc2_logged_in");
+  window.location.href="login.html";
+}
+
+const active = localStorage.getItem("cc2_active_chat");
+const connections = JSON.parse(localStorage.getItem("cc2_connections")) || [];
+
+if(active && connections.includes(active)){
+  document.getElementById("letter").innerHTML = `
+    <h2>${active}</h2>
+    <p>This is a quiet space for conversation.</p>
+  `;
 }
 </script>
 
