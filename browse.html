@@ -1,293 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>CC² · Browse</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-:root{
-  --pink:#f2b6d9;
-  --lav:#cdbdf6;
-  --mint:#c8e6df;
-  --card:#ffffff22;
-  --soft:#ffffff55;
-  --text:#2c2434;
-  --accent:#e6c7ff;
-}
-
-*{
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-}
-
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
-  color:var(--text);
+  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
-
-/* Header */
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 22px;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:800;
-}
-
-.header a{
-  text-decoration:none;
-  font-weight:600;
-  color:var(--text);
-}
-
-/* Layout */
-.wrap{
-  max-width:1100px;
-  margin:0 auto;
-  padding:10px 16px 60px;
-}
-
-/* Filters */
-.filters{
-  background:var(--card);
-  backdrop-filter:blur(16px);
-  border-radius:30px;
-  padding:22px;
-  margin-bottom:26px;
-  animation:breathe 6s ease-in-out infinite;
-}
-
-@keyframes breathe{
-  0%,100%{box-shadow:0 0 0 rgba(255,255,255,0)}
-  50%{box-shadow:0 0 28px rgba(255,255,255,0.25)}
-}
-
-.filters h2{
-  margin-top:0;
-  font-size:20px;
-}
-
-.filter-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:14px;
-}
-
-select{
-  width:100%;
-  border:none;
-  border-radius:18px;
-  padding:14px;
-  background:var(--soft);
-  font-size:14px;
-}
-
-/* Search button */
-.search-btn{
-  margin-top:18px;
-  width:100%;
-  padding:16px;
-  border-radius:28px;
-  border:none;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--pink),var(--lav));
-  position:relative;
-  overflow:hidden;
-  opacity:.7;
-}
-
-.search-btn.enabled{opacity:1}
-
-.search-btn::after{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background:radial-gradient(circle,var(--accent),transparent 60%);
-  opacity:0;
-  transition:opacity .3s ease;
-}
-
-.search-btn:active::after{
-  opacity:.8;
-}
-
-/* Results */
-.results{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-  animation:fadeUp .6s ease forwards;
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
+.wrap{max-width:900px;margin:auto;padding:20px}
 .card{
-  background:var(--card);
+  background:rgba(255,255,255,.25);
   backdrop-filter:blur(16px);
+  padding:20px;
   border-radius:28px;
-  padding:18px;
-  cursor:pointer;
-  transition:transform .25s ease, box-shadow .25s ease;
+  margin-top:16px;
 }
-
-.card:hover{
-  transform:translateY(-6px) scale(1.02);
-  box-shadow:0 22px 44px rgba(0,0,0,.15);
-}
-
-/* CUSTOM ICON — EYE / LENS */
-.icon-eye{
-  width:64px;
-  height:42px;
-  margin:0 auto 14px;
-  position:relative;
-}
-
-.eye-outline{
-  position:absolute;
-  inset:0;
-  border-radius:50% / 60%;
-  background:rgba(255,255,255,0.5);
-}
-
-.eye-core{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  background:var(--accent);
-  transform:translate(-50%,-50%);
-  transition:transform .4s ease;
-}
-
-.card:hover .eye-core{
-  transform:translate(-50%,-50%) scale(1.3);
-}
-
-/* Card text */
-.name{
-  font-weight:700;
-  font-size:16px;
-}
-
-.meta{
-  font-size:13px;
-  opacity:.75;
-  margin-top:4px;
-}
+.footer{text-align:center;font-size:12px;opacity:.6;margin-top:40px}
 </style>
 </head>
-
 <body>
 
-<div class="header">
-  <div class="logo">CC²</div>
-  <a href="home.html">Home</a>
-</div>
-
 <div class="wrap">
-
-<div class="filters">
   <h2>Have a snoop</h2>
+  <button onclick="show()">Search</button>
 
-  <div class="filter-grid">
-    <select id="country" onchange="populateCounties(); enableSearch()">
-      <option value="">Country</option>
-      <option value="Ireland">Ireland</option>
-      <option value="UK">United Kingdom</option>
-    </select>
-
-    <select id="county" onchange="enableSearch()">
-      <option value="">County / Area</option>
-    </select>
-
-    <select onchange="enableSearch()">
-      <option value="">Interest</option>
-      <option>Coffee chats</option>
-      <option>Walking</option>
-      <option>Books</option>
-      <option>Music</option>
-      <option>Parenting</option>
-      <option>Neurodiversity</option>
-      <option>Creativity</option>
-      <option>Fitness</option>
-    </select>
-
-    <select onchange="enableSearch()">
-      <option value="">Availability</option>
-      <option>Online friendships</option>
-      <option>Meet ups</option>
-      <option>Both</option>
-    </select>
+  <div id="results" style="display:none">
+    <div class="card" onclick="location.href='profilec.html'">James · Dublin</div>
+    <div class="card" onclick="location.href='profilec.html'">Aoife · Galway</div>
   </div>
 
-  <button id="searchBtn" class="search-btn" onclick="search()">Search</button>
-</div>
-
-<div id="results" class="results" style="display:none">
-
-  <div class="card" onclick="location.href='profilec.html'">
-    <div class="icon-eye">
-      <div class="eye-outline"></div>
-      <div class="eye-core"></div>
-    </div>
-    <div class="name">James</div>
-    <div class="meta">Dublin · Books · Meet ups</div>
+  <div class="footer">
+    Made with love in Éire · <a href="safety.html">Safety & community</a>
   </div>
-
-  <div class="card" onclick="location.href='profilec.html'">
-    <div class="icon-eye">
-      <div class="eye-outline"></div>
-      <div class="eye-core"></div>
-    </div>
-    <div class="name">Aoife</div>
-    <div class="meta">Galway · Walking · Online</div>
-  </div>
-
-</div>
-
 </div>
 
 <script>
-if(!localStorage.getItem("cc2_logged_in")){
-  window.location.href="login.html";
-}
-
-const counties={
-  Ireland:["Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"],
-  UK:["London","Manchester","Birmingham","Leeds","Liverpool","Bristol","Brighton","Glasgow","Edinburgh","Cardiff","Belfast"]
-};
-
-function populateCounties(){
-  county.innerHTML='<option value="">County / Area</option>';
-  (counties[country.value]||[]).forEach(c=>{
-    const o=document.createElement("option");
-    o.textContent=c;
-    county.appendChild(o);
-  });
-}
-
-function enableSearch(){
-  document.getElementById("searchBtn").classList.add("enabled");
-}
-
-function search(){
-  document.getElementById("results").style.display="grid";
-}
+if(!localStorage.cc2_logged_in) location.href="login.html";
+function show(){results.style.display="block"}
 </script>
 
 </body>
