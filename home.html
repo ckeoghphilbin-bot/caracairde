@@ -1,72 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>CC² · Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
+:root{
+  --pink:#f2b6d9;
+  --lav:#cdbdf6;
+  --mint:#c8e6df;
+  --card:#ffffff22;
+  --text:#2c2434;
+}
+
+/* Reset */
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
+  color:var(--text);
+  animation:backgroundBreathe 10s ease-in-out infinite;
 }
+
+@keyframes backgroundBreathe{
+  0%,100%{filter:saturate(1)}
+  50%{filter:saturate(1.08)}
+}
+
+/* Header */
 .header{
-  padding:18px 22px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
+  padding:18px 22px;
 }
-.grid{
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+}
+
+/* Layout */
+.wrap{
   max-width:900px;
-  margin:40px auto;
+  margin:0 auto;
+  padding:30px 16px 60px;
+}
+
+/* Button grid */
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:20px;
-  padding:0 16px;
+  gap:24px;
 }
+
+/* Tiles */
 .tile{
-  background:rgba(255,255,255,.25);
-  backdrop-filter:blur(16px);
-  padding:28px;
-  border-radius:36px;
+  background:var(--card);
+  backdrop-filter:blur(18px);
+  border-radius:38px;
+  padding:36px 24px;
   text-align:center;
   cursor:pointer;
-  transition:.3s;
+  animation:float 6s ease-in-out infinite;
+  transition:transform .4s ease, box-shadow .4s ease;
 }
+
+/* Each tile floats slightly differently */
+.tile:nth-child(1){animation-delay:0s}
+.tile:nth-child(2){animation-delay:1.5s}
+.tile:nth-child(3){animation-delay:3s}
+.tile:nth-child(4){animation-delay:4.5s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.tile:active{
+  transform:scale(0.97);
+}
+
 .tile:hover{
-  transform:translateY(-6px);
+  box-shadow:0 26px 50px rgba(0,0,0,.18);
 }
+
+.title{
+  font-size:18px;
+  font-weight:700;
+}
+
+.sub{
+  font-size:13px;
+  opacity:.75;
+  margin-top:8px;
+}
+
+/* Footer */
 .footer{
+  margin-top:50px;
   text-align:center;
   font-size:12px;
-  opacity:.6;
+  opacity:.65;
 }
-a{color:inherit;text-decoration:none}
+.footer a{
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
+}
+.footer a:hover{text-decoration:underline}
 </style>
 </head>
+
 <body>
 
 <div class="header">
-  <strong>CC²</strong>
-  <button onclick="logout()">Log out</button>
+  <div class="logo">CC²</div>
 </div>
 
+<div class="wrap">
+
 <div class="grid">
-  <div class="tile" onclick="location.href='messages.html'">You’ve got post</div>
-  <div class="tile" onclick="location.href='connections.html'">Waves</div>
-  <div class="tile" onclick="location.href='browse.html'">Have a snoop</div>
-  <div class="tile" onclick="location.href='profilec.html'">All about me</div>
+  <div class="tile" onclick="location.href='messages.html'">
+    <div class="title">You’ve got post</div>
+    <div class="sub">Private one-to-one chats</div>
+  </div>
+
+  <div class="tile" onclick="location.href='connections.html'">
+    <div class="title">Waves</div>
+    <div class="sub">Gentle hellos & connections</div>
+  </div>
+
+  <div class="tile" onclick="location.href='browse.html'">
+    <div class="title">Have a snoop</div>
+    <div class="sub">Find people like you</div>
+  </div>
+
+  <div class="tile" onclick="location.href='profilec.html'">
+    <div class="title">All about me</div>
+    <div class="sub">Your CC² space</div>
+  </div>
 </div>
 
 <div class="footer">
   Made with love in Éire · <a href="safety.html">Safety & community</a>
 </div>
 
+</div>
+
 <script>
-if(!localStorage.cc2_logged_in) location.href="login.html";
-function logout(){
-  localStorage.removeItem("cc2_logged_in");
-  location.href="login.html";
+if(!localStorage.getItem("cc2_logged_in")){
+  window.location.href="login.html";
 }
 </script>
 
