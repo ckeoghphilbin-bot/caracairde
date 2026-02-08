@@ -9,10 +9,14 @@
 :root{
   --pink:#f2b6d9;
   --lav:#cdbdf6;
-  --peach:#f7c4b8;
   --mint:#c8e6df;
-  --card:#ffffff25;
+  --card:#ffffff22;
+  --soft:#ffffff55;
   --text:#2c2434;
+
+  /* Motion system */
+  --ease:cubic-bezier(.4,.0,.2,1);
+  --lift:translateY(-6px) scale(1.02);
 }
 
 *{
@@ -23,8 +27,14 @@
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,var(--pink),var(--lav));
+  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
   color:var(--text);
+  animation:breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe{
+  0%,100%{filter:saturate(1)}
+  50%{filter:saturate(1.05)}
 }
 
 /* Header */
@@ -45,61 +55,57 @@ body{
   border:none;
   font-weight:600;
   cursor:pointer;
-  color:var(--text);
 }
 
 /* Layout */
 .wrap{
   max-width:900px;
   margin:0 auto;
-  padding:10px 16px 50px;
+  padding:20px 16px 60px;
 }
 
-.cafe-btn{
-  width:100%;
-  padding:18px;
-  border-radius:30px;
-  border:none;
-  font-size:18px;
-  font-weight:700;
-  margin:14px 0 26px;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--peach),var(--lav));
-}
-
-/* Grid */
+/* Buttons grid */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
 }
 
-.card{
+/* Main buttons */
+.tile{
   background:var(--card);
-  backdrop-filter:blur(12px);
-  border-radius:28px;
-  padding:22px 18px;
+  backdrop-filter:blur(16px);
+  border-radius:36px;
+  padding:30px 20px;
   text-align:center;
   cursor:pointer;
-  transition:transform .15s ease;
+  transition:
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease);
 }
 
-.card:hover{
-  transform:scale(1.03);
+.tile:hover{
+  transform:var(--lift);
+  box-shadow:0 22px 44px rgba(0,0,0,.18);
 }
 
-.card span{
-  display:block;
-  margin-top:8px;
-  font-weight:600;
+.title{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.sub{
+  font-size:13px;
+  opacity:.75;
 }
 
 /* Footer */
-footer{
+.footer{
+  margin-top:40px;
   text-align:center;
   font-size:12px;
   opacity:.6;
-  margin-top:28px;
 }
 </style>
 </head>
@@ -113,48 +119,39 @@ footer{
 
 <div class="wrap">
 
-  <button class="cafe-btn" onclick="go('coffee-room.html')">
-    ☕ Enter Café
-  </button>
+<div class="grid">
 
-  <div class="grid">
-
-    <div class="card" onclick="go('messages.html')">
-      💌
-      <span>You’ve Got Post</span>
-    </div>
-
-    <div class="card" onclick="go('browse.html')">
-      👀
-      <span>Have a Snoop</span>
-    </div>
-
-    <div class="card" onclick="go('connections.html')">
-      👋
-      <span>Waves</span>
-    </div>
-
-    <div class="card" onclick="go('profilec.html')">
-      🧍
-      <span>All About Me</span>
-    </div>
-
+  <div class="tile" onclick="location.href='messages.html'">
+    <div class="title">You’ve got post</div>
+    <div class="sub">Private one-to-one chats</div>
   </div>
 
-  <footer>
-    Made with love in Éire 🇮🇪
-  </footer>
+  <div class="tile" onclick="location.href='connections.html'">
+    <div class="title">Waves</div>
+    <div class="sub">Gentle hellos & connections</div>
+  </div>
+
+  <div class="tile" onclick="location.href='browse.html'">
+    <div class="title">Have a snoop</div>
+    <div class="sub">Find people like you</div>
+  </div>
+
+  <div class="tile" onclick="location.href='profilec.html'">
+    <div class="title">All about me</div>
+    <div class="sub">Your CC² space</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Made with love in Éire
+</div>
 
 </div>
 
 <script>
-/* login protection */
 if(!localStorage.getItem("cc2_logged_in")){
   window.location.href="login.html";
-}
-
-function go(page){
-  window.location.href=page;
 }
 
 function logout(){
