@@ -1,120 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>CC² · Home</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CC² · The Café</title>
 
-<script>
-if(localStorage.getItem("cc2_logged_in") !== "true"){
-  window.location.href = "index.html";
-}
-</script>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f6b7d2, #cbb7ff, #b7e3e0);
+      min-height: 100vh;
+      color: #2b2b2b;
+    }
 
-<style>
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:linear-gradient(135deg,#f4b6d8,#c8b7f3,#bfe7e5);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      font-weight: 600;
+    }
 
-.wrapper{
-  width:92%;
-  max-width:520px;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(14px);
-  border-radius:32px;
-  padding:26px;
-  box-shadow:0 30px 80px rgba(0,0,0,0.15);
-}
+    .logo {
+      font-size: 22px;
+    }
 
-header{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:20px;
-}
+    .home-btn {
+      text-decoration: none;
+      background: rgba(255,255,255,0.35);
+      padding: 10px 16px;
+      border-radius: 18px;
+      color: #2b2b2b;
+      font-weight: 600;
+    }
 
-.brand{
-  font-size:22px;
-  font-weight:800;
-}
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-.logout{
-  font-size:13px;
-  cursor:pointer;
-  opacity:.7;
-}
+    .room-card {
+      background: rgba(255,255,255,0.35);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
 
-/* Café */
-.cafe{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  padding:16px;
-  border-radius:24px;
-  background:linear-gradient(135deg,#f2a6c9,#caa7ff);
-  font-weight:700;
-  cursor:pointer;
-  margin-bottom:22px;
-}
+    h1 {
+      margin-top: 0;
+      font-size: 26px;
+    }
 
-/* Grid */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
+    .chat-box {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 18px;
+      padding: 16px;
+      height: 300px;
+      overflow-y: auto;
+      font-size: 15px;
+    }
 
-.tile{
-  height:130px;
-  border-radius:26px;
-  background:rgba(255,255,255,0.45);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-  font-weight:700;
-  transition:transform .2s;
-}
+    .message {
+      margin-bottom: 10px;
+    }
 
-.tile:hover{transform:translateY(-3px)}
-</style>
+    .message strong {
+      color: #6b4eff;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 15px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border-radius: 14px;
+      border: none;
+      background: #6b4eff;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="wrapper">
-
 <header>
-  <div class="brand">CC²</div>
-  <div class="logout" onclick="logout()">Log out</div>
+  <div class="logo">☕ CC² Café</div>
+  <a class="home-btn" href="home.html">Home</a>
 </header>
 
-<!-- ENTER CAFÉ — THIS IS THE FIX -->
-<div class="cafe" onclick="location.href='coffee room.html'">
-  ☕ Enter Café
-</div>
+<div class="container">
+  <div class="room-card">
+    <h1>Welcome to the Café</h1>
+    <p>
+      This is a relaxed, live group space. Say hello, join the chat,
+      or just sit quietly with a virtual cuppa.
+    </p>
 
-<div class="grid">
-  <div class="tile" onclick="location.href='messages.html'">💌 You’ve Got Post</div>
-  <div class="tile" onclick="location.href='browse.html'">👀 Have a Snoop</div>
-  <div class="tile" onclick="location.href='connections.html'">👋 Waves</div>
-  <div class="tile" onclick="location.href='profilec.html'">🧍 All About Me</div>
-</div>
+    <div class="chat-box" id="chatBox">
+      <div class="message"><strong>James:</strong> Evening all 👋</div>
+      <div class="message"><strong>Aoife:</strong> Anyone else wrecked today?</div>
+    </div>
 
+    <div class="input-area">
+      <input type="text" id="chatInput" placeholder="Say something nice…" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
 </div>
 
 <script>
-function logout(){
-  localStorage.removeItem("cc2_logged_in");
-  window.location.href="index.html";
-}
+  function sendMessage() {
+    const input = document.getElementById("chatInput");
+    const box = document.getElementById("chatBox");
+
+    if (input.value.trim() === "") return;
+
+    const msg = document.createElement("div");
+    msg.className = "message";
+    msg.innerHTML = "<strong>You:</strong> " + input.value;
+
+    box.appendChild(msg);
+    box.scrollTop = box.scrollHeight;
+    input.value = "";
+  }
 </script>
 
 </body>
