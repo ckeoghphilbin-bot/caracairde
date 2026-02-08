@@ -1,132 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>CC² • Home</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- LOGIN GUARD -->
-<script>
-if (localStorage.getItem("cc2_logged_in") !== "yes") {
-  window.location.href = "login.html";
-}
-</script>
-
+<title>Home • CC²</title>
 <style>
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  background: radial-gradient(circle at top, #e6dbff, #c9b6f2);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  font-family:-apple-system;
+  background:linear-gradient(135deg,#b79cff,#f4b7d8);
 }
-
-.container{
-  width:95%;
-  max-width:420px;
-  background:#f1eaff;
-  border-radius:28px;
-  padding:24px;
-  box-shadow:0 25px 50px rgba(0,0,0,0.15);
-}
-
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-h1{
-  font-size:22px;
-  margin:0;
-}
-
-.logout{
-  background:#ff6b9c;
-  color:white;
-  border:none;
-  padding:10px 14px;
-  border-radius:14px;
-  font-size:14px;
-}
-
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-top:20px;
+  gap:20px;
+  max-width:700px;
+  margin:50px auto;
 }
-
-.tile{
-  background:linear-gradient(135deg,#bfa8ff,#8f7cff);
-  color:white;
-  height:120px;
-  border-radius:22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  font-size:15px;
+.btn{
+  background:#d8c7ff;
+  border-radius:30px;
+  padding:40px;
   text-align:center;
-  box-shadow:0 15px 30px rgba(0,0,0,0.2);
-  transition:transform .15s ease;
+  font-size:18px;
+  font-weight:600;
+  transition:.2s;
 }
-
-.tile:hover{
-  transform:scale(1.04);
-}
-
-.footer{
-  text-align:center;
-  font-size:12px;
-  color:#6b5fa6;
-  margin-top:20px;
-}
+.btn:hover{transform:scale(1.04)}
+a{text-decoration:none;color:#2b0f3a}
+footer{text-align:center;margin-top:40px;font-size:12px;color:#3d1c5a}
 </style>
+<script>
+if(!localStorage.getItem("cc2_logged_in")) location.href="login.html";
+</script>
 </head>
-
 <body>
 
-<div class="container">
-
-  <div class="header">
-    <h1>Welcome to CC² 💜</h1>
-    <button class="logout" onclick="logout()">Log out</button>
-  </div>
-
-  <div class="grid">
-    <div class="tile" onclick="window.location.href='coffee-room.html'">
-      ☕<br>Enter the Coffee Shop
-    </div>
-
-    <div class="tile" onclick="window.location.href='messages.html'">
-      💌<br>You’ve Got Post
-    </div>
-
-    <div class="tile" onclick="window.location.href='browse.html'">
-      👀<br>Have a Snoop
-    </div>
-
-    <div class="tile" onclick="window.location.href='profilec.html'">
-      ✨<br>All About Me
-    </div>
-  </div>
-
-  <div class="footer">
-    Made with love in Ireland 🇮🇪
-  </div>
-
+<div class="grid">
+<a class="btn" href="messages.html">💌 You’ve Got Post</a>
+<a class="btn" href="browse.html">👀 Have a Snoop</a>
+<a class="btn" href="connections.html">👋 Waves</a>
+<a class="btn" href="profilec.html">🧍 All About Me</a>
 </div>
 
-<script>
-function logout(){
-  localStorage.removeItem("cc2_logged_in");
-  window.location.href = "login.html";
-}
-</script>
-
+<footer>Made with love in Ireland 🇮🇪</footer>
 </body>
 </html>
