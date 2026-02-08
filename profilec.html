@@ -12,14 +12,15 @@ body{
   background:linear-gradient(180deg,#2a164f,#5a2ea6,#ff6fae);
   color:#f7f3ff;
 }
-.top{
-  padding:20px;
+.topbar{
+  padding:16px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
+a{color:#fff;text-decoration:none;font-weight:700}
 .container{
-  max-width:820px;
+  max-width:900px;
   margin:auto;
   padding:20px;
 }
@@ -33,46 +34,38 @@ body{
 .header{
   display:flex;
   justify-content:space-between;
+  gap:20px;
 }
 .avatar{
-  width:130px;
-  height:130px;
+  width:140px;
+  height:140px;
   border-radius:50%;
   object-fit:cover;
   background:#1f133f;
 }
-.section{margin-top:28px}
+.section{margin-top:30px}
 .tag{
   display:inline-block;
   padding:8px 16px;
   border-radius:999px;
-  background:rgba(255,255,255,.2);
+  background:rgba(255,255,255,.25);
   margin:6px;
 }
-button{
-  background:#1f133f;
-  color:#fff;
-  border:none;
-  border-radius:999px;
-  padding:14px 22px;
-  font-weight:800;
-  cursor:pointer;
-}
 .comment{
-  background:rgba(0,0,0,.25);
+  background:rgba(0,0,0,.3);
   padding:16px;
   border-radius:18px;
   margin-top:12px;
 }
-a{color:#fff;text-decoration:none;font-weight:700}
 </style>
 </head>
 
 <body>
 
-<div class="top">
-  <a href="index.html">Home</a>
-  <div>👋</div>
+<div class="topbar">
+  <a href="index.html">← Home</a>
+  <strong>CC² 💜</strong>
+  <span>👋</span>
 </div>
 
 <div class="container">
@@ -80,7 +73,7 @@ a{color:#fff;text-decoration:none;font-weight:700}
 <div class="card">
   <div class="header">
     <div>
-      <h1 id="name">Your name</h1>
+      <h1 id="name"></h1>
       <p id="location"></p>
       <a href="enhanceprofile.html">✨ Enhance my profile</a>
     </div>
@@ -111,14 +104,25 @@ a{color:#fff;text-decoration:none;font-weight:700}
 </div>
 
 <script>
-const d=JSON.parse(localStorage.getItem("cc2profile"))||{};
-name.innerText=d.name||"Your name";
-location.innerText=d.location||"";
-bio.innerText=d.bio||"";
-availability.innerText=d.availability||"";
-if(d.photo) photo.src=d.photo;
-(d.interests||[]).forEach(i=>interests.innerHTML+=`<span class="tag">${i}</span>`);
-(d.comments||[]).forEach(c=>comments.innerHTML+=`<div class="comment">${c}</div>`);
+const data = JSON.parse(localStorage.getItem("cc2profile"));
+
+if(!data){
+  document.getElementById("name").innerText = "Set up your profile ✨";
+}else{
+  name.innerText = data.name || "";
+  location.innerText = data.location || "";
+  bio.innerText = data.bio || "";
+  availability.innerText = data.availability || "";
+  if(data.photo) photo.src = data.photo;
+
+  (data.interests||[]).forEach(i=>{
+    interests.innerHTML += `<span class="tag">${i}</span>`;
+  });
+
+  (data.comments||[]).forEach(c=>{
+    comments.innerHTML += `<div class="comment">${c}</div>`;
+  });
+}
 </script>
 
 </body>
