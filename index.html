@@ -1,68 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CC²</title>
 
 <style>
+:root{
+  --bg1:#2b1b3f;
+  --bg2:#4a2f6f;
+  --bg3:#7b5c8f;
+  --surface:#5e4676;
+  --text:#f2eef7;
+}
+
+*{box-sizing:border-box}
+
 body{
   margin:0;
-  font-family:system-ui;
-  background:radial-gradient(circle at top, #ff6fae, #7a5cff, #1f133f);
-  color:#f7f3ff;
-}
-.wrapper{
   min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(1200px at 20% 10%, var(--bg3), transparent),
+    radial-gradient(1000px at 80% 90%, #8b6fa0, transparent),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
   display:flex;
-  flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
+
+.wrapper{
+  width:100%;
+  max-width:900px;
+  padding:48px 32px 32px;
+  text-align:center;
+}
+
 .logo{
-  font-size:38px;
-  font-weight:900;
-  margin-bottom:40px;
+  font-size:42px;
+  font-weight:800;
+  letter-spacing:0.08em;
+  margin-bottom:56px;
 }
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,160px);
-  gap:24px;
+  grid-template-columns:repeat(2,1fr);
+  gap:48px;
+  justify-items:center;
 }
-.card{
-  background:linear-gradient(145deg,#ff87c7,#9d7cff);
-  border-radius:28px;
-  padding:28px;
-  text-align:center;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
-  transition:.2s;
+
+.portal{
+  width:190px;
+  height:190px;
+  border-radius:42%;
+  background:linear-gradient(145deg,#6d528a,#8b6fa0);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:var(--text);
+  position:relative;
+  animation: breathe 9s ease-in-out infinite;
+  transition:
+    transform .28s cubic-bezier(.4,0,.2,1),
+    box-shadow .28s cubic-bezier(.4,0,.2,1);
 }
-.card:hover{transform:scale(1.05)}
+
+.portal span{
+  font-size:15px;
+  font-weight:600;
+  margin-top:12px;
+  opacity:.9;
+}
+
+.portal:hover{
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:
+    0 26px 60px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.portal:active{
+  transform:translateY(-2px) scale(.98);
+}
+
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.025)}
+}
+
 .footer{
-  margin-top:40px;
+  margin-top:56px;
   font-size:12px;
-  opacity:.7;
+  opacity:.65;
 }
-a{color:inherit;text-decoration:none}
 </style>
 </head>
 
 <body>
+
 <div class="wrapper">
 
-<div class="logo">CC²</div>
+  <div class="logo">CC²</div>
 
-<div class="grid">
-  <a href="browse.html"><div class="card">👀<br>Browse</div></a>
-  <a href="connections.html"><div class="card">👋<br>Waves</div></a>
-  <a href="#"><div class="card">💬<br>Chat Rooms</div></a>
-  <a href="profilec.html"><div class="card">🧍‍♀️<br>My Profile</div></a>
+  <div class="grid">
+    <a class="portal" href="coffee.html">
+      <span>Enter the Coffee Shop</span>
+    </a>
+
+    <a class="portal" href="messages.html">
+      <span>You’ve Got Post</span>
+    </a>
+
+    <a class="portal" href="browse.html">
+      <span>Have a Snoop</span>
+    </a>
+
+    <a class="portal" href="profilec.html">
+      <span>All About Me</span>
+    </a>
+  </div>
+
+  <div class="footer">
+    Made with love in Ireland
+  </div>
+
 </div>
 
-<div class="footer">Made with love in Ireland 🇮🇪</div>
-
-</div>
 </body>
 </html>
