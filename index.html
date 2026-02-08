@@ -30,13 +30,19 @@ body{
 header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  margin-bottom:28px;
+  align-items:flex-start;
+  margin-bottom:22px;
+}
+
+.brand-wrap{
+  display:flex;
+  flex-direction:column;
 }
 
 .brand{
   font-size:26px;
   font-weight:800;
+  line-height:1;
 }
 
 .brand span{
@@ -44,27 +50,35 @@ header{
   opacity:0.8;
 }
 
-.cc2{
-  font-weight:900;
-  font-size:22px;
-  animation: float 3s ease-in-out infinite;
+.tagline{
+  font-size:13px;
+  margin-top:6px;
+  opacity:0.85;
 }
 
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
+.field{
+  position:relative;
 }
 
 input{
   width:100%;
-  padding:14px 16px;
+  padding:14px 44px 14px 16px;
   margin-bottom:14px;
   border-radius:16px;
   border:none;
   font-size:16px;
   outline:none;
   background:rgba(255,255,255,0.65);
+}
+
+.eye{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:16px;
+  opacity:0.7;
 }
 
 button{
@@ -125,17 +139,25 @@ footer{
 <div class="card">
 
 <header>
-  <div class="brand">CC<span>²</span></div>
-  <div class="cc2">💜</div>
+  <div class="brand-wrap">
+    <div class="brand">CC<span>²</span></div>
+    <div class="tagline">Friendship squared</div>
+  </div>
 </header>
 
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
+<div class="field">
+  <input type="email" id="email" placeholder="Email">
+</div>
+
+<div class="field">
+  <input type="password" id="password" placeholder="Password">
+  <span class="eye" onclick="togglePassword()">👁</span>
+</div>
 
 <button onclick="login()">Log in</button>
 
 <div class="signup">
-  New here? <a href="signupcc.html">Sign up ✨</a>
+  <a href="signupcc.html">Quash your curiosity ✨</a>
 </div>
 
 <div class="faces">
@@ -152,6 +174,11 @@ footer{
 </div>
 
 <script>
+function togglePassword(){
+  const pw = document.getElementById("password");
+  pw.type = pw.type === "password" ? "text" : "password";
+}
+
 function login(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
