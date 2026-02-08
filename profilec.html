@@ -1,236 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CC² · All About Me</title>
-
+<title>My Profile • CC²</title>
 <style>
-:root{
-  --bg1:#241536;
-  --bg2:#3b235c;
-  --surface:#5a3b77;
-  --surface2:#6a4f86;
-  --text:#f2eef7;
-  --muted:rgba(242,238,247,.65);
-}
-
-*{box-sizing:border-box}
-
 body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(1200px at 20% 10%, #7b5c8f, transparent),
-    linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:var(--text);
+  background:linear-gradient(135deg,#b79cff,#f4b7d8);
+  font-family:-apple-system;
 }
-
-/* ---------- TOP BAR ---------- */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 28px;
+.card{
+  max-width:800px;
+  margin:30px auto;
+  background:#e6dcff;
+  padding:30px;
+  border-radius:26px;
 }
-
-.brand{
-  font-size:18px;
-  font-weight:800;
-  letter-spacing:.08em;
-}
-
-.topbar .right{
-  display:flex;
-  gap:14px;
-  align-items:center;
-}
-
-.topbar a, .topbar button{
-  font-size:13px;
-  color:var(--text);
-  background:#241536;
-  border:none;
-  border-radius:999px;
-  padding:10px 16px;
-  cursor:pointer;
-  text-decoration:none;
-  opacity:.9;
-}
-
-.topbar a:hover,
-.topbar button:hover{
-  opacity:1;
-}
-
-/* ---------- PAGE ---------- */
-.container{
-  max-width:1100px;
-  margin:0 auto;
-  padding:32px 28px 80px;
-}
-
-.section{
-  background:linear-gradient(145deg,var(--surface),var(--surface2));
-  border-radius:40px;
-  padding:36px 38px;
-  margin-bottom:36px;
-  box-shadow:
-    0 26px 60px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.08);
-}
-
-/* ---------- PROFILE HEADER ---------- */
-.header{
-  display:grid;
-  grid-template-columns:1fr 180px;
-  gap:36px;
-  align-items:start;
-}
-
-.info p{
-  margin:8px 0;
-  font-size:14px;
-  opacity:.9;
-}
-
-.photo{
-  width:180px;
-  height:180px;
-  border-radius:28px;
-  background:#241536;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
-  opacity:.7;
-}
-
-/* ---------- ABOUT ---------- */
-.about p{
-  font-size:15px;
-  line-height:1.7;
-  opacity:.95;
-}
-
-/* ---------- LOWER GRID ---------- */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:36px;
-}
-
-.tag{
-  display:inline-block;
-  padding:8px 14px;
-  border-radius:999px;
-  background:rgba(0,0,0,.25);
-  font-size:13px;
-  margin:6px 6px 0 0;
-}
-
-.comment{
-  background:rgba(0,0,0,.22);
-  padding:14px 16px;
-  border-radius:18px;
-  font-size:14px;
-  margin-bottom:12px;
-}
-
-/* ---------- FOOT ---------- */
-.actions{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.actions a{
-  text-decoration:none;
-  background:#241536;
-  color:var(--text);
-  padding:12px 20px;
-  border-radius:999px;
-  font-size:14px;
-}
+a{color:#5a2c91;font-weight:600;text-decoration:none}
 </style>
+<script>
+if(!localStorage.getItem("cc2_logged_in")) location.href="login.html";
+</script>
 </head>
-
 <body>
 
-<!-- LOGIN PROTECTION -->
-<script>
-if(localStorage.getItem("cc2_logged_in") !== "true"){
-  window.location.href = "login.html";
-}
-</script>
+<div class="card">
+<a href="index.html">Home</a> | <a href="editprofile.html">✨ Enhance my profile</a>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="brand">CC²</div>
-  <div class="right">
-    <a href="index.html">Home</a>
-    <button onclick="logout()">Log out</button>
-  </div>
+<h2 id="name"></h2>
+<p id="about"></p>
+<p><strong>Interests:</strong> <span id="interests"></span></p>
 </div>
 
-<div class="container">
-
-  <!-- PROFILE HEADER -->
-  <div class="section header">
-    <div class="info">
-      <p><strong>Hometown:</strong> Galway</p>
-      <p><strong>Gender:</strong> Prefer not to say</p>
-      <p><strong>Age range:</strong> Hidden</p>
-    </div>
-
-    <div class="photo">
-      Profile photo
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <div class="section about">
-    <h2>A bit about me</h2>
-    <p>
-      Easy-going, likes meaningful conversations and calm spaces.
-      Here for friendship without pressure or expectations.
-    </p>
-  </div>
-
-  <!-- LOWER -->
-  <div class="grid">
-
-    <div class="section">
-      <h3>Kind words</h3>
-      <div class="comment">You seem very sound!</div>
-      <div class="comment">Nice to see someone else into walking.</div>
-    </div>
-
-    <div class="section">
-      <h3>Interests</h3>
-      <span class="tag">Walking</span>
-      <span class="tag">Coffee</span>
-      <span class="tag">Books</span>
-      <span class="tag">Quiet chats</span>
-    </div>
-
-  </div>
-
-  <!-- ACTIONS -->
-  <div class="section actions">
-    <a href="enhanceprofile.html">Enhance my profile</a>
-    <span>👋</span>
-  </div>
-
-</div>
-
-<!-- LOGOUT -->
 <script>
-function logout(){
-  localStorage.removeItem("cc2_logged_in");
-  window.location.href = "login.html";
-}
+let p=JSON.parse(localStorage.getItem("cc2_profile")||"{}");
+name.textContent=p.name||"Your name";
+about.textContent=p.about||"";
+interests.textContent=p.interests||"";
 </script>
-
 </body>
 </html>
