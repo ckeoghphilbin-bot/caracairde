@@ -1,76 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Edit Profile – CC²</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial;
-      background: #f5efff;
-      padding: 20px;
-    }
-    .box {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #c9b6ff;
-      border: none;
-      padding: 12px;
-      border-radius: 20px;
-      width: 100%;
-      font-size: 16px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Enhance Profile • CC²</title>
+<style>
+body{
+  background:linear-gradient(135deg,#b79cff,#f4b7d8);
+  font-family:-apple-system;
+}
+.card{
+  max-width:750px;
+  margin:30px auto;
+  background:#e6dcff;
+  padding:30px;
+  border-radius:24px;
+}
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  margin-bottom:12px;
+}
+button{
+  background:#7b3fe4;
+  color:white;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+}
+</style>
 </head>
 <body>
+<div class="card">
+<h2>✨ Enhance My Profile</h2>
 
-<div class="box">
-  <h2>Edit Profile 💜</h2>
-
-  <input id="name" placeholder="Name">
-  <input id="location" placeholder="Country · County">
-  <textarea id="bio" placeholder="About me..."></textarea>
-
-  <input type="file" id="photo">
-
-  <button onclick="saveProfile()">Save Profile</button>
+<input id="name" placeholder="Your name">
+<textarea id="about" placeholder="A bit about you"></textarea>
+<input id="interests" placeholder="Interests (comma separated)">
+<button onclick="save()">Save Profile</button>
 </div>
 
 <script>
-function saveProfile() {
-  const reader = new FileReader();
-  const file = document.getElementById("photo").files[0];
-
-  const profile = {
+function save(){
+  localStorage.setItem("cc2_profile", JSON.stringify({
     name: name.value,
-    location: location.value,
-    bio: bio.value
-  };
-
-  if (file) {
-    reader.onload = () => {
-      profile.photo = reader.result;
-      localStorage.setItem("cc2profile", JSON.stringify(profile));
-      window.location.href = "profilec.html";
-    };
-    reader.readAsDataURL(file);
-  } else {
-    localStorage.setItem("cc2profile", JSON.stringify(profile));
-    window.location.href = "profilec.html";
-  }
+    about: about.value,
+    interests: interests.value
+  }));
+  location.href="profilec.html";
 }
 </script>
-
 </body>
 </html>
