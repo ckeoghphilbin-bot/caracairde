@@ -1,61 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Profile – CC²</title>
+<title>CC² · All About Me</title>
 
 <style>
+:root{
+  --bg1:#241536;
+  --bg2:#3b235c;
+  --surface:#5a3b77;
+  --surface2:#6a4f86;
+  --text:#f2eef7;
+  --muted:rgba(242,238,247,.65);
+}
+
+*{box-sizing:border-box}
+
 body{
   margin:0;
-  font-family:system-ui;
-  background:linear-gradient(180deg,#2a164f,#5a2ea6,#ff6fae);
-  color:#f7f3ff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(1200px at 20% 10%, #7b5c8f, transparent),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
 }
+
 .topbar{
-  padding:16px 20px;
+  padding:20px 28px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-a{color:#fff;text-decoration:none;font-weight:700}
+
+.topbar a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:14px;
+  opacity:.8;
+}
+
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
+  max-width:1000px;
+  margin:0 auto;
+  padding:20px 28px 60px;
 }
-.card{
-  background:linear-gradient(145deg,#ff5fa2,#7b5cff);
+
+.grid-top{
+  display:grid;
+  grid-template-columns:1fr 160px;
+  gap:28px;
+  margin-bottom:32px;
+}
+
+.info-card{
+  background:linear-gradient(145deg,var(--surface),var(--surface2));
+  border-radius:28px;
+  padding:22px 24px;
+}
+
+.info-card p{
+  margin:6px 0;
+  font-size:14px;
+  opacity:.9;
+}
+
+.photo{
+  width:160px;
+  height:160px;
+  border-radius:24px;
+  background:#241536;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  opacity:.7;
+}
+
+.about{
+  background:linear-gradient(145deg,var(--surface),var(--surface2));
   border-radius:36px;
-  padding:30px;
-  margin-bottom:30px;
-  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  padding:28px 30px;
+  margin-bottom:36px;
+  animation:breathe 10s ease-in-out infinite;
 }
-.header{
+
+.about h2{
+  margin:0 0 12px;
+  font-weight:600;
+}
+
+.about p{
+  margin:0;
+  line-height:1.7;
+  font-size:15px;
+  opacity:.92;
+}
+
+.grid-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+}
+
+.section{
+  background:linear-gradient(145deg,var(--surface),var(--surface2));
+  border-radius:32px;
+  padding:24px 26px;
+}
+
+.section h3{
+  margin:0 0 14px;
+  font-weight:600;
+}
+
+.comment{
+  background:rgba(0,0,0,.22);
+  padding:14px 16px;
+  border-radius:18px;
+  margin-bottom:12px;
+  font-size:14px;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.tag{
+  background:rgba(0,0,0,.25);
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:13px;
+}
+
+.footer-actions{
+  margin-top:36px;
   display:flex;
   justify-content:space-between;
-  gap:20px;
+  align-items:center;
 }
-.avatar{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#1f133f;
-}
-.section{margin-top:30px}
-.tag{
-  display:inline-block;
-  padding:8px 16px;
+
+button{
+  padding:12px 20px;
   border-radius:999px;
-  background:rgba(255,255,255,.25);
-  margin:6px;
+  border:none;
+  background:#241536;
+  color:var(--text);
+  font-size:14px;
+  cursor:pointer;
+  transition:
+    transform .25s cubic-bezier(.4,0,.2,1),
+    box-shadow .25s cubic-bezier(.4,0,.2,1);
 }
-.comment{
-  background:rgba(0,0,0,.3);
-  padding:16px;
-  border-radius:18px;
-  margin-top:12px;
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(0,0,0,.35);
+}
+
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.01)}
 }
 </style>
 </head>
@@ -64,66 +171,67 @@ a{color:#fff;text-decoration:none;font-weight:700}
 
 <div class="topbar">
   <a href="index.html">← Home</a>
-  <strong>CC² 💜</strong>
+  <span>CC² · All About Me</span>
   <span>👋</span>
 </div>
 
 <div class="container">
 
-<div class="card">
-  <div class="header">
-    <div>
-      <h1 id="name"></h1>
-      <p id="location"></p>
-      <a href="enhanceprofile.html">✨ Enhance my profile</a>
+  <!-- TOP -->
+  <div class="grid-top">
+    <div class="info-card">
+      <p><strong>Hometown:</strong> Galway</p>
+      <p><strong>Gender:</strong> Prefer not to say</p>
+      <p><strong>Age range:</strong> 30–35</p>
     </div>
-    <img id="photo" class="avatar">
+
+    <div class="photo">
+      Profile photo
+    </div>
   </div>
 
-  <div class="section">
-    <h3>About me</h3>
-    <p id="bio"></p>
+  <!-- ABOUT -->
+  <div class="about">
+    <h2>A bit about me</h2>
+    <p>
+      Easy-going, enjoys meaningful chats and quiet routines.
+      Here for genuine connections without pressure.
+    </p>
   </div>
 
-  <div class="section">
-    <h3>Things I’m into</h3>
-    <div id="interests"></div>
+  <!-- BOTTOM -->
+  <div class="grid-bottom">
+
+    <!-- COMMENTS -->
+    <div class="section">
+      <h3>Say hello 👋</h3>
+
+      <div class="comment">Hi, you seem lovely!</div>
+      <div class="comment">Nice to see someone else into walking.</div>
+
+      <button>Report</button>
+    </div>
+
+    <!-- INTERESTS -->
+    <div class="section">
+      <h3>Interests</h3>
+
+      <div class="tags">
+        <div class="tag">Walking</div>
+        <div class="tag">Coffee</div>
+        <div class="tag">Books</div>
+        <div class="tag">Music</div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="section">
-    <h3>Connection style</h3>
-    <p id="availability"></p>
+  <div class="footer-actions">
+    <button onclick="location.href='enhanceprofile.html'">Enhance my profile</button>
+    <span></span>
   </div>
+
 </div>
-
-<div class="card">
-  <h3>Kind words only 💜</h3>
-  <div id="comments"></div>
-</div>
-
-</div>
-
-<script>
-const data = JSON.parse(localStorage.getItem("cc2profile"));
-
-if(!data){
-  document.getElementById("name").innerText = "Set up your profile ✨";
-}else{
-  name.innerText = data.name || "";
-  location.innerText = data.location || "";
-  bio.innerText = data.bio || "";
-  availability.innerText = data.availability || "";
-  if(data.photo) photo.src = data.photo;
-
-  (data.interests||[]).forEach(i=>{
-    interests.innerHTML += `<span class="tag">${i}</span>`;
-  });
-
-  (data.comments||[]).forEach(c=>{
-    comments.innerHTML += `<div class="comment">${c}</div>`;
-  });
-}
-</script>
 
 </body>
 </html>
