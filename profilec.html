@@ -2,140 +2,301 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>CC² · My Profile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CC² — My Profile</title>
-
-<script>
-if(localStorage.getItem("cc2_logged_in") !== "true"){
-  window.location.href = "index.html";
-}
-</script>
 
 <style>
+:root{
+  --pink:#f2b6d9;
+  --lav:#cdbdf6;
+  --mint:#c8e6df;
+  --card:#ffffff25;
+  --soft:#ffffff55;
+  --text:#2c2434;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
 body{
   margin:0;
   min-height:100vh;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:linear-gradient(135deg,#c9b6ff,#f3b7d8,#bfe8e6);
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  color:#2b2b2b;
+  background:linear-gradient(135deg,var(--pink),var(--lav),var(--mint));
+  color:var(--text);
 }
 
-.wrapper{
-  width:95%;
-  max-width:900px;
-  margin:30px 0;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(14px);
-  border-radius:36px;
-  padding:28px;
-  box-shadow:0 30px 80px rgba(0,0,0,0.15);
-}
-
-header{
+/* Header */
+.header{
   display:flex;
   justify-content:space-between;
-  margin-bottom:22px;
+  align-items:center;
+  padding:18px 22px;
 }
 
-.brand{
+.logo{
   font-size:22px;
   font-weight:800;
 }
 
-.home{
-  font-size:13px;
-  cursor:pointer;
-  opacity:.75;
+.header a{
+  text-decoration:none;
+  font-weight:600;
+  color:var(--text);
 }
 
-select, textarea{
+/* Layout */
+.wrap{
+  max-width:900px;
+  margin:0 auto;
+  padding:10px 16px 60px;
+}
+
+.card{
+  background:var(--card);
+  backdrop-filter:blur(14px);
+  border-radius:34px;
+  padding:26px;
+  margin-bottom:24px;
+}
+
+/* Top section */
+.top{
+  display:grid;
+  grid-template-columns:1fr 180px;
+  gap:20px;
+}
+
+.avatar{
+  width:180px;
+  height:180px;
+  border-radius:28px;
+  background:var(--soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  text-align:center;
+  overflow:hidden;
+}
+
+.avatar img{
   width:100%;
-  padding:14px;
-  border-radius:18px;
+  height:100%;
+  object-fit:cover;
+}
+
+input[type=file]{
+  margin-top:10px;
+  font-size:12px;
+}
+
+/* Sections */
+h2{
+  margin-top:0;
+  font-size:22px;
+}
+
+textarea{
+  width:100%;
   border:none;
-  background:rgba(255,255,255,0.65);
-  margin-bottom:14px;
+  border-radius:20px;
+  padding:16px;
+  min-height:120px;
+  background:var(--soft);
+  resize:none;
   font-size:15px;
+}
+
+select, input[type=text]{
+  width:100%;
+  border:none;
+  border-radius:18px;
+  padding:14px;
+  background:var(--soft);
+  font-size:15px;
+}
+
+/* Interests */
+.interests{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+
+.interests label{
+  background:var(--soft);
+  padding:12px;
+  border-radius:18px;
+  font-size:14px;
+}
+
+/* Comments */
+.comment-box{
+  background:var(--soft);
+  border-radius:20px;
+  padding:14px;
+  margin-top:10px;
+}
+
+.comment{
+  margin-bottom:10px;
+  font-size:14px;
+}
+
+/* Save */
+.save-btn{
+  width:100%;
+  padding:18px;
+  border-radius:30px;
+  border:none;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--pink),var(--lav));
+}
+
+/* Footer note */
+.note{
+  text-align:center;
+  font-size:12px;
+  opacity:.65;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrapper">
+<div class="header">
+  <div class="logo">CC²</div>
+  <a href="home.html">Home</a>
+</div>
 
-<header>
-  <div class="brand">CC²</div>
-  <div class="home" onclick="location.href='home.html'">Home</div>
-</header>
+<div class="wrap">
 
-<h3>A bit about me</h3>
-<textarea id="about" placeholder="Share as much or as little as you like…"></textarea>
+<!-- TOP -->
+<div class="card top">
+  <div>
+    <h2>A bit about me</h2>
+    <textarea id="about" placeholder="Share as much or as little as you like…"></textarea>
+  </div>
 
-<h3>Location</h3>
-<select id="country" onchange="updateCounties()">
-  <option value="">Select country</option>
-  <option value="ireland">Ireland</option>
-  <option value="uk">United Kingdom</option>
-</select>
+  <div>
+    <div class="avatar" id="avatarBox">
+      <span>Profile photo<br>(optional)</span>
+    </div>
+    <input type="file" accept="image/*" onchange="loadPhoto(event)">
+  </div>
+</div>
 
-<select id="county">
-  <option>Select county / area</option>
-</select>
+<!-- LOCATION -->
+<div class="card">
+  <h2>Location</h2>
+  <select id="country" onchange="updateCounties()">
+    <option value="">Select country</option>
+    <option value="ireland">Ireland</option>
+    <option value="uk">United Kingdom</option>
+  </select>
+  <br><br>
+  <select id="county">
+    <option value="">Select county / area</option>
+  </select>
+</div>
 
-<button onclick="saveProfile()">Enhance my profile</button>
+<!-- AVAILABILITY -->
+<div class="card">
+  <h2>Availability</h2>
+  <select id="availability">
+    <option>Online friendships</option>
+    <option>Meet ups</option>
+    <option>Both</option>
+  </select>
+</div>
+
+<!-- INTERESTS -->
+<div class="card">
+  <h2>Interests (required)</h2>
+  <div class="interests">
+    <label><input type="checkbox"> Coffee chats</label>
+    <label><input type="checkbox"> Walking</label>
+    <label><input type="checkbox"> Parenting</label>
+    <label><input type="checkbox"> Music</label>
+    <label><input type="checkbox"> Books</label>
+    <label><input type="checkbox"> Neurodiversity</label>
+    <label><input type="checkbox"> Creativity</label>
+    <label><input type="checkbox"> Fitness</label>
+  </div>
+</div>
+
+<!-- COMMENTS -->
+<div class="card">
+  <h2>Say hello</h2>
+  <input type="text" placeholder="Leave something kind…">
+  <div class="comment-box">
+    <div class="comment">👋 Welcome to CC²</div>
+  </div>
+</div>
+
+<button class="save-btn" onclick="saveProfile()">Enhance my profile</button>
+<div class="note">Profiles save automatically on this device</div>
 
 </div>
 
 <script>
-const counties = {
-  ireland: [
-    "Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal",
-    "Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny",
-    "Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath",
-    "Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone",
-    "Waterford","Westmeath","Wexford","Wicklow"
-  ],
-  uk: [
-    "London","Manchester","Birmingham","Leeds","Liverpool","Bristol",
-    "Brighton","Nottingham","Sheffield",
-    "Glasgow","Edinburgh","Aberdeen","Dundee",
-    "Cardiff","Swansea","Newport",
-    "Belfast","Derry","Lisburn"
-  ]
+/* login guard */
+if(!localStorage.getItem("cc2_logged_in")){
+  window.location.href="login.html";
+}
+
+/* Photo */
+function loadPhoto(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    avatarBox.innerHTML=`<img src="${reader.result}">`;
+    localStorage.avatar=reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* Country logic */
+const counties={
+  ireland:["Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"],
+  uk:["London","Manchester","Birmingham","Leeds","Liverpool","Bristol","Brighton","Glasgow","Edinburgh","Cardiff","Belfast"]
 };
 
 function updateCounties(){
-  const country = document.getElementById("country").value;
-  const countySelect = document.getElementById("county");
-  countySelect.innerHTML = "<option>Select county / area</option>";
-
-  if(!counties[country]) return;
-
-  counties[country].forEach(c => {
-    const opt = document.createElement("option");
-    opt.textContent = c;
-    countySelect.appendChild(opt);
+  county.innerHTML='<option value="">Select county / area</option>';
+  const list=counties[country.value]||[];
+  list.forEach(c=>{
+    const o=document.createElement("option");
+    o.textContent=c;
+    county.appendChild(o);
   });
 }
 
+/* Save */
 function saveProfile(){
-  localStorage.about = about.value;
-  localStorage.country = country.value;
-  localStorage.county = county.value;
+  localStorage.about=about.value;
+  localStorage.country=country.value;
+  localStorage.county=county.value;
+  localStorage.availability=availability.value;
   alert("Profile saved ✨");
 }
 
-window.onload = () => {
-  if(localStorage.about) about.value = localStorage.about;
+/* Load */
+window.onload=()=>{
+  if(localStorage.about) about.value=localStorage.about;
+  if(localStorage.avatar) avatarBox.innerHTML=`<img src="${localStorage.avatar}">`;
   if(localStorage.country){
-    country.value = localStorage.country;
+    country.value=localStorage.country;
     updateCounties();
-    county.value = localStorage.county || "";
+    county.value=localStorage.county||"";
   }
+  if(localStorage.availability) availability.value=localStorage.availability;
 };
 </script>
 
