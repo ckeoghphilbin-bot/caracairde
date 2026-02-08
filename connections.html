@@ -51,8 +51,14 @@ body{
 }
 
 .section h2{
-  margin:0 0 18px;
+  margin:0 0 10px;
   font-weight:600;
+}
+
+.helper{
+  font-size:13px;
+  opacity:.6;
+  margin-bottom:18px;
 }
 
 .card{
@@ -63,16 +69,12 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.08);
-  animation:breathe 10s ease-in-out infinite;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
 .card p{
   margin:0;
   font-size:14px;
-  opacity:.9;
 }
 
 .actions{
@@ -88,24 +90,11 @@ button{
   color:var(--text);
   font-size:13px;
   cursor:pointer;
-  transition:
-    transform .25s cubic-bezier(.4,0,.2,1),
-    box-shadow .25s cubic-bezier(.4,0,.2,1);
 }
 
-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 22px rgba(0,0,0,.35);
-}
-
-.muted{
-  opacity:.6;
+.status{
   font-size:13px;
-}
-
-@keyframes breathe{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.01)}
+  opacity:.7;
 }
 </style>
 </head>
@@ -120,24 +109,28 @@ button:hover{
 
 <div class="container">
 
-  <!-- INCOMING -->
+  <!-- INCOMING WAVES -->
   <div class="section">
     <h2>Incoming waves</h2>
+    <div class="helper">
+      A wave just means “open to connect”. Nothing more.
+    </div>
     <div id="incoming"></div>
-    <p class="muted">Only you can see these.</p>
   </div>
 
   <!-- CONNECTIONS -->
   <div class="section">
     <h2>Connections</h2>
+    <div class="helper">
+      These only appear once a wave is returned.
+    </div>
     <div id="connections"></div>
-    <p class="muted">These are mutual and private.</p>
   </div>
 
 </div>
 
 <script>
-/* --- MOCK DATA FOR MVP --- */
+/* --- INITIALISE STORAGE IF EMPTY --- */
 if(!localStorage.getItem("cc2_incoming")){
   localStorage.setItem("cc2_incoming", JSON.stringify([
     "James · Leeds",
@@ -158,37 +151,51 @@ function render(){
   const incoming = JSON.parse(localStorage.getItem("cc2_incoming"));
   const connections = JSON.parse(localStorage.getItem("cc2_connections"));
 
+  // Incoming waves
   incoming.forEach((name,i)=>{
     const d=document.createElement("div");
     d.className="card";
     d.innerHTML=`
       <p>${name}</p>
       <div class="actions">
-        <button onclick="accept(${i})">Accept</button>
-        <button onclick="dismiss(${i})">Dismiss</button>
+        <button onclick="returnWave(${i})">👋 Return wave</button>
+        <button onclick="letPass(${i})">Let it pass</button>
       </div>`;
     incomingEl.appendChild(d);
   });
 
+  if(incoming.length === 0){
+    incomingEl.innerHTML = `<div class="status">No waves waiting.</div>`;
+  }
+
+  // Connections
   connections.forEach(name=>{
     const d=document.createElement("div");
     d.className="card";
-    d.innerHTML=`<p>${name}</p>`;
+    d.innerHTML=`
+      <p>${name}</p>
+      <div class="status">Connected</div>`;
     connectionsEl.appendChild(d);
   });
+
+  if(connections.length === 0){
+    connectionsEl.innerHTML = `<div class="status">No connections yet.</div>`;
+  }
 }
 
-function accept(i){
+function returnWave(i){
   const incoming = JSON.parse(localStorage.getItem("cc2_incoming"));
   const connections = JSON.parse(localStorage.getItem("cc2_connections"));
-  connections.push(incoming[i]);
+
+  connections.push(incoming[i]); // mutual wave → connection
   incoming.splice(i,1);
+
   localStorage.setItem("cc2_incoming",JSON.stringify(incoming));
   localStorage.setItem("cc2_connections",JSON.stringify(connections));
   render();
 }
 
-function dismiss(i){
+function letPass(i){
   const incoming = JSON.parse(localStorage.getItem("cc2_incoming"));
   incoming.splice(i,1);
   localStorage.setItem("cc2_incoming",JSON.stringify(incoming));
