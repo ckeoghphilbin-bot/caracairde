@@ -10,7 +10,6 @@ if(localStorage.getItem("cc2_logged_in") !== "true"){
   window.location.href = "index.html";
 }
 
-/* Demo notification counts */
 if(!localStorage.waves) localStorage.waves = 1;
 if(!localStorage.messages) localStorage.messages = 2;
 </script>
@@ -35,12 +34,12 @@ body{
   border-radius:32px;
   padding:26px;
   box-shadow:0 30px 80px rgba(0,0,0,0.15);
+  position:relative;
 }
 
 header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   margin-bottom:18px;
 }
 
@@ -49,17 +48,53 @@ header{
   font-weight:800;
 }
 
-.brand span{font-size:14px;opacity:.7}
-
 .logout{
   font-size:13px;
   cursor:pointer;
   opacity:.75;
 }
 
-/* Café button */
+/* Walkthrough */
+.walkthrough{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:32px;
+}
+
+.walk-card{
+  background:rgba(255,255,255,0.9);
+  border-radius:26px;
+  padding:26px;
+  max-width:360px;
+  text-align:left;
+}
+
+.walk-card h3{
+  margin-top:0;
+}
+
+.walk-card p{
+  font-size:14px;
+  margin:10px 0;
+}
+
+.walk-card button{
+  margin-top:14px;
+  padding:12px 18px;
+  border-radius:18px;
+  border:none;
+  background:linear-gradient(135deg,#9b7dff,#f39acb);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* Café */
 .cafe{
-  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -69,32 +104,12 @@ header{
   border-radius:22px;
   background:linear-gradient(135deg,#f3a6cf,#caa7ff);
   cursor:pointer;
-  box-shadow:0 16px 36px rgba(0,0,0,0.18);
-  transition:transform .2s, box-shadow .2s;
-}
-
-.cafe:hover{
-  transform:translateY(-3px);
-  box-shadow:0 22px 46px rgba(0,0,0,0.22);
 }
 
 .cafe-icon{
   font-size:26px;
-  animation:steam 2.8s ease-in-out infinite;
 }
 
-@keyframes steam{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
-  100%{transform:translateY(0)}
-}
-
-.cafe-text{
-  font-size:16px;
-  font-weight:700;
-}
-
-/* Grid */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -105,50 +120,23 @@ header{
   position:relative;
   height:135px;
   border-radius:28px;
-  background:linear-gradient(
-    135deg,
-    rgba(255,255,255,0.55),
-    rgba(255,255,255,0.25)
-  );
+  background:rgba(255,255,255,0.45);
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   cursor:pointer;
-  transition:transform .2s, box-shadow .2s;
 }
 
-.tile:hover{
-  transform:translateY(-4px);
-  box-shadow:0 16px 40px rgba(0,0,0,0.18);
-}
-
-.icon{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.label{
-  font-size:15px;
-  font-weight:700;
-}
-
-/* Notification badge */
 .badge{
   position:absolute;
   top:14px;
   right:14px;
-  min-width:22px;
-  height:22px;
-  padding:0 6px;
   background:#ff5c8a;
   color:white;
   border-radius:999px;
+  padding:2px 8px;
   font-size:12px;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
 footer{
@@ -165,90 +153,58 @@ footer{
 <div class="wrapper">
 
 <header>
-  <div class="brand">CC<span>²</span></div>
+  <div class="brand">CC²</div>
   <div class="logout" onclick="logout()">Log out</div>
 </header>
 
-<!-- Café -->
 <div class="cafe" onclick="go('coffee-room.html')">
-  <div class="cafe-icon">☕</div>
-  <div class="cafe-text">Enter Café</div>
+  ☕ Enter Café
 </div>
 
 <div class="grid">
-
-  <!-- Messages -->
-  <div class="tile" onclick="openMessages()">
-    <div class="icon">💌</div>
-    <div class="label">You’ve Got Post</div>
-    <div class="badge" id="msgBadge"></div>
-  </div>
-
-  <!-- Browse -->
-  <div class="tile" onclick="go('browse.html')">
-    <div class="icon">👀</div>
-    <div class="label">Have a Snoop</div>
-  </div>
-
-  <!-- Waves -->
-  <div class="tile" onclick="openWaves()">
-    <div class="icon">👋</div>
-    <div class="label">Waves</div>
-    <div class="badge" id="waveBadge"></div>
-  </div>
-
-  <!-- Profile -->
-  <div class="tile" onclick="go('profilec.html')">
-    <div class="icon">🧍</div>
-    <div class="label">All About Me</div>
-  </div>
-
+  <div class="tile" onclick="openMessages()">💌 You’ve Got Post <div class="badge" id="msgBadge"></div></div>
+  <div class="tile" onclick="go('browse.html')">👀 Have a Snoop</div>
+  <div class="tile" onclick="openWaves()">👋 Waves <div class="badge" id="waveBadge"></div></div>
+  <div class="tile" onclick="go('profilec.html')">🧍 All About Me</div>
 </div>
 
-<footer>
-  Made with love in Éire 🇮🇪
-</footer>
+<footer>Made with love in Éire 🇮🇪</footer>
+
+<!-- Walkthrough -->
+<div class="walkthrough" id="walkthrough">
+  <div class="walk-card">
+    <h3>Welcome to CC²</h3>
+    <p>CC² is built for friendship — no dating, no pressure.</p>
+    <p>Start with a <strong>Wave 👋</strong>. If it’s waved back, messaging opens.</p>
+    <p>The <strong>Café ☕</strong> is for easy group chat — it’s fine to just listen.</p>
+    <p><em>Take your time. You don’t owe anyone a reply.</em></p>
+    <button onclick="closeWalkthrough()">Got it ✨</button>
+  </div>
+</div>
 
 </div>
 
 <script>
-function go(page){
-  window.location.href = page;
+function go(p){location.href=p}
+function logout(){localStorage.removeItem("cc2_logged_in");location.href="index.html"}
+function openWaves(){localStorage.waves=0;location.href="connections.html"}
+function openMessages(){localStorage.messages=0;location.href="messages.html"}
+
+function closeWalkthrough(){
+  localStorage.cc2_seen_walkthrough = "true";
+  document.getElementById("walkthrough").style.display="none";
 }
 
-function logout(){
-  localStorage.removeItem("cc2_logged_in");
-  window.location.href = "index.html";
+if(localStorage.cc2_seen_walkthrough){
+  document.getElementById("walkthrough").style.display="none";
 }
 
-function openWaves(){
-  localStorage.waves = 0;
-  window.location.href = "connections.html";
-}
-
-function openMessages(){
-  localStorage.messages = 0;
-  window.location.href = "messages.html";
-}
-
-/* Badge logic */
 function refreshBadges(){
-  const w = Number(localStorage.waves);
-  const m = Number(localStorage.messages);
-
-  if(w > 0){
-    waveBadge.textContent = w;
-  } else {
-    waveBadge.style.display = "none";
-  }
-
-  if(m > 0){
-    msgBadge.textContent = m;
-  } else {
-    msgBadge.style.display = "none";
-  }
+  if(localStorage.waves>0) waveBadge.textContent=localStorage.waves;
+  else waveBadge.style.display="none";
+  if(localStorage.messages>0) msgBadge.textContent=localStorage.messages;
+  else msgBadge.style.display="none";
 }
-
 refreshBadges();
 </script>
 
