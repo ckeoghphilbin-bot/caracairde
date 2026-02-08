@@ -1,114 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>CC² — Log in</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>CC² · Log in</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #f2c6ff, #b28cff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #2d1b3f;
-    }
+<style>
+:root{
+  --bg1:#2b1b3f;
+  --bg2:#4a2f6f;
+  --bg3:#7b5c8f;
+  --text:#2d1b3f;
+}
 
-    .card {
-      background: rgba(255,255,255,0.96);
-      border-radius: 26px;
-      padding: 36px 28px;
-      width: 90%;
-      max-width: 380px;
-      text-align: center;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at top, #ffb7d5, #c7b7ff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--text);
+}
 
-    h1 {
-      font-size: 26px;
-      margin-bottom: 8px;
-    }
+.card{
+  background:rgba(255,255,255,0.96);
+  border-radius:24px;
+  padding:40px 30px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
 
-    p {
-      font-size: 14px;
-      opacity: 0.85;
-      margin-bottom: 22px;
-    }
+h1{
+  font-size:30px;
+  margin-bottom:10px;
+}
 
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 14px;
-      border-radius: 14px;
-      border: 1px solid #ddd;
-      font-size: 15px;
-    }
+p{
+  font-size:15px;
+  opacity:.85;
+  margin-bottom:28px;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 18px;
-      border: none;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(135deg, #ff9acb, #c77dff);
-      color: white;
-      margin-top: 6px;
-    }
+input{
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:16px;
+  border:1px solid #ddd;
+  font-size:15px;
+}
 
-    .signup {
-      margin-top: 16px;
-      font-size: 14px;
-    }
+button{
+  width:100%;
+  padding:16px;
+  border-radius:18px;
+  border:none;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(135deg,#b388ff,#8c6cff);
+  color:white;
+}
 
-    .signup a {
-      color: #7a4fff;
-      font-weight: 600;
-      text-decoration: none;
-    }
-  </style>
+.link{
+  margin-top:18px;
+  font-size:14px;
+}
+
+.link a{
+  color:#7a4fff;
+  font-weight:600;
+  text-decoration:none;
+}
+</style>
 </head>
 
 <body>
-  <div class="card">
-    <h1>Welcome back 💜</h1>
-    <p>Log in to CC²</p>
 
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+<div class="card">
+  <h1>Welcome back 💜</h1>
+  <p>Log in to CC²</p>
 
-    <button onclick="login()">Log in</button>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
-    <div class="signup">
-      New here? <a href="signupcc.html">Create an account ✨</a>
-    </div>
+  <button onclick="login()">Log in</button>
+
+  <div class="link">
+    New here? <a href="signupcc.html">Create an account</a>
   </div>
+</div>
 
-  <script>
-    // If already logged in, skip this page
-    if (localStorage.getItem("cc2_logged_in")) {
-      window.location.href = "home.html";
-    }
+<script>
+function login(){
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-    function login() {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+  if(!email || !password){
+    alert("Please enter email and password");
+    return;
+  }
 
-      if (!email || !password) {
-        alert("Please enter email and password");
-        return;
-      }
+  localStorage.setItem("cc2_logged_in","true");
+  window.location.href = "home.html";
+}
+</script>
 
-      // Simulated login success
-      localStorage.setItem("cc2_logged_in", "true");
-      localStorage.setItem("cc2_user_email", email);
-
-      window.location.href = "home.html";
-    }
-  </script>
 </body>
 </html>
