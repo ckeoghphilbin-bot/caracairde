@@ -13,7 +13,6 @@
   --card:#ffffff22;
   --soft:#ffffff55;
   --text:#2c2434;
-  --accent:#e6c7ff;
 }
 
 *{
@@ -28,7 +27,6 @@ body{
   color:var(--text);
 }
 
-/* Header */
 .header{
   display:flex;
   justify-content:space-between;
@@ -47,89 +45,29 @@ body{
   color:var(--text);
 }
 
-/* Layout */
 .wrap{
   max-width:900px;
   margin:0 auto;
   padding:10px 16px 60px;
 }
 
-/* Intro */
-.intro{
-  background:var(--card);
-  backdrop-filter:blur(14px);
-  border-radius:28px;
-  padding:18px 22px;
-  margin-bottom:20px;
-  font-size:14px;
-}
-
-/* Inbox */
 .inbox{
   display:flex;
   flex-direction:column;
   gap:14px;
 }
 
-/* Thread */
 .thread{
   background:var(--card);
   backdrop-filter:blur(14px);
   border-radius:26px;
   padding:18px;
-  display:flex;
-  align-items:center;
-  gap:16px;
   cursor:pointer;
-  transition:transform .2s ease;
-}
-
-.thread:hover{
-  transform:translateY(-3px);
-}
-
-/* Mail swirl icon */
-.mail{
-  width:44px;
-  height:32px;
-  position:relative;
-}
-
-.mail::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:8px;
-  background:rgba(255,255,255,0.5);
-}
-
-.mail::after{
-  content:"";
-  position:absolute;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  border:3px solid var(--accent);
-  top:6px;
-  left:13px;
-  border-color:var(--accent) transparent transparent transparent;
-  animation:spin 3s linear infinite;
-}
-
-@keyframes spin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-
-.name{
   font-weight:700;
-  font-size:16px;
 }
 
-/* Chat */
 .chat{
   display:none;
-  flex-direction:column;
   background:var(--card);
   backdrop-filter:blur(14px);
   border-radius:26px;
@@ -140,22 +78,20 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:12px;
-  font-weight:700;
+  margin-bottom:10px;
 }
 
-.back{
-  font-size:13px;
+.report{
+  font-size:12px;
+  opacity:.6;
   cursor:pointer;
-  opacity:.75;
 }
 
 .chat-box{
   background:var(--soft);
   border-radius:20px;
   padding:14px;
-  min-height:260px;
-  overflow-y:auto;
+  min-height:240px;
   margin-bottom:12px;
 }
 
@@ -167,12 +103,6 @@ body{
   max-width:75%;
 }
 
-.msg.you{
-  margin-left:auto;
-  background:#e9dcff;
-}
-
-/* Input */
 .input-row{
   display:flex;
   gap:10px;
@@ -183,7 +113,6 @@ body{
   border:none;
   border-radius:18px;
   padding:12px 14px;
-  font-size:15px;
 }
 
 .input-row button{
@@ -191,7 +120,6 @@ body{
   border-radius:18px;
   padding:12px 18px;
   font-weight:600;
-  cursor:pointer;
   background:linear-gradient(135deg,var(--pink),var(--lav));
 }
 </style>
@@ -206,32 +134,15 @@ body{
 
 <div class="wrap">
 
-<div class="intro">
-  Messages open only after both people wave back.  
-  Click a name to read.
-</div>
-
-<!-- INBOX -->
 <div id="inbox" class="inbox">
-
-  <div class="thread" onclick="openChat('James')">
-    <div class="mail"></div>
-    <div class="name">James</div>
-  </div>
-
-  <div class="thread" onclick="openChat('Aoife')">
-    <div class="mail"></div>
-    <div class="name">Aoife</div>
-  </div>
-
+  <div class="thread" onclick="openChat('James')">James</div>
 </div>
 
-<!-- CHAT -->
 <div id="chat" class="chat">
 
   <div class="chat-header">
     <div id="chatName"></div>
-    <div class="back" onclick="backToInbox()">← Back</div>
+    <div class="report" onclick="reportChat()">Report conversation</div>
   </div>
 
   <div class="chat-box" id="chatBox">
@@ -254,26 +165,23 @@ if(!localStorage.getItem("cc2_logged_in")){
 
 function openChat(name){
   inbox.style.display="none";
-  chat.style.display="flex";
+  chat.style.display="block";
   chatName.textContent=name;
 }
 
-function backToInbox(){
-  chat.style.display="none";
-  inbox.style.display="flex";
+function sendMsg(){
+  if(!msgInput.value.trim()) return;
+  const m=document.createElement("div");
+  m.className="msg";
+  m.textContent=msgInput.value;
+  chatBox.appendChild(m);
+  msgInput.value="";
 }
 
-function sendMsg(){
-  const input=document.getElementById("msgInput");
-  if(!input.value.trim()) return;
-
-  const msg=document.createElement("div");
-  msg.className="msg you";
-  msg.textContent=input.value;
-
-  chatBox.appendChild(msg);
-  input.value="";
-  chatBox.scrollTop=9999;
+function reportChat(){
+  if(confirm("Report this conversation for review?")){
+    alert("Thank you. We’ll review this discreetly.");
+  }
 }
 </script>
 
