@@ -35,9 +35,7 @@ body{
 }
 
 /* LOGIN GUARD */
-.guard{
-  display:none;
-}
+.guard{display:none}
 
 /* HEADER */
 header{
@@ -78,9 +76,10 @@ header{
   align-items:center;
   justify-content:center;
   font-size:18px;
+  cursor:pointer;
+  transition:.3s;
 }
 
-/* LOG OUT */
 .logout{
   padding:10px 16px;
   border-radius:999px;
@@ -154,7 +153,6 @@ footer a{
 <body>
 
 <script>
-/* PROTECT PAGE */
 if(localStorage.getItem("cc2_logged_in")!=="yes"){
   window.location.href="login.html";
 }
@@ -167,28 +165,19 @@ if(localStorage.getItem("cc2_logged_in")!=="yes"){
     <div class="cafe" onclick="location.href='coffee-room.html'">
       ☕ Enter Café
     </div>
-    <div class="notify">•</div>
+
+    <div class="notify" id="notifyDot" onclick="goNotifications()">•</div>
+
     <div class="logout" onclick="logout()">Log out</div>
   </div>
 </header>
 
 <main>
   <div class="grid">
-    <div class="card" onclick="location.href='messages.html'">
-      You’ve Got Post
-    </div>
-
-    <div class="card" onclick="location.href='browse.html'">
-      Have a Snoop
-    </div>
-
-    <div class="card" onclick="location.href='connections.html'">
-      Waves
-    </div>
-
-    <div class="card" onclick="location.href='profilec.html'">
-      All About Me
-    </div>
+    <div class="card" onclick="location.href='messages.html'">You’ve Got Post</div>
+    <div class="card" onclick="location.href='browse.html'">Have a Snoop</div>
+    <div class="card" onclick="location.href='connections.html'">Waves</div>
+    <div class="card" onclick="location.href='profilec.html'">All About Me</div>
   </div>
 </main>
 
@@ -202,6 +191,19 @@ function logout(){
   localStorage.removeItem("cc2_logged_in");
   window.location.href="login.html";
 }
+
+function goNotifications(){
+  window.location.href="notifications.html";
+}
+
+/* Notification dot logic */
+(function(){
+  const notes = JSON.parse(localStorage.getItem("cc2_notifications") || "[]");
+  const dot = document.getElementById("notifyDot");
+  if(!notes.length){
+    dot.style.opacity = "0.25";
+  }
+})();
 </script>
 
 </body>
