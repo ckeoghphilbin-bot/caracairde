@@ -6,16 +6,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+:root{
+  --bg1:#f2b6d8;
+  --bg2:#c8bcf6;
+  --glass:rgba(255,255,255,0.35);
+  --ink:#26202f;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
 body{
   margin:0;
-  background:linear-gradient(135deg,#f2b6d8,#c8bcf6);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--ink);
 }
 
 header{
   padding:20px 24px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  cursor:pointer;
 }
 
 .wrap{
@@ -25,11 +45,23 @@ header{
 }
 
 .notice{
-  padding:18px 22px;
-  margin-bottom:14px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.35);
+  background:var(--glass);
   backdrop-filter:blur(14px);
+  padding:18px 22px;
+  border-radius:26px;
+  margin-bottom:14px;
+  animation:fadeUp .35s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.empty{
+  opacity:.6;
+  text-align:center;
+  margin-top:40px;
 }
 </style>
 </head>
@@ -43,18 +75,30 @@ if(localStorage.getItem("cc2_logged_in")!=="yes"){
 </script>
 
 <header>
-  <div onclick="location.href='home.html'">CC²</div>
+  <div class="logo" onclick="location.href='home.html'">CC²</div>
   <div>Notifications</div>
 </header>
 
-<div class="wrap">
+<div class="wrap" id="list"></div>
 
-<div class="notice">James waved at you</div>
-<div class="notice">New Coffee Room discussion in your county</div>
-<div class="notice">Someone viewed your profile</div>
-<div class="notice">Community reminder: keep things respectful</div>
+<script>
+const list = document.getElementById("list");
+let notes = JSON.parse(localStorage.getItem("cc2_notifications") || "[]");
 
-</div>
+if(!notes.length){
+  list.innerHTML = '<div class="empty">No new notifications</div>';
+}else{
+  notes.forEach(n=>{
+    const d=document.createElement("div");
+    d.className="notice";
+    d.textContent=n;
+    list.appendChild(d);
+  });
+}
+
+/* clear notifications after viewing */
+localStorage.removeItem("cc2_notifications");
+</script>
 
 </body>
 </html>
