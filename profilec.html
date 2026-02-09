@@ -1,40 +1,223 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>CC² · Profile</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
+:root{
+  --bg1:#f2b6d8;
+  --bg2:#c8bcf6;
+  --glass:rgba(255,255,255,0.3);
+  --ink:#26202f;
+}
+
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+
 body{
   margin:0;
-  min-height:100vh;
-  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--ink);
 }
-.box{
-  max-width:800px;
-  margin:40px auto;
-  background:rgba(255,255,255,.25);
-  padding:28px;
+
+header{
+  padding:20px 24px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.logo{font-size:22px;font-weight:800;cursor:pointer}
+
+.wrap{
+  max-width:960px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:var(--glass);
   border-radius:36px;
+  padding:30px;
+  backdrop-filter:blur(16px);
 }
-.footer{text-align:center;font-size:12px;opacity:.6;margin-top:40px}
+
+.top{
+  display:grid;
+  grid-template-columns:1fr 140px;
+  gap:24px;
+}
+
+.avatar{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background:#00000022;
+  overflow:hidden;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.section{
+  margin-top:34px;
+}
+
+h3{margin-bottom:10px}
+
+input,textarea,select{
+  width:100%;
+  padding:14px;
+  border-radius:18px;
+  border:none;
+  background:rgba(255,255,255,0.6);
+}
+
+textarea{resize:none}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.tag{
+  padding:10px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.6);
+  cursor:pointer;
+}
+
+.tag.active{
+  background:#26202f;
+  color:white;
+}
+
+button{
+  margin-top:34px;
+  width:100%;
+  padding:16px;
+  border-radius:22px;
+  border:none;
+  background:#26202f;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
 </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>A bit about me</h2>
-  <textarea style="width:100%;height:120px"></textarea>
-  <button>Enhance my profile</button>
+<script>
+if(localStorage.getItem("cc2_logged_in")!=="yes"){
+  location.href="login.html";
+}
+</script>
+
+<header>
+  <div class="logo" onclick="location.href='home.html'">CC²</div>
+  <div>My Profile</div>
+</header>
+
+<div class="wrap">
+<div class="card">
+
+<div class="top">
+  <div>
+    <h2 id="displayName">Your name</h2>
+    <input id="location" placeholder="Town / County">
+  </div>
+  <div class="avatar">
+    <img id="photo">
+  </div>
 </div>
 
-<div class="footer">
-  Made with love in Éire · <a href="safety.html">Safety & community</a>
+<div class="section">
+  <h3>A bit about me</h3>
+  <textarea id="about" rows="4"></textarea>
+</div>
+
+<div class="section">
+  <h3>Interests</h3>
+  <div class="tags" id="tags"></div>
+</div>
+
+<div class="section">
+  <h3>Friendship style</h3>
+  <select id="style">
+    <option>In-person meet-ups</option>
+    <option>Online friendships</option>
+    <option>Both</option>
+  </select>
+</div>
+
+<div class="section">
+  <h3>Availability</h3>
+  <textarea id="availability" rows="3"
+    placeholder="Days, times, casual or structured…"></textarea>
+</div>
+
+<div class="section">
+  <h3>Say hello</h3>
+  <textarea rows="3" placeholder="Positive comments only"></textarea>
+</div>
+
+<input type="file" id="upload">
+
+<button onclick="save()">Save profile</button>
+
+</div>
 </div>
 
 <script>
-if(!localStorage.cc2_logged_in) location.href="login.html";
+const interests=[
+"Walking","Coffee","Books","Music","Art","Fitness","Yoga","Nature","Cooking",
+"Gardening","Photography","Crafts","Volunteering","Learning","Languages",
+"Meditation","Swimming","Cycling","Board games","Writing","Community events"
+];
+
+const tags=document.getElementById("tags");
+interests.forEach(i=>{
+  const t=document.createElement("div");
+  t.className="tag";
+  t.textContent=i;
+  t.onclick=()=>t.classList.toggle("active");
+  tags.appendChild(t);
+});
+
+upload.onchange=e=>{
+  const r=new FileReader();
+  r.onload=()=>localStorage.setItem("cc2_photo",r.result);
+  r.readAsDataURL(e.target.files[0]);
+};
+
+function save(){
+  localStorage.setItem("cc2_about",about.value);
+  localStorage.setItem("cc2_location",location.value);
+  localStorage.setItem("cc2_style",style.value);
+  localStorage.setItem("cc2_availability",availability.value);
+  const sel=[...document.querySelectorAll(".tag.active")].map(t=>t.textContent);
+  localStorage.setItem("cc2_interests",JSON.stringify(sel));
+  alert("Profile saved successfully");
+}
+
+(function load(){
+  if(localStorage.getItem("cc2_photo")) photo.src=localStorage.getItem("cc2_photo");
+  if(localStorage.getItem("cc2_about")) about.value=localStorage.getItem("cc2_about");
+  if(localStorage.getItem("cc2_location")) location.value=localStorage.getItem("cc2_location");
+  if(localStorage.getItem("cc2_style")) style.value=localStorage.getItem("cc2_style");
+  if(localStorage.getItem("cc2_availability")) availability.value=localStorage.getItem("cc2_availability");
+  if(localStorage.getItem("cc2_interests")){
+    const s=JSON.parse(localStorage.getItem("cc2_interests"));
+    document.querySelectorAll(".tag").forEach(t=>{
+      if(s.includes(t.textContent)) t.classList.add("active");
+    });
+  }
+})();
 </script>
 
 </body>
