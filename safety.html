@@ -1,37 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CC² · Safety</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CC² · Safety & Community</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
+:root{
+  --bg1:#f2b6d8;
+  --bg2:#c8bcf6;
+  --glass:rgba(255,255,255,0.35);
+  --ink:#26202f;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,#f2b6d9,#cdbdf6,#c8e6df);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--ink);
 }
+
+header{
+  padding:20px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  cursor:pointer;
+}
+
 .wrap{
   max-width:900px;
   margin:auto;
-  padding:40px;
+  padding:20px;
 }
+
 .card{
-  background:rgba(255,255,255,.25);
-  padding:26px;
-  border-radius:36px;
-  margin-bottom:20px;
+  background:var(--glass);
+  backdrop-filter:blur(14px);
+  border-radius:32px;
+  padding:28px;
+  margin-bottom:24px;
+}
+
+h2{
+  margin-top:0;
+}
+
+ul{
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:10px;
+}
+
+.footer{
+  text-align:center;
+  opacity:.7;
+  font-size:13px;
+  margin-top:30px;
 }
 </style>
 </head>
+
 <body>
 
+<script>
+if(localStorage.getItem("cc2_logged_in")!=="yes"){
+  location.href="login.html";
+}
+</script>
+
+<header>
+  <div class="logo" onclick="location.href='home.html'">CC²</div>
+  <div>Safety & Community</div>
+</header>
+
 <div class="wrap">
-  <div class="card">
-    <h2>Safety & Community</h2>
-    <p>Be kind. Respect boundaries. Friendship only.</p>
-    <p>Ireland & UK support: Samaritans 116 123</p>
-  </div>
+
+<div class="card">
+  <h2>Our community promise</h2>
+  <p>
+    CC² exists to help people build genuine friendships.
+    This is a non-dating, non-sexual space designed around kindness,
+    respect, and shared interests.
+  </p>
+</div>
+
+<div class="card">
+  <h2>What’s encouraged</h2>
+  <ul>
+    <li>Friendly conversation</li>
+    <li>Respectful curiosity</li>
+    <li>Inclusive language</li>
+    <li>Clear boundaries</li>
+    <li>Community-minded behaviour</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>What’s not allowed</h2>
+  <ul>
+    <li>Sexual or romantic advances</li>
+    <li>Harassment or intimidation</li>
+    <li>Hate speech or exclusion</li>
+    <li>Persistent unwanted contact</li>
+    <li>Sharing personal contact details publicly</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Reporting & moderation</h2>
+  <p>
+    If something doesn’t feel right, you can report it discreetly.
+    Reports are reviewed calmly and fairly.
+  </p>
+  <p>
+    We prioritise education first, then boundaries, and only escalate
+    when needed.
+  </p>
+</div>
+
+<div class="footer">
+  Made with love in Éire · Friendship squared
+</div>
+
 </div>
 
 </body>
