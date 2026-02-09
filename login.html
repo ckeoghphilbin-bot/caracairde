@@ -6,75 +6,164 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+:root{
+  --pink:#f2b7d2;
+  --lilac:#c9b9f2;
+  --blue:#b8d7f0;
+  --ink:#1e1e1e;
+}
+
+/* RESET */
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+/* PAGE */
 body{
   margin:0;
   min-height:100vh;
-  background:linear-gradient(135deg,#f3b9d6,#cbb6f3);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:linear-gradient(120deg,var(--pink),var(--lilac),var(--blue));
+  background-size:400% 400%;
+  animation:wave 18s ease infinite;
   display:flex;
   align-items:center;
   justify-content:center;
+  color:var(--ink);
 }
 
-.box{
-  background:#ffffff22;
+/* BACKGROUND MOTION */
+@keyframes wave{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* CC² LOGO */
+.logo{
+  position:fixed;
+  top:20px;
+  left:20px;
+  font-weight:700;
+  font-size:22px;
+}
+
+/* MAIN CARD */
+.card{
+  width:92%;
+  max-width:420px;
+  background:rgba(255,255,255,0.18);
   backdrop-filter:blur(14px);
-  padding:30px;
-  border-radius:26px;
-  width:90%;
-  max-width:360px;
+  border-radius:32px;
+  padding:34px 28px;
 }
 
-h1{
-  margin:0 0 10px;
-  font-size:28px;
+/* BANNER */
+.banner{
+  font-size:30px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.sub{
+  font-size:15px;
+  opacity:0.9;
+  margin-bottom:26px;
+}
+
+/* FORM */
+label{
+  font-size:14px;
+  display:block;
+  margin-bottom:6px;
 }
 
 input{
   width:100%;
-  padding:14px;
-  margin-top:12px;
+  padding:14px 16px;
   border-radius:18px;
   border:none;
+  margin-bottom:16px;
+  font-size:15px;
 }
 
+/* PASSWORD ROW */
+.pass-wrap{
+  position:relative;
+}
+
+.pass-wrap span{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:13px;
+  cursor:pointer;
+  opacity:0.7;
+}
+
+/* BUTTON */
 button{
   width:100%;
-  padding:14px;
-  margin-top:16px;
+  padding:15px;
+  border-radius:22px;
   border:none;
-  border-radius:18px;
-  background:#ffffff55;
+  background:rgba(255,255,255,0.55);
   font-weight:600;
+  font-size:16px;
   cursor:pointer;
+  transition:transform .2s ease;
 }
 
-.small{
-  margin-top:14px;
-  text-align:center;
+button:hover{
+  transform:translateY(-2px);
+}
+
+/* LINKS */
+.links{
+  margin-top:18px;
+  display:flex;
+  justify-content:space-between;
   font-size:14px;
+}
+
+.links a{
+  color:inherit;
+  text-decoration:none;
+  opacity:0.85;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
-  <h1>Welcome to CC²</h1>
-  <p>Friendship squared.</p>
+<div class="logo">CC²</div>
 
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+<div class="card">
+
+  <div class="banner">Welcome</div>
+  <div class="sub">Friendship squared.</div>
+
+  <label>Email</label>
+  <input id="email" type="email" placeholder="you@email.com">
+
+  <label>Password</label>
+  <div class="pass-wrap">
+    <input id="password" type="password" placeholder="Your password">
+    <span onclick="togglePass()">show</span>
+  </div>
 
   <button onclick="login()">Log in</button>
 
-  <div class="small">
+  <div class="links">
+    <a href="#">Forgot your password?</a>
     <a href="signupcc.html">Quash your curiosity</a>
   </div>
+
 </div>
 
 <script>
-/* IMPORTANT: prevent logged-in users seeing login */
+/* already logged in? go home */
 if (localStorage.getItem("cc2_logged_in") === "yes") {
   window.location.replace("home.html");
 }
@@ -83,6 +172,11 @@ function login(){
   /* fake login for now */
   localStorage.setItem("cc2_logged_in","yes");
   window.location.href = "home.html";
+}
+
+function togglePass(){
+  const p = document.getElementById("password");
+  p.type = p.type === "password" ? "text" : "password";
 }
 </script>
 
